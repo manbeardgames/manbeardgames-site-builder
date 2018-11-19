@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: $gray-100;
+    -webkit-font-smoothing: antialiased;
+    padding-top: 91px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#flex-wrap {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    main {
+        flex: 1;
+    }
+}
+
+footer {
+    background-color: $ophidianblue;
+    color: $white;
+    padding: 15px;
+    h4 span {
+        font-size: 60% !important;
+    }
+    a {
+        color: $ophidianorange;
+        transition: 0.3s color;
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: $white;
+        }
+    }
+    .social-icons {
+        a {
+            color: $white;
+            transition: 0.3s color;
+            &:hover,
+            &:focus {
+                text-decoration: none;
+                color: $ophidianorange;
+            }
+        }
+    }
+}
+
+// footer {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-around;
+//     background-color: $ophidianblue;
+//     padding: 15px 0;
+//     color: $white;
+//     font-weight: 300;
+//     small {
+//         font-size: 50%;
+//     }
+//     .brand-container {
+//         text-align: right;
+//         margin: auto;
+//         h3 {
+//             font-size: 1rem;
+//         }
+//     }
+//     .social-icons {
+//         text-align: center;
+//         .mdi-36px.mdiset,
+//         .mdi-36px.mdi::before {
+//             font-size: 24px;
+//         }
+//         a {
+//             display: inline-block;
+//             color: $white;
+//             margin-right: 1rem;
+//             transition: color 0.3s;
+//             &:last-child {
+//                 margin-right: 0;
+//             }
+//             &:hover {
+//                 color: $ophidianorange;
+//             }
+//         }
+//     }
+//     a {
+//         transition: color 0.3s;
+//         &:hover {
+//             color: $ophidianorange;
+//         }
+//     }
+// }
+@media (min-width: 576px) {
+    // footer {
+    //     flex-direction: row;
+    //     .brand-container{
+    //         h3 {
+    //             font-size: 1.25rem;
+    //         }
+    //     }
+    //     .social-icons {
+    //         margin-right: auto;
+    //         .mdi-36px.mdiset,
+    //         .mdi-36px.mdi::before {
+    //             font-size: 36px;
+    //         }
+    //     }
+    // }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+    footer {
+        a {}
+        .social-icons {
+            a {}
+        }
+    }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {}

@@ -1,0 +1,48 @@
+<!-- BEGIN: source/partials/_head.ejs -->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Manbeardgames">
+
+<meta name="title" content="ManBeardGames <%- page.title %>">
+<meta name="description" contnet="<%- page.description %>">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="<%- page.ogtitle %>">
+<meta property="og:image" content="<%- page.ogimage %>">
+<meta property="og:site_name" content="ManBeardGames">
+<meta property="og:description" content="<%- page.ogdescription %>">
+
+
+
+
+<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+
+<%# Use the title from the page's front matter if it has one %>
+<title><%- page.title %></title>
+
+<%# Bootstrap css %>
+<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+
+<%# Material Design Icons %>
+<link rel="stylesheet" href="/vendor/mdi/css/materialdesignicons.css">
+
+<%# Site css %>
+<link rel="stylesheet" href="/css/site.css">
+
+<%# jQuery %>
+<script type="text/javascript" src="/vendor/jquery/jquery.js"></script>
+
+<%# Google Analytics %>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-63802407-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-63802407-1');
+</script>
+
+<!-- END: source/partials/_head.ejs -->

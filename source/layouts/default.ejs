@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+    <head>
+        <% include ../partials/_head %>
+    </head>
+
+    <body data-spy="scroll" data-target=".sidebar">
+    <% include ../partials/_fixed-top-nav %>
+
+        <main>
+            <%- body %>
+        </main>
+
+        <footer class="fixed-bottom">
+            <% include ../partials/_footer %>
+        </footer>
+
+        <% include ../partials/_scripts %>
+    </body>
+</html>

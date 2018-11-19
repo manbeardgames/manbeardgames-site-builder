@@ -1,0 +1,39 @@
+@import "mixins";
+@import "variables";
+@import "bootstrap-overrides";
+@import "global";
+@import "landing";
+@import "navbar";
+@import "games";
+@import "post";
+@import "game-main";
+
+
+
+
+
+
+
+@media (min-width: 576px) { 
+
+ }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+
+ }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+    .container {
+        width: 100%;
+        @include box-sizing(border-box);
+    }
+ }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+
+ }
+
+

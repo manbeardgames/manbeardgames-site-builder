@@ -1,0 +1,58 @@
+<div class="block-container">
+    <div class="block">
+        <div class="row">
+            <div class="col-md-6">
+                <% if (screenshots.length > 0)  { %>
+                <img class="img-fluid" src="<%= screenshots[0] %>">
+                <% } %>
+            </div>
+
+            <div class="col-md-6">
+                <div class="row">
+                    <% screenshots.forEach((screenshot, i) => { %>
+                        <% if(i === 0) { %>
+                            <% return %>
+                        <% } %>
+                        <div class="col-md-6">
+                            <img class="img-fluid" src="<%= screenshot %>">
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="block-container">
+    <div class="block">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <% screenshots.forEach((screenshot, i) => { %>
+                <% console.log(i === 0 ? 'active' : '') %>
+                <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>" class="<%= (i === 0) ? 'active' : '' %>">
+                </li>
+                <% }) %>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <% screenshots.forEach((screenshot, i) => { %>
+                <% console.log(screenshot) %>
+                 <div class="carousel-item <%= i === 0 ? 'active' : '' %>" style="background-image: url('<%= screenshot %>');">
+                </div>
+                <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                    <img class="d-block img-fluid" src="<%= screenshot %>" />
+                </div>
+                <% }) %>
+
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div> -->

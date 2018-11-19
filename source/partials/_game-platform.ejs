@@ -1,0 +1,38 @@
+<div class="block-container">
+    <div class="block">
+        <div class="block-platforms">
+            <% if(game.platforms.steam !== undefined) { %>
+                <div class="platform">
+                    <a href="<%- game.platforms.steam %>" target="_blank">
+                        <div class="platform-badge" style="background-image: url('/img/badges/steam-badge.png');">
+                        </div> 
+                    </a>
+                </div>
+            <% } %>
+            <% if(game.platforms.itch !== undefined) { %>
+                <div class="platform">
+                    <a href="<%- game.platforms.itch %>" target="_blank">
+                        <div class="platform-badge" style="background-image: url('/img/badges/itch-badge.png');">
+                        </div>
+                    </a>                            
+                </div>
+            <% } %>   
+            <% if(game.platforms.ludum !== undefined) { %>
+            <div class="platform">
+                <a href="<%- game.platforms.ludum %>" target="_blank">
+                    <div class="platform-badge" style="background-image: url('/img/badges/ludum-badge.png');">
+                    </div>
+                </a>                            
+            </div>
+        <% } %>     
+        <% if(game.platforms.omgjam !== undefined) { %>
+        <div class="platform">
+            <a href="<%- game.platforms.omgjam %>" target="_blank">
+                <div class="platform-badge" style="background-image: url('/img/badges/omgjam-badge.png');">
+                </div>
+            </a>                            
+        </div>
+    <% } %>                                      
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<!-- BEGIN: source/partials/_header.ejs -->
+<nav class="navbar navbar-expand-lg fixed-top" id="topNav">
+
+    <a class="navbar-brand" href="/"></a>
+    <% if(game != undefined) { %>
+    <h3 class="text-white"><%= game.name %></h3>
+    <% } %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="/#games">Games</a></li>
+            <li class="nav-item"><a class="nav-link" href="/tutorials">Tutorials</a></li>
+            <li class="nav-item"><a class="nav-link" href="/dev-blog">Dev Blog</a></li>
+        </ul>
+        
+    </div>
+
+</nav>
+<!-- End: source/partials/_header.ejs -->

@@ -1,0 +1,13 @@
+<div class="block-container">
+    <div class="block">
+        <h3 class="block-header"><%= game.name %></h3>
+        <hr />
+        <div class="block-description">
+            <% game.description.forEach((description, i) => { %>
+            <p>
+                <%= description %>
+            </p>
+            <% }) %>
+        </div>
+    </div>
+</div>

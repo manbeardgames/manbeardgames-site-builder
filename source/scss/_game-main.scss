@@ -1,0 +1,87 @@
+
+    .block-container {
+        background: $gray-100;
+        &:nth-child(2n+1) {
+            background-color: $gray-200;
+        }
+        .block {
+            @include flexbox;
+            @include flex-direction(column);
+            padding: 2rem;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            .block-header {
+                width: 100%;
+                text-align: left;
+                color: $ophidianblue;
+            }
+            hr {
+                margin-top: 0;
+                margin-bottom: 2rem;
+                margin-left: 0;
+                margin-right: 0;
+                border-top: 1px solid black;
+            }
+            .block-description {
+                @include flexbox;
+                @include flex-direction(column);
+                p {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+            .block-platforms {
+                @include flexbox;
+                @include flex-direction(row);
+                @include justify-content(center);
+                @include flex-wrap(wrap);
+                .platform {
+                    a {
+                        color: $ophidianblue;
+                        transition: color 0.3s;
+                        &:hover {
+                            text-decoration: none;
+                            color: $ophidianorange;
+                        }
+                        .mdi-48px.mdiset,
+                        .mdi-48px.mdi::before {
+                            font-size: 5rem;
+                        }
+                        .platform-badge {
+                            display: inline-block;
+                            vertical-align: top;
+                            border-radius: 2px;
+                            padding: 40px;
+                            width: 256px;
+                            height: 128px;
+                            // background-color: #EFEFEF;
+                            // border: 1px solid #ddd;
+                            background-position: center;
+                            background-repeat: no-repeat;
+                            background-size: contain;
+                            margin-bottom: 14px;
+                            margin-right: 14px;
+                        }
+                        .itch-logo {
+                            background-image: url('../img/itchio-logo/itchio-textless-black.svg');
+                            background-size: cover;
+                            background-repeat: no-repeat;
+                            background-position: 50% 50%;
+                            width: 5rem;
+                            height: 5rem;
+                            transition: all 0.3s;
+                            &:hover {
+                                background-image: url('../img/itchio-logo/itchio-textless-orange.svg')
+                            }
+                        }
+                    }
+                }
+            }
+
+            .block-trailer {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }

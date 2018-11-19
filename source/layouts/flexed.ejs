@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+
+<head>
+    <% include ../partials/_head %>
+</head>
+
+<body data-spy="scroll" data-target=".sidebar">
+    <div id="flex-wrap">
+        <header>
+            <% include ../partials/_fixed-top-nav %>
+        </header>
+        <main>
+            <%- body %>
+        </main>
+
+        <footer>
+            <% include ../partials/_footer %>
+        </footer>
+
+        <% include ../partials/_scripts %>
+    </div>
+</body>
+
+</html>
