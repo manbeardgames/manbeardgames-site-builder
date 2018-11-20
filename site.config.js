@@ -1,7 +1,12 @@
 module.exports = {
     site: {
-        title: 'Test Site',
-        description: 'Test site for small static site generator',
+        title: 'ManBeardGames',
+        description: '',
+        opengraph: {
+            type: '',
+            img: '',
+            description: '',
+        },
         basePath: process.env.NODE_ENV === 'production' ? '/testsite' : ''
     },
     paths: {

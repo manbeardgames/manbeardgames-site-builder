@@ -1,9 +1,19 @@
 ---
-title: Tutorials
-layout: flexed
-ogtitle: ManBeardGames
-ogimage: https://manbeardgames.com/img/ogmbg.png
-ogdescription: ManBeardGames is an indie game developer, web developer, and twitch streamer. These are tutorials written on game development.
+site: {
+    title: "Tutorials",
+    description: "ManBeardGames is an indie game developer, web developer, and twitch streamer. These are tutorials written on game development."
+}
+
+og: {
+    title: "Tutorials",
+    image: "https://manbeardgames.com/img/ogmbg.png",
+    description: "ManBeardGames is an indie game developer, web developer, and twitch streamer. These are tutorials written on game development."
+}
+
+page: {
+    layout: "game",
+    navheader: "ManBeardGames"
+}
 ---
 <div class="container post">
 

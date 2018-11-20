@@ -40,17 +40,103 @@ ProcessJavaScript(paths.src.js, paths.build.js);
 //  Process all vendor files
 ProcessVendor(paths.src.vendor, paths.build.vendor);
 
-//  Imprort the games list
-let games = ProcessGameListData('./source/data/games_list.json');
 
-//  Process the pages
-ProcessPages(paths.src.pages, paths.src.layouts, paths.build.root, { "games": games });
+//  Get a list of all the pages
+let pageList = glob.sync('**/*.@(md|ejs|html)', { cwd: paths.src.pages });
 
-GenerateGamePages(games, paths.src.layouts, paths.src.img, paths.build.img, paths.build.root);
+//  Iterage the page list
+pageList.forEach((page, i) => {
+    //  Get the file info on the page
+    let fileInfo = path.parse(page);
 
-let blogData = ProcessPosts(paths.src.posts, paths.src.layouts, paths.build.posts);
+    //  Generate the full path to the page file
+    let fullFilePath = path.join(paths.src.pages, page);
 
-GenerateDevBlog(paths.src.devblog, paths.build.posts, blogData, paths.src.layouts);
+    //  Create the path for the build directory
+    let buildDir = path.join(paths.tmp.root, fileInfo.dir);
+
+    //  Create the build directory
+    fse.ensureDir(buildDir);
+
+    //  Read the contents of the file for the page
+    let pageContent = fse.readFileSync(fullFilePath, 'utf-8');
+
+    //  Get the front matter from the page content
+    let fMatter = frontMatter(pageContent);
+
+    //  Create the page data from the front matter
+    let pageData = Object.assign({}, {
+        site: fMatter.attributes.site,
+        og: fMatter.attributes.og,
+        page: fMatter.attributes.page,
+    });
+
+    //  Render the page based on the file extension.
+    let renderedPage;
+    switch (fileInfo.ext) {
+        case '.md':
+            renderedPage = marked(fMatter.body);
+            break;
+        case '.ejs':
+            renderedPage = ejs.render(fMatter.body, pageData, {
+                filename: fullFilePath
+            });
+            break;
+        default:
+            renderedPage = fMatter.body;
+    }
+
+    //  Get the name of the layout to use (flexed is default if not provided)
+    let layoutName = fMatter.attributes.page.layout || 'default';
+
+    //  Get the path to the layout file.
+    let layoutFilePath = path.join(paths.src.layouts, `${layoutName}.ejs`);
+
+    //  Read the contents of the file for the layout. We'll use thise
+    //  during the render steps below.
+    let layoutContent = fse.readFileSync(layoutFilePath, 'utf-8');
+
+    //  Create the data to be used by the layout
+    let layoutData = Object.assign({}, pageData, {
+        body: renderedPage,
+        filename: layoutFilePath
+    })
+
+    //  If the layout is the 'game' layout, then assign the extra game
+    //  data needed
+    if (layoutName === 'game') {
+        //  Get a list of all the screenshot files
+        let screenshots = glob.sync('**/*', { cwd: path.join(paths.src.pages, fileInfo.dir, "img", "screenshots") });
+        layoutData = Object.assign({}, layoutData, {
+            game: fMatter.attributes.game,
+            screenshots: screenshots
+        });
+    }
+
+    //  Render the layout
+    let renderedLayout = ejs.render(layoutContent, layoutData);
+
+    //  Write the render to disk as a .html file
+    fse.writeFileSync(path.join(buildDir, `${fileInfo.name}.html`), renderedLayout);
+
+})
+
+
+
+
+
+
+// //  Imprort the games list
+// let games = ProcessGameListData('./source/data/games_list.json');
+
+// //  Process the pages
+// ProcessPages(paths.src.pages, paths.src.layouts, paths.build.root, { "games": games });
+
+// GenerateGamePages(games, paths.src.layouts, paths.src.img, paths.build.img, paths.build.root);
+
+// let blogData = ProcessPosts(paths.src.posts, paths.src.layouts, paths.build.posts);
+
+// GenerateDevBlog(paths.src.devblog, paths.build.posts, blogData, paths.src.layouts);
 
 
 
@@ -310,11 +396,11 @@ function GenerateGamePages(games, layoutPath, imgSrcPath, imgBuildPath, buildPat
         let ogImage = '';
         imgFiles.forEach((img, i) => {
             let imgPath = path.join('img', 'games', gameNameHyphinated, 'screenshots', img);
-            
+
             //  Change backslashes to forward slashes
             imgPath = imgPath.replace(/\\/g, "/");
             ogImage = imgPath;
-            
+
             //  add leading forward slashs
             imgPath = `/${imgPath}`;
 
@@ -423,7 +509,7 @@ function ProcessPosts(postSrcPath, layoutSrcPath, postBuildPath) {
             url: `/dev-blog/${fileInfo.name}`
         });
     });
-    
+
     //  Return the blog data
     return blogData;
 }
@@ -434,7 +520,7 @@ function GenerateDevBlog(templatePath, buildPath, postData, layoutSrcPath) {
     let fileInfo = path.parse(templatePath);
 
     //  Create the destiniation directory
-    
+
 
     //  Read the page file
     let pageTemplete = fse.readFileSync(templatePath, 'utf-8');
@@ -466,7 +552,7 @@ function GenerateDevBlog(templatePath, buildPath, postData, layoutSrcPath) {
     let completePage = ejs.render(layoutTemplate, Object.assign({}, pageData, {
         body: renderedPage,
         filename: layoutFileName,
-        game: {name: "Dev Blog"}
+        game: { name: "Dev Blog" }
     }));
 
     //  Generate the output path
