@@ -1,23 +1,41 @@
+//  fs-extra for working with files
 const fse = require('fs-extra');
+//  readlin-sync for asking questions in console and getting response back
 const read = require('readline-sync');
 
-
-
-
-
+//  Instantiate our game object. This will hold all the 
+//  datat that we parse out through the questions below
 let game = {};
 
 
-
+//  Get the name of the game
 game.name = AskName();
+
+//  Get the short description of the game
 game.shortDescription = AskShort();
-game.descriptio = AskFull();
+
+//  Get the long description of the game
+game.description = AskFull();
+
+//  Get the link to the trailer for the game
 game.trailer = AskTrailer();
+
+//  Get the game platform information
 game.platforms = AskPlatforms();
+
+//  Get which operating systems the game is on
 game.os = AskOS();
 
-//  Create JSOn from game
+//  Create JSON from game
 let json = JSON.stringify(game, null, 4);
+
+
+//  Write json to data folder
+
+//  create new folder structure for the game page
+
+//  create the index.ejs file with front matter for the game page
+
 
 //  Write json to disk
 fse.writeFileSync('./.tmp/promptTest.json', json);
@@ -25,6 +43,12 @@ fse.writeFileSync('./.tmp/promptTest.json', json);
 
 
 
+// -------------------------------------------------------
+/**
+ * Asks the user to input the name of the game.
+ * @returns {string} The value entered by the user
+ */
+// -------------------------------------------------------
 function AskName() {
     //  Ask the question
     let result = read.question('game name: (My Game) ');
@@ -38,6 +62,12 @@ function AskName() {
     return result;
 }
 
+// -------------------------------------------------------
+/**
+ * Asks the user to input the short description for the game
+ * @returns {string} The value entered by the user
+ */
+// -------------------------------------------------------
 function AskShort() {
     //  Ask the question
     let result = read.question('short description: ');
@@ -51,18 +81,24 @@ function AskShort() {
     return result;
 }
 
+// -------------------------------------------------------
+/**
+ * Asks the user to input the full description of the game. Each entry
+ * by the user consitutes one paragraph.  
+ * @returns {string[]} The collection of values entered by the user
+ */
+// -------------------------------------------------------
 function AskFull() {
     //  Setup the array to hold the user answers
     let result = [];
-    let count = 1;
-
+    
     //  Setup loop
     let resolved = false;
-
     while (!resolved) {
         //  Ask the question
         let answer = read.question('Full Description: (blank when finished) ');
 
+        //  If there is no answer, or the answer is blank, we've finished
         if (!answer || answer === '') {
             resolved = true;
         } else {
@@ -75,6 +111,12 @@ function AskFull() {
     return result;
 }
 
+// -------------------------------------------------------
+/**
+ * Asks the use for the link to the trailer of the game
+ * @returns {string} The value entered by the user
+ */
+// -------------------------------------------------------
 function AskTrailer() {
     //  Ask question
     let result = read.question('trailer: (youtube only) ');
@@ -88,12 +130,16 @@ function AskTrailer() {
     return result;
 }
 
+// -------------------------------------------------------
+/** Asks the user for the platforms and the links to their pages.
+ * @returns {array} An collection of objects, one for each platform
+ */
+// -------------------------------------------------------
 function AskPlatforms() {
     //  Setup the array to hold the user answer
     let result = [];
 
     //  Setup loop
-    let count = 1;
     let resolved = false;
 
     while (!resolved) {
@@ -114,6 +160,12 @@ function AskPlatforms() {
     return result;
 }
 
+// -------------------------------------------------------
+/**
+ * Asks the user which operating systems the game is avaialble on
+ * @returns {object} The object containing the true/false values for each operating system.
+ */
+// -------------------------------------------------------
 function AskOS() {
 
     //  Ask the questions
@@ -141,9 +193,4 @@ function AskOS() {
     //  Return the result
     return os;
 
-}
-
-function SanatizeInput(str) {
-    sanatized = str;
-    return sanatized;
 }
