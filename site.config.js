@@ -2,12 +2,13 @@ module.exports = {
     site: {
         title: 'ManBeardGames',
         description: '',
-        opengraph: {
-            type: '',
-            img: '',
-            description: '',
-        },
         basePath: process.env.NODE_ENV === 'production' ? '/testsite' : ''
+    },
+    opengraph: {
+        type: 'website',
+        image: 'https://manbeardgames.com/img/ogmbg.png',
+        siteName: 'ManBeardGames',
+        description: 'ManBeardGames is an indie game developer, web developer, and twitch streamer.',
     },
     paths: {
         src: {
@@ -52,7 +53,7 @@ module.exports = {
                 bootstrapjs: './.tmp/vendor/bootstrap/js/bootstrap.js',
                 jquery: './.tmp/vendor/jquery/jquery.js',
                 mdicss: './.tmp/vendor/mdi/css/materialdesignicons.css',
-                mdifonts: './.tmp/vendor/mdi/fonts/'                
+                mdifonts: './.tmp/vendor/mdi/fonts/'
             }
         }
     }

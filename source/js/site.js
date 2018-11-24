@@ -1,61 +1,48 @@
 (function () {
-    $(function () {
-      $('#animtescroll').click(function (e) {
-        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-          var target = $(this.hash);
-          target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-          if (target.length) {
-            $('html,body').animate({
-              scrollTop: target.offset().top
-            }, 750);
-  
-            e.preventDefault();
-          }
+
+  //  Animates the scrolling when the "game" button is clicked in the landing. Scrolls down to be
+  //  positioned at the first game in the list
+  $(function () {
+    $('#animatescroll').click(function (e) {
+      if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        if (target.length) {
+          $('html,body').animate({
+            scrollTop: target.offset().top
+          }, 750);
+
+          e.preventDefault();
         }
-      });
+      }
     });
-  
-    function setSwap() {
-      var sheight = $('#landing').css('height');
-      $('#swap').height(sheight);
-    }
-  
-    // function setAffix() {
-    //   // $('.sidebar').affix({
-    //   $('#topNav').affix({
-    //     offset: {
-    //       // top: $('.sidebar').offset().top
-    //       top: $('#topNav').offset().top
-    //     }
-    //   });
-    // }
-  
-    $(window).resize(function () {
-      setSwap();
-      // setAffix();
-    });
-  
+  });
+
+
+  // Sets the swap div to be the height of the landing div
+  function setSwap() {
+    var sheight = $('#landing').css('height');
+    $('#swap').height(sheight);
+  }
+
+
+  //  When the window resizes, we need to re-set the swap
+  $(window).resize(function () {
     setSwap();
-  
-    // if ($('#topNav').length) {
-    //   setAffix();
-    // }
-  
-    // $('h1, h2, h3, h4, h5, h6').each(function () {
-    //   if (this.id) {
-    //     $(this).wrapInner('<a href="#' + this.id + '"></a>');
-    //   }
-    // });
-  
-    $('ul.nav a').click(function () {
-      $('nav.navbar-collapse').height(1).removeClass('in');
-    });
-  
-    $('body').click(function () {
-      $('#menu').collapse('hide');
-    });
-  
-    $('.content-section table').addClass('table'); // TODO Remove this after tables are styled in CSS
-  
-  })();
-  
+  });
+
+  //  Set initial swap
+  setSwap();
+
+
+  //  When a link in the navbar is clicked, collapse the navbar
+  $('#navbarNav a').click(function () {
+    $('#navbarNav').collapse('hide');
+  });
+
+  //  When the body is clicked, collapse the navbar
+  $('body').click(function () {
+    $('#navbarNav').collapse('hide');
+  });
+
+})();

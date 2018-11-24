@@ -5,7 +5,7 @@
 
         <div class="game-container">
             <div class="game-preview-container">
-                <img class="img-responsive img-thumbnail" src="img/games/<%- game.name.toLowerCase().replace(/ /g, '-') %>/game_preview.png" alt="...">
+                <img class="img-responsive img-thumbnail" src="img/games/<%- game.nameSpine %>/game_preview.png" alt="...">
             </div>
 
             <div class="game-overview-container">
@@ -17,50 +17,17 @@
                 </p>
 
                 <div class="block-platforms">
-                    <% if(game.platforms.steam !== undefined) { %>
+                    <% game.platforms.forEach((platform, i) => { %>
                         <div class="platform">
-                            <a href="<%- game.platforms.steam %>" target="_blank">
-                                <div class="platform-badge" style="background-image: url('img/badges/steam-badge.png');">
-                                </div> 
+                            <a href="<%- platform.url %>" target="_blank">
+                                <div class="platform-badge" style="background-image: url('img/badges/<%- platform.name %>-badge.png');"></div>
                             </a>
                         </div>
-                    <% } %>
-                    <% if(game.platforms.itch !== undefined) { %>
-                        <div class="platform">
-                            <a href="<%- game.platforms.itch %>" target="_blank">
-                                <div class="platform-badge" style="background-image: url('img/badges/itch-badge.png');">
-                                </div>
-                            </a>                            
-                        </div>
-                    <% } %>     
-                    <% if(game.platforms.ludum !== undefined) { %>
-                        <div class="platform">
-                            <a href="<%- game.platforms.ludum %>" target="_blank">
-                                <div class="platform-badge" style="background-image: url('img/badges/ludum-badge.png');">
-                                </div>
-                            </a>                            
-                        </div>
-                    <% } %>                                  
-                    <% if(game.platforms.omgjam !== undefined) { %>
-                        <div class="platform">
-                            <a href="<%- game.platforms.omgjam %>" target="_blank">
-                                <div class="platform-badge" style="background-image: url('img/badges/omgjam-badge.png');">
-                                </div>
-                            </a>                            
-                        </div>
-                    <% } %>                        
+                    <% }) %>           
                 </div>          
-                <a class="btn btn-primary btn-large" href="/<%= game.name.split(' ').join('-').toLowerCase() %>">More Info</a>
+                <a class="btn btn-primary btn-large" href="/<%= game.nameSpine %>">More Info</a>
             </div>
         </div>
 </section>
 <% }) %>
 <!-- END: source/partials/_games.ejs -->
-
-
-<%#
-
-games
-    game
-
-%>

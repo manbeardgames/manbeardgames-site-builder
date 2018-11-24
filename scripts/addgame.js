@@ -2,14 +2,21 @@
 const fse = require('fs-extra');
 //  readlin-sync for asking questions in console and getting response back
 const read = require('readline-sync');
+//  path module for working creating paths
+const path = require('path');
+//  paths contain the pathing information for reading and writing to disk
+const paths = require('../paths');
+//  site.config contains the config information about the site
+const config = require('../site.config');
 
 //  Instantiate our game object. This will hold all the 
-//  datat that we parse out through the questions below
+//  data that we parse out through the questions below
 let game = {};
 
 
 //  Get the name of the game
 game.name = AskName();
+game.nameSpine = game.name.toLowerCase().split(' ').join('-');
 
 //  Get the short description of the game
 game.shortDescription = AskShort();
@@ -26,19 +33,56 @@ game.platforms = AskPlatforms();
 //  Get which operating systems the game is on
 game.os = AskOS();
 
+//  Add the game to the master games_list
+let games;
+if(fse.existsSync(path.join(paths.source.data, 'games_list.json'))) {
+    //  Reading json
+    console.log("Parsing existing file");
+    var gamesJson = fse.readFileSync(path.join(paths.source.data, 'games_list.json'));
+    games = JSON.parse(gamesJson);
+
+    //  Addin game
+    console.log('adding game');
+    games.push(game);
+} else {
+    //  Not found
+    games = [];
+    //  Adding game
+    console.log("Adding to new collection");
+    games.push(game);
+}
+
+
 //  Create JSON from game
-let json = JSON.stringify(game, null, 4);
+let json = JSON.stringify(games, null, 4);
+
+fse.writeFileSync(path.join(paths.source.data, 'games_list.json'), json);
 
 
-//  Write json to data folder
+// //  Ensure that the path to the data folder exists for output
+// fse.ensureDirSync(path.join(paths.source.data, 'games'));
+
+// //  Write the json to the data folder
+// fse.writeFileSync(path.join(paths.source.data, 'games', game.nameSpine + '.json'), json);
 
 //  create new folder structure for the game page
+fse.ensureDirSync(path.join(paths.source.pages, game.nameSpine));
 
 //  create the index.ejs file with front matter for the game page
+let fMatter = '---' + '\n';
+fMatter += 'site: ' + JSON.stringify(config.site, null, 4) + '\n';
+fMatter += 'opengraph: ' + JSON.stringify(config.opengraph, null, 4) + '\n';
+fMatter += 'page: ' + JSON.stringify({layout: 'game', navheader: game.name}, null, 4) + '\n';
+fMatter += 'game: ' + JSON.stringify(game, null, 4) + '\n';
+fMatter += '---';
+
+//  Write the json file to the page
+fse.writeFileSync(path.join(paths.source.pages, game.nameSpine, 'index.ejs'), fMatter);
+
+//  Add the image folder
+fse.ensureDirSync(path.join(paths.source.pages, game.nameSpine, 'img'));
 
 
-//  Write json to disk
-fse.writeFileSync('./.tmp/promptTest.json', json);
 
 
 
@@ -91,7 +135,7 @@ function AskShort() {
 function AskFull() {
     //  Setup the array to hold the user answers
     let result = [];
-    
+
     //  Setup loop
     let resolved = false;
     while (!resolved) {
@@ -102,7 +146,6 @@ function AskFull() {
         if (!answer || answer === '') {
             resolved = true;
         } else {
-            count++;
             result.push(answer);
         }
     }

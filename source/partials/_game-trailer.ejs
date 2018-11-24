@@ -1,8 +1,8 @@
 <div class="block-container">
-    <div class="block" style="background-image: url('<%= screenshots[0] %>')">
+    <div class="block" style="background-image: url('img/games/<%- game.nameSpine %>/cover.png')">
         <div class="row">
             <div class="col-md-6 ml-auto mr-auto">
-                <div class="block-trailer img-thumbnail" <%- game.trailer == null ? 'style="visibility: hidden;"' : '' %>>
+                <div class="block-trailer img-thumbnail" <%- game.trailer.length === 0 ? 'style="visibility: hidden;"' : '' %>>
                     <div class="embed-responsive embed-responsive-16by9">
                         <% if(game.trailer != null) { %>
                         <iframe width="560" height="315" src="<%= game.trailer %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -14,6 +14,4 @@
             </div>
         </div>      
     </div>
-
-    
 </div>
