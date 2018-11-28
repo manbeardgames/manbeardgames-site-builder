@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+<head>
+    <% include ../partials/_head %>
+</head>
+
+<body data-spy="scroll" data-target=".sidebar">
+    <header>
+        <% include ../partials/_fixed-top-nav %>
+    </header>
+    <div id="wrapper" class="toggled">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <!-- <ul class="sidebar-nav"> -->
+            <ul class="nav flex-column">
+                <!-- <li class="sidebar-brand">
+                    <a href="#">Tutorials</a>
+                </li> -->
+                <a class="navbar-brand" href="/tutorials">MonoGame Tutorials</a>
+                <% navHeaders.forEach((header, i) => { %>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#<%- header.nameSpine %>"><%- header.name %> </a>
+                    <div id="<%- header.nameSpine %>" class="collapse">
+                        <ul class="nav flex-column ml-3">
+                            <% header.subHeaders.forEach((subHeader, i) => { %>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="./<%- subHeader.nameSpine %>"><%- subHeader.name %></a>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                </li>
+                <% }) %>
+            </ul>
+        </div>
+
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+                <%- body %>
+            </div>
+        </div>
+    </div>
+
+
+    <% include ../partials/_scripts %>
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+</body>
+
+</html>

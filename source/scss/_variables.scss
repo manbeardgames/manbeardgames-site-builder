@@ -111,4 +111,43 @@ $ophidian-colors: map-merge(
 //  End site colors
 // -------------------------------------------------------------------------
 
+$zindex-main-sidebar: 1100 !default;
+$sidebar-width: 250px !default;
+$sidebar-padding-x: 0.5rem !default;
+$sidebar-padding-y: 0 !default;
+$nav-link-padding-y:                .5rem !default;
+$nav-link-padding-x: 1rem !default;
 
+$sidebar-mini-width: ($nav-link-padding-x + $sidebar-padding-x + .8rem) * 2 !default;
+$sidebar-nav-icon-width: $sidebar-mini-width - (($sidebar-padding-x + $nav-link-padding-x) * 2);
+$sidebar-user-image-width: $sidebar-nav-icon-width + ($nav-link-padding-x / 2);
+$font-size-base: 1rem !default; // Assumes the browser default, typically `16px
+$font-size-sm: ($font-size-base * .875) !default;
+
+$main-footer-padding: 15px !default;
+$main-footer-border-top-width: 1px !default;
+$main-footer-border-top-color: $gray-300 !default;
+$main-footer-border-top: $main-footer-border-top-width solid $main-footer-border-top-color !default;
+$main-footer-height: 30px; //(($font-size-root * $line-height-base) + ($main-footer-padding * 2)) + $main-footer-border-top-width !default;
+$main-footer-bg: $white;
+
+
+$spacer: 1rem !default;
+$navbar-padding-y:  ($spacer / 2) !default;
+$navbar-padding-x: ($spacer / 2) !default;
+
+// Content padding
+$content-padding-y: 0 !default;
+$content-padding-x: $navbar-padding-x !default;
+
+
+$main-footer-padding: 15px !default;
+$main-footer-border-top-width: 1px !default;
+$main-footer-border-top-color: $gray-300 !default;
+$main-footer-border-top: $main-footer-border-top-width solid $main-footer-border-top-color !default;
+$main-footer-height: 30px; //(($font-size-root * $line-height-base) + ($main-footer-padding * 2)) + $main-footer-border-top-width !default;
+$main-footer-bg: $white;
+
+$boxed-layout-max-width: 1250px !default;
+
+$main-bg: #f4f6f9 !default;

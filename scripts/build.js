@@ -7,10 +7,17 @@ const glob = require('glob');
 const config = require('../site.config');
 const sass = require('sass');
 const paths = require('../paths');
+const pygmentize = require('pygmentize-bundled');
 
-marked.setOptions({
-    gfm: true
-});
+// marked.setOptions({
+//     highlight: function(code, lang, callback) {
+//         let coded = '';
+//         pygmentize({lang: lang, format: 'html'}, code, (err, result) => {
+//             coded = result.toString();
+//         });
+//         return coded;
+//     }
+//   });
 
 
 //  Clear build path
@@ -23,6 +30,7 @@ ProcessJavaScript();
 ProcessVendor();
 ProcessPages();
 GenerateDevBlog();
+GenerateTutorials();
 
 
 //  ===================================================================================
@@ -321,3 +329,239 @@ function GenerateDevBlog() {
     fse.writeFileSync(completePath, completePage);
 }
 
+
+function ProcessTutorials() {
+    //  Get the list of all tutorials
+    let tutorialFiles = glob.sync('**/*.md', { cwd: paths.source.tutorials });
+
+    //  Go through each tutorial file
+    let tutorialData = [];
+    tutorialFiles.forEach((tutorial, i) => {
+
+        //  Get the fileInfo
+        let fileInfo = path.parse(tutorial);
+
+        //  Create the build directory
+        let buildDir = path.join(paths.build.devblog, fileInfo.name);
+
+        //  Make the directory
+        fse.ensureDirSync(buildDir);
+
+        //  Read the page
+        let pageTemplete = fse.readFileSync(path.join(paths.source.posts, tutorial), 'utf-8');
+
+        //  Extract the front matter
+        let fMatter = frontMatter(pageTemplete);
+
+        let pageData = Object.assign({}, config, {
+            page: fMatter.attributes,
+        });
+
+
+        //  Render the marked
+        var markedRenderer = new marked.Renderer();
+        markedRenderer.heading = function (text, level) {
+            var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+            return `
+        <h${level} id=${escapedText}>${text}</h${level}>`;
+        }
+        let renderedPost = marked(fMatter.body, { renderer: markedRenderer });
+
+        //  Determine which layout to use
+        let layout = fMatter.attributes.layout || 'tutorials';
+
+        //  Generate the file name of the layout
+        let layoutFileName = path.join(paths.source.layouts, layout + '.ejs');
+
+        //  Read the data from the layout file
+        let layoutTemplete = fse.readFileSync(layoutFileName, 'utf-8');
+
+        //  Render the layout
+        let completePage = ejs.render(
+            layoutTemplete,
+            Object.assign({}, pageData, {
+                body: renderedPost,
+                filename: layoutFileName
+            })
+        );
+
+        //  Generate the path to write the file
+        let finalFilePath = `${buildDir}/index.html`;
+
+        //  Write to file
+        fse.writeFileSync(finalFilePath, completePage);
+
+
+        //  Add the neccessary info to the blogdata
+        tutorialData.push({
+            title: fMatter.attributes.title,
+            short: fMatter.attributes.short,
+            date: fMatter.attributes.date,
+            url: `/tutorials/${fileInfo.name}`
+        });
+    });
+
+    //  Return the blog data
+    return tutorialData;
+
+}
+
+function GenerateTutorials() {
+    //  Ensure the directory exists
+    fse.ensureDirSync(paths.build.tutorials);
+
+    let navHeaders = GenerateTutorialNavHeaders();
+
+    //  Get a list of all the tutorial files
+    let tutorialFiles = glob.sync('**/*.md', { cwd: paths.source.tutorials });
+
+    tutorialFiles.forEach((tutorial, i) => {
+        //  Get hte file info
+        let fileInfo = path.parse(tutorial);
+
+        let dirSpine = fileInfo.dir.replace(/[0-9]+-/g, '');
+        let nameSpine = fileInfo.name.replace(/[0-9]+-/g, '');
+
+        //  Generate the build directory path string
+        let buildDir = path.join(paths.build.tutorials, dirSpine, nameSpine);
+
+        //  Make the directory
+        fse.ensureDirSync(buildDir);
+
+        //  Read the page
+        let pageTemplete = fse.readFileSync(path.join(paths.source.tutorials, tutorial), 'utf-8');
+
+        //  Extract the front matter
+        let fMatter = frontMatter(pageTemplete);
+
+        let pageData = Object.assign({}, config, {
+            page: fMatter.attributes
+        });
+
+        //  Render the marked
+        var markedRenderer = new marked.Renderer();
+        markedRenderer.heading = function (text, level) {
+            var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+            return `
+            <h${level} id=${escapedText}>${text}</h${level}>`;
+        }
+
+        markedRenderer.code = function(code, language, isEscapsed) {
+            return `
+            <pre><code class="${language}">${code}</code></pre>`
+            
+        }
+        let renderedPost = marked(fMatter.body, { renderer: markedRenderer });
+
+        //  Determine which layout to use
+        let layout = fMatter.attributes.layout || 'tutorials';
+
+        //  Generate the file name of the layout
+        let layoutFileName = path.join(paths.source.layouts, layout + '.ejs');
+
+        //  Read teh data from the layout file
+        let layoutTemplete = fse.readFileSync(layoutFileName, 'utf-8');
+
+        //  Render the layout
+        let completePage = ejs.render(
+            layoutTemplete,
+            Object.assign({}, pageData, {
+                body: renderedPost,
+                filename: layoutFileName,
+                navHeaders: navHeaders
+            })
+        );
+
+        //  Generate the path to write the file
+        let finalFilePath = `${buildDir}/index.html`;
+
+        //  Write to file
+        fse.writeFileSync(finalFilePath, completePage);
+
+    });
+
+
+
+
+    // //  Process the tutorial pages
+    // let tutorialData = ProcessTutorials();
+}
+
+
+function GenerateTutorialNavHeaders() {
+    //  Get a list of all the tutorial files
+    let tutorialFiles = glob.sync('**/*.md', { cwd: paths.source.tutorials });
+    //let directories = []
+
+    let headers = [];
+    tutorialFiles.forEach((tutorial, i) => {
+        //  Get the file info of the tutorial file
+        let fileInfo = path.parse(tutorial);
+        //  Add the directory fo the file to the headers array
+        //directories.push(fileInfo.dir);
+        headers.push({ name: fileInfo.dir, subHeaders: [] });
+    });
+
+    //  Filter the headers so that it only contains the unique values
+    headers = headers.filter((value, index, self) => {
+        return index === self.findIndex((h) => h.name === value.name);
+    });
+
+    //  Add all files into the subheader collection of the appropriate header
+    tutorialFiles.forEach((tutorial, i) => {
+        let fileInfo = path.parse(tutorial);
+        let idx = headers.findIndex(x => x.name === fileInfo.dir);
+        headers[idx].subHeaders.push({ name: fileInfo.name });
+    });
+
+    //  Sort the headers by name
+    headers.sort((a, b) => {
+        if (a.name < b.name) {
+            return -1;
+        } else if (a.name > b.name) {
+            return 1;
+        } else {
+            return 0;
+        }
+    });
+
+    //  Sort each subheader by name
+    let idx = 0;
+    for (idx = 0; idx < headers.length; idx++) {
+        headers[idx].subHeaders.sort((a, b) => {
+            if (a.name < b.name) {
+                return -1;
+            } else if (a.name > b.name) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+    };
+
+    //  Sanatize the names of all headers and subheaders so that
+    //  the numbers are removed and they are in title case
+    headers.forEach((header, i) => {
+        header.nameSpine = header.name.replace(/[0-9]+-/g, '');
+        header.name = header.nameSpine;
+        header.name = header.name.split('-').join(' ');
+        header.name = header.name
+            .toLowerCase()
+            .split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ');
+
+        header.subHeaders.forEach((subHeader, i) => {
+            subHeader.nameSpine = subHeader.name.replace(/[0-9]+-/g, '');
+            subHeader.name = subHeader.nameSpine;
+            subHeader.name = subHeader.name.split('-').join(' ');
+            subHeader.name = subHeader.name
+                .toLowerCase()
+                .split(' ')
+                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                .join(' ');
+        });
+    });
+
+    return headers;
+}
