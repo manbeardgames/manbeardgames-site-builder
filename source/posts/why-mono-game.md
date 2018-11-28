@@ -1,7 +1,7 @@
 ---
 title: Why Do I Use MonoGame
 short: I get asked this question a lot.  So much that I started joking on my stream that I should write a formal statement about it on my website to link to.  I could provide a pros and cons list of using MonoGame vs insert game engine of choice here but that doesn't explain why I use MonoGame.  Hopefully this will answer the question.
-layout: flexed
+layout: default
 date: November 18th, 2018
 ogtitle: Why I use MonoGame
 ogimage: https://manbeardgames.com/img/ogmbg.png

@@ -36,7 +36,7 @@ feel you need to get the Professional or Enterprise Editions then do so, however
 
 Once the download finished, run the installer to begin installing Visual Studio.  It will ask you which components and workloads you want to install as part of the process.  Look over this list to see what's there, and if there is anything you thing you may have interest in, you can choose it now.  If you don't choose something now, you can always add it later by rerunning the installer which will allow you to modify your installation and choose additional workloads and components.  For now, the only thing we need at minimum is the .NET Desktop Development workload.
 
-```cs
+```csharp
 using System;
 using System.Collections.Generic;
 using System.Linq;

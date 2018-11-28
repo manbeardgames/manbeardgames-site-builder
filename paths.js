@@ -24,13 +24,13 @@ module.exports = {
         images: path.join(source, 'img'),
         js: path.join(source, 'js'),
         vendor: {
-            bootstrapcss: './node_modules/bootstrap/dist/css/bootstrap.css',
-            bootstrapjs: './node_modules/bootstrap/dist/js/bootstrap.js',
-            jquery: './node_modules/jquery/dist/jquery.js',
-            mdicss: './node_modules/@mdi/font/css/materialdesignicons.css',
-            mdifonts: './node_modules/@mdi/font/fonts/',
-            highlightjs: './node_modules/highlight.js/lib/highlight.js',
-            hightlightcss: './node_modules/highlight.js/styles/solarized-dark.css'
+            "bootstrap-css": './node_modules/bootstrap/dist/css/bootstrap.css',
+            "bootstrap-js": './node_modules/bootstrap/dist/js/bootstrap.js',
+            "popperjs-js": './node_modules/popper.js/dist/popper.js',
+            "jquery-js": './node_modules/jquery/dist/jquery.js',
+            "mdi-css": './node_modules/@mdi/font/css/materialdesignicons.css',
+            "mdi-fonts": './node_modules/@mdi/font/fonts/',
+            "prismjs-css": './node_modules/prismjs/themes/prism-tomorrow.css'
         }
     },
     build: {
@@ -43,14 +43,14 @@ module.exports = {
         images: path.join(build, 'img'),
         js: path.join(build, 'js'),
         vendor: {
-            bootstrapcss:path.join(build, 'vendor', 'bootstrap', 'css', 'bootstrap.css'),
-            bootstrapjs: path.join(build, 'vendor', 'bootstrap', 'js', 'bootstrap.js'),
-            jquery: path.join(build, 'vendor', 'jquery', 'jquery.js'),
-            mdicss: path.join(build, 'vendor', 'mdi', 'css', 'materialdesignicons.css'),
-            mdifonts: path.join(build, 'vendor', 'mdi', 'fonts'),
-            highlightjs: path.join(build, 'vendor', 'highlightjs', 'highlight.js'),
-            hightlightcss: path.join(build, 'vendor', 'highlightjs', 'solarized-dark.css')
-        }        
+            "bootstrap-css": path.join(build, 'vendor', 'bootstrap', 'css', 'bootstrap.css'),
+            "bootstrap-js": path.join(build, 'vendor', 'bootstrap', 'js', 'bootstrap.js'),
+            "popperjs-js": path.join(build, 'vendor', 'popper.js', 'js', 'popper.js'),
+            "jquery-js": path.join(build, 'vendor', 'jquery', "js", 'jquery.js'),
+            "mdi-css": path.join(build, 'vendor', 'mdi', 'css', 'materialdesignicons.css'),
+            "mdi-fonts": path.join(build, 'vendor', 'mdi', 'fonts'),
+            "prismjs-css": path.join(build, 'vendor', 'prismjs', 'css', 'prism-tomorrow.css')
+        }
     },
     temp: {
         root: temp,
@@ -62,14 +62,14 @@ module.exports = {
         images: path.join(temp, 'img'),
         js: path.join(temp, 'js'),
         vendor: {
-            bootstrapcss:path.join(temp, 'vendor', 'bootstrap', 'css', 'bootstrap.css'),
-            bootstrapjs: path.join(temp, 'vendor', 'bootstrap', 'js', 'bootstrap.js'),
-            jquery: path.join(temp, 'vendor', 'jquery', 'jquery.js'),
-            mdicss: path.join(temp, 'vendor', 'mdi', 'css', 'materialdesignicons.css'),
-            mdifonts: path.join(temp, 'vendor', 'mdi', 'fonts'),
-            highlightjs: path.join(temp, 'vendor', 'highlightjs', 'highlight.js'),
-            hightlightcss: path.join(temp, 'vendor', 'highlightjs', 'solarized-dark.css')
-        }        
+            "bootstrap-css": path.join(temp, 'vendor', 'bootstrap', 'css', 'bootstrap.css'),
+            "bootstrap-js": path.join(temp, 'vendor', 'bootstrap', 'js', 'bootstrap.js'),
+            "popperjs-js": path.join(temp, 'vendor', 'popper.js', 'js', 'popper.js'),
+            "jquery-js": path.join(temp, 'vendor', 'jquery', "js", 'jquery.js'),
+            "mdi-css": path.join(temp, 'vendor', 'mdi', 'css', 'materialdesignicons.css'),
+            "mdi-fonts": path.join(temp, 'vendor', 'mdi', 'fonts'),
+            "prismjs-css": path.join(temp, 'vendor', 'prismjs', 'css', 'prism-tomorrow.css')
+        }
 
     }
 }

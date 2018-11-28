@@ -7,7 +7,9 @@ const glob = require('glob');
 const config = require('../site.config');
 const sass = require('sass');
 const paths = require('../paths');
-const pygmentize = require('pygmentize-bundled');
+const prism = require('prismjs');
+const  loadLanguages = require('prismjs/components/');
+loadLanguages(['csharp']);
 
 // marked.setOptions({
 //     highlight: function(code, lang, callback) {
@@ -308,7 +310,7 @@ function GenerateDevBlog() {
     });
 
     //  Determine which layout to use
-    let layout = fMatter.attributes.layout || 'flexed';
+    let layout = fMatter.attributes.layout || 'default';
 
     //  Generate the file name of the layout
     let layoutFileName = path.join(paths.source.layouts, layout + '.ejs');
@@ -447,8 +449,11 @@ function GenerateTutorials() {
         }
 
         markedRenderer.code = function(code, language, isEscapsed) {
+            var html = prism.highlight(code, prism.languages.csharp, language);
             return `
-            <pre><code class="${language}">${code}</code></pre>`
+            <pre class="language-${language}"><code class="language-${language}">${html}</code></pre>`;
+            // return `
+            // <pre><code class="${language}">${code}</code></pre>`
             
         }
         let renderedPost = marked(fMatter.body, { renderer: markedRenderer });

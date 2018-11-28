@@ -1,0 +1,24 @@
+<%# ---------------------------------------------------------------------------------
+  Name:         _game-description.ejs
+  Type:         Partial
+  Description:  This is a partial templete for rendering the paragraphs of the games description
+  Notes:        -   Values for the game name and the descriptions are provided by the front matter
+                    of the page
+                -   The descriptions should be an array collection where each index in the array is
+                    a paragraph of the description
+  Last Refactored: 11/28/2018
+---------------------------------------------------------------------------------  #%>
+
+<div class="block-container">
+    <div class="block">
+        <h3 class="block-header"><%= game.name %></h3>
+        <hr />
+        <div class="block-description">
+            <% game.description.forEach((description, i) => { %>
+            <p>
+                <%= description %>
+            </p>
+            <% }) %>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 ---
 title: Rotating A Square
 short: I wanted to draw a diamond within the game window, which is essentially a square rotated 45 degrees around its center.  In this post, I'll explain how I was able to achieve that.
-layout: flexed
+layout: default
 date: November 26th, 2018
 ogtitle: Rotating A Square
 ogimage: https://manbeardgames.com/img/ogmbg.png

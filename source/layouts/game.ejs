@@ -1,3 +1,10 @@
+<%# ---------------------------------------------------------------------------------
+  Name:         game.ejs
+  Type:         Layout
+  Description:  This is the layout templete used by individual game pages
+  Last Refactored: 11/28/2018
+---------------------------------------------------------------------------------  #%>
+
 <!doctype html>
 <html>
     <head>
@@ -5,20 +12,20 @@
     </head>
 
     <body>
-        <% include ../partials/_fixed-top-nav %>
+        <% include ../partials/navs/_default-top-nav %>
         
         <header>
-            <% include ../partials/_game-trailer %>
+            <% include ../partials/sections/_game-trailer %>
         </header>
 
         <main id="game-main">
-            <% include ../partials/_game-description %>
-            <% include ../partials/_game-platform %>
+            <% include ../partials/sections/_game-description %>
+            <% include ../partials/sections/_game-platform %>
         </main>
 
         <footer>
-            <% include ../partials/_footer %>
+            <% include ../partials/footers/_default-footer %>
         </footer>
-        <% include ../partials/_scripts %>
+        <% include ../partials/scripts/_default-scripts %>
     </body>
 </html>

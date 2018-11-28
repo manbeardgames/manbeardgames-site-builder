@@ -1,7 +1,7 @@
 ---
 title: Fitting A Diamond In THe Game Window From Top To Bottom
 short: I knew the game window was 720px tall and wanted to fit a diamond in the window from top to bottom. In this post, I explore how I calculated the length of the sides to give me a perfect 720px tall diamond.
-layout: flexed
+layout: default
 date: November 26th, 2018
 ogtitle: Fitting A Diamon In The Game Window
 ogimage: https://manbeardgames.com/img/ogmbg.png

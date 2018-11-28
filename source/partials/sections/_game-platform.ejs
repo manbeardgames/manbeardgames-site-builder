@@ -1,0 +1,28 @@
+<%# ---------------------------------------------------------------------------------
+  Name:         _game-plaform.ejs
+  Type:         Partial
+  Description:  This is the partial that renders the platform badges for which platforms the
+                game is available on. 
+  Notes:        -   Data for which platforms is provided by the front matter of the page
+                -   The accepted values for the platforms are currently:
+                        steam
+                        itch
+                        ludum
+                        omgjam
+                -   The badge images for the platforms are expected to exist at the path
+                    img/badges/{platform-name}-badge.png
+  Last Refactored: 11/28/2018
+---------------------------------------------------------------------------------  #%>
+<div class="block-container">
+    <div class="block">
+        <div class="block-platforms">
+            <% game.platforms.forEach((platform, i) => { %> 
+                <div class="platform">
+                    <a href="<%- platform.url %>" target="_blank">
+                        <div class="platform-badge" style="background-image: url('img/badges/<%- platform.name %>-badge.png');"></div>
+                    </a>
+                </div>
+            <% }) %>                        
+        </div>
+    </div>
+</div>

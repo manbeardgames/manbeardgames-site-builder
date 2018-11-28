@@ -1,7 +1,7 @@
 ---
 title: Drawing a Line
 short: MonoGame has no native way of drawing a line from a starting point to an end point.  In this post, I'll explore one method of doing this.
-layout: flexed
+layout: default
 date: November 26th, 2018
 ogtitle: Drawing a Line
 ogimage: https://manbeardgames.com/img/ogmbg.png

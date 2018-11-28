@@ -1,0 +1,30 @@
+<%# ---------------------------------------------------------------------------------
+  Name:         _game-trailer.ejs
+  Type:         Partial
+  Description:  This is the partial templete the provides a large header area with background
+                using the games cover.png image, and if a trailer url is provided to the page
+                data, displays the iframe embedded youtube trailer in the center of the area
+  Notes:        -   The cover.png file used for the backgorund image of the area is expected
+                    to be at the path 'img/games/{lowercase-hyphinated-gamename}/cover.png
+                -   If a value for the game.trailer is not provided, then the visibility of the 
+                    block-trailer div is set to hidden
+  Last Refactored: 11/28/2018
+---------------------------------------------------------------------------------  #%>
+
+<div class="block-container">
+    <div class="block" style="background-image: url('img/games/<%- game.nameSpine %>/cover.png')">
+        <div class="row">
+            <div class="col-md-6 ml-auto mr-auto">
+                <div class="block-trailer img-thumbnail" <%- game.trailer.length === 0 ? 'style="visibility: hidden;"' : '' %>>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <% if(game.trailer != null) { %>
+                        <iframe width="560" height="315" src="<%= game.trailer %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                        </iframe>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>      
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<%# ---------------------------------------------------------------------------------
+  Name:         _default-top-nav.ejs
+  Type:         Partial
+  Description:  This is the default partial template for the top navigation bar on the site
+  Notes:        -   The navbar-brand <a> tag has a background image that is supplied
+                    by the CSS styling
+                -   The page.navheader value is supplied through the front matter of the 
+                    actual page itself.
+                -   The Games nav-item uses the #games href, which combined with the
+                    js function in site.js will do an animated scroll down the page
+                    to the games section if on the root index.html of the site.
+  Last Refactored: 11/28/2018
+---------------------------------------------------------------------------------  #%>
+
+<nav class="navbar navbar-expand-lg fixed-top" id="topNav">
+    <!-- Navbar brand background image is supplied by the CSS style -->
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#sidenav" aria-controls="sidenav"
+        aria-expanded="false" aria-label="Toggle sidebar">
+        <span class="navbar-toggler-icon"></span>
+    </button>    
+    <h3 class="text-white"><%= page.navheader %></h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="/#games">Games</a></li>
+            <li class="nav-item"><a class="nav-link" href="/tutorials">Tutorials</a></li>
+            <li class="nav-item"><a class="nav-link" href="/dev-blog">Dev Blog</a></li>
+        </ul>
+    </div>
+</nav>
+

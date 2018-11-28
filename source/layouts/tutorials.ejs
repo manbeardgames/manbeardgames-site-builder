@@ -1,3 +1,11 @@
+<%# ---------------------------------------------------------------------------------
+  Name:         tutorials.ejs
+  Type:         Layout
+  Description:  This is the layout template used by all of the tutorial pages.
+  Notes:        -   Uses the tutorial top nav instead of default
+                -   Includes the tutorial sidebar section
+  Last Refactored: 11/28/2018
+---------------------------------------------------------------------------------  #%>
 <!doctype html>
 <html>
 
@@ -7,7 +15,7 @@
 
 <body data-spy="scroll" data-target=".sidebar">
     <header>
-        <% include ../partials/_tutorial-top-nav %>
+        <% include ../partials/navs/_tutorial-top-nav %>
     </header>
     <div class="container-fluid">
         <div class="row navbar-expand-md">
@@ -39,7 +47,7 @@
 
 
 
-    <% include ../partials/_scripts %>
+    <% include ../partials/scripts/_default-scripts %>
 </body>
 
 </html>

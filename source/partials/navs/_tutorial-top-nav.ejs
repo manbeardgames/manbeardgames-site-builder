@@ -1,4 +1,16 @@
-<!-- BEGIN: source/partials/_header.ejs -->
+<%# ---------------------------------------------------------------------------------
+  Name:         _tutorial-top-nav.ejs
+  Type:         Partial
+  Description:  This is the partial templete for the top nav used on the tutorial pages.
+                The major difference in this one and the default one is the addition of the
+                tutorial side bar toggle button that is shown on md and lower viewports.
+  Notes:        -   The tutorial sidebar toggle button only displays on widths 768px and lower
+                -   When the tutorial sidebar toggle button is displayed, the navbar uses a 
+                    justify-content: space-around style which pushes the logo to the center
+                    of the navbar.
+  Last Refactored: 11/28/2018
+---------------------------------------------------------------------------------  #%>
+
 <nav class="navbar fixed-top  flex-md-nowrap p-0 navbar-expand-md" id="topNav">
     <div class="d-flex align-items-center justify-content-between col-sm-12 col-md-2 mr-0">
         <button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#sidenav"
@@ -19,4 +31,3 @@
         </ul>
     </div>
 </nav>
-<!-- End: source/partials/_header.ejs -->
