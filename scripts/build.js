@@ -8,7 +8,7 @@ const config = require('../site.config');
 const sass = require('sass');
 const paths = require('../paths');
 const prism = require('prismjs');
-const  loadLanguages = require('prismjs/components/');
+const loadLanguages = require('prismjs/components/');
 loadLanguages(['csharp']);
 
 // marked.setOptions({
@@ -20,6 +20,10 @@ loadLanguages(['csharp']);
 //         return coded;
 //     }
 //   });
+
+marked.setOptions({
+    gfm: true
+});
 
 
 //  Clear build path
@@ -444,17 +448,28 @@ function GenerateTutorials() {
         var markedRenderer = new marked.Renderer();
         markedRenderer.heading = function (text, level) {
             var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+            var style = level === 1 ? "title" : level === 2 ? "heading" : "sub-heading";
             return `
-            <h${level} id=${escapedText}>${text}</h${level}>`;
+            <h${level} class="${style}" id=${escapedText}>${text}</h${level}>`;
         }
 
-        markedRenderer.code = function(code, language, isEscapsed) {
+        markedRenderer.code = function (code, language, isEscapsed) {
             var html = prism.highlight(code, prism.languages.csharp, language);
             return `
             <pre class="language-${language}"><code class="language-${language}">${html}</code></pre>`;
             // return `
             // <pre><code class="${language}">${code}</code></pre>`
-            
+
+        }
+
+        markedRenderer.image = function (href, title, text) {
+            var imgPath = path.join('/img', 'tutorials', dirSpine, nameSpine, href);
+            return `<img class="img-fluid" src="${imgPath}" alt="${title}" />`;            
+        }
+
+        markedRenderer.link = function(href, title, text) {
+            var link = marked.Renderer.prototype.link.call(this, href, title, text);
+            return link .replace('<a', '<a target="_blank"');
         }
         let renderedPost = marked(fMatter.body, { renderer: markedRenderer });
 

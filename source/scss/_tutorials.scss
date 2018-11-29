@@ -1,3 +1,26 @@
+#tutorial {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-top: 2rem;
+        &.title {
+            margin-top: 0;
+            font-size: 2rem;
+            border-bottom: 1px solid darken($ophidianblue, 5%);
+        }
+        &.sub-heading {
+            font-size: 1.7rem;
+        }
+        &.sub-heading {
+            font-size: 1.5rem;
+        }
+    }
+
+}
+
 .wrapper {
     display: flex;
     width: 100%;
@@ -29,6 +52,41 @@ a[data-toggle="collapse"] {
     top: 50%;
     right: 20px;
     transform: translateY(-50%);
+}
+
+
+.thumbnail {
+    max-width: 40%;
+}
+
+.lightbox-wrapper {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+
+    .lightbox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    img {
+        max-width: 90%;
+        max-height: 80%;
+
+    }
+
+    &:target {
+        outline:none;
+        display:flex;
+        justify-content: center;
+    }
 }
 
 @media (max-width: 768px) {
