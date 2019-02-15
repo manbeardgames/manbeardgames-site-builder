@@ -1,0 +1,44 @@
+---
+site: {
+    title: "ManBeardGames",
+    description: "ManBeardGames is an indie game developer, web developer, and twitch streamer."
+}
+
+og: {
+    title: "ManBeardGames",
+    image: "https://manbeardgames.com/img/ogmbg.png",
+    description: "ManBeardGames is an indie game developer, web developer, and twitch streamer."
+}
+
+page: {
+    layout: "default",
+    navheader: "Tutorials"
+}
+---
+
+<div class="content">
+    <div class="container">
+    <h1 class="mt-4 mb-3">MonoGame Tutorials</h1>
+    <% tutorials.forEach((tutorial, i) => { %> 
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                            <img class="img-fluid rounded" src="<%= tutorial.cover %>" alt="">
+                    </div>
+
+                    <div class="col-lg-6">
+                        <h2 class="card-title"><%= tutorial.title %></h2>
+                        <p calss="card-text"><%= tutorial.short %></p>
+                        <a href="<%= tutorial.url %>" class="btn btn-primary">Read More &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer text-muted">
+                Posted on <%= tutorial.date %>
+            </div>
+        </div>
+    <% }) %>
+    </div>
+</div>
