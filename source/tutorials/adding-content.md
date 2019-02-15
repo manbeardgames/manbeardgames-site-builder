@@ -6,7 +6,7 @@ publish: ok
 index: 100
 date: Feburary 15, 2019
 ogtitle: Adding Content
-ogimage: https://manbeardgames.com/img/ogmbg.png
+ogimage: https://manbeardgames.com/img/tutorials/adding-content/tutorial-cover.png
 ogdescription: This tutorial briefly goes over adding content, such as images, sounds, and fonts, to your game using the Content Pipeline Tool and the ContentMangaer.
 ---
 <div class="container post">
@@ -23,13 +23,13 @@ If you would like to follow along with this tutorial using the same files and as
 
 # The Content Pipeline Tool and the ContentManager
 ---
-Let's create a scenario.  You're using the MonoGame framework to develop the next big indie hit.  You've created some really awesome sprites for your character to use in the game, and now you need a way to get them in the game.  You have your file **player_idle.png** in your project folder.  You know that to draw to the game window, you use the `SpriteBatch.Draw` method, but all variations of this method require a `Texture2D` object.  How do you turn your player_idle.png file into a Texture2D object in code?.  This is where the **Content Pipeline Tool** and the **ContentManager** class comes in.
+Let's create a scenario.  You're using the MonoGame framework to develop the next big indie hit.  You've created some really awesome sprites for your character to use in the game, and now you need a way to get them in the game.  You have your file **player_idle.png** in your project folder.  You know that to draw to the game window, you use the `SpriteBatch.Draw` method, but all variations of this method require a `Texture2D` object.  How do you turn your player_idle.png file into a Texture2D object in code?  This is where the **Content Pipeline Tool** and the **ContentManager** class comes in.
 
-The Content Pipeline Tool is a nifty little tool that comes with MonoGame.  It takes your game assets (aka content), and creates `.xnb` files that can be used by the ContentManager to load them up in your game. Why would we want to do this though; converting our game assets to this arbitrary .xnb file format. Can't we just read the image file directly into the game using things like FileStreams?  Let's explore this using the following scenario.
+The Content Pipeline Tool is a nifty little tool that comes with MonoGame.  It takes your game assets (aka content) and creates `.xnb` files that can be used by the ContentManager to load them up in your game. Why would we want to do this though; converting our game assets to this arbitrary .xnb file format. Can't we just read the image file directly into the game using things like FileStreams?  Let's explore this using the following scenario.
 
 ## Scenario: Using FileStream
 ---
-Yes, you can actually use things like a `FileStream` to load your images into the game.  The **Texture2D** class has a method called `FromStream(GraphicsDevice graphicsDevice, Stream stream)`, which takes a *GraphicDevice* object and a *System.IO.Stream* object of the image file.  Let's go ahead and create a new MonoGame Crossplatform Desktop Project.  Once created, open the **Game1.cs** file.  Let's add a `Texture2D` object called **_playerIdle** that we'll use to hold our sprite.  Add it just under the SpriteBatch, so it should look like the following.
+Yes, you can use things like a `FileStream` to load your images into the game.  The **Texture2D** class has a method called `FromStream(GraphicsDevice graphicsDevice, Stream stream)`, which takes a *GraphicDevice* object and a *System.IO.Stream* object of the image file.  Let's go ahead and create a new MonoGame Cross Platform Desktop Project.  Once created, open the **Game1.cs** file.  Let's add a `Texture2D` object called **_playerIdle** that we'll use to hold our sprite.  Add it just under the SpriteBatch, so it should look like the following.
 
 ```csharp
 /// <summary>
@@ -52,7 +52,7 @@ public class Game1 : Game
     //....
 ```
 
-Now, we need to add the player_idle.png file to our project. So go ahead and do this by right clicking the project in the Solution Explorer, selecing **Add Existing Item**, and choosing the **player_idle.png**.  Be sure to change the "Copy to Output Directory" property for the file in the properties window to "Copy Always".  Now inside the `LoadContent()` method we can use the `Texture2D.FromStream` method to load it in like so (be sure to add the `using System.IO;` using statement to the top of the Game1.cs file)
+Now, we need to add the player_idle.png file to our project. So go ahead and do this by right clicking the project in the Solution Explorer, selecting **Add Existing Item**, and choosing the **player_idle.png**.  Be sure to change the "Copy to Output Directory" property for the file in the properties window to "Copy Always".  Now inside the `LoadContent()` method we can use the `Texture2D.FromStream` method to load it in like so (be sure to add the `using System.IO;` using statement to the top of the Game1.cs file)
 
 ```csharp
 /// <summary>
@@ -75,7 +75,7 @@ protected override void LoadContent()
 }
 ``` 
 
-The `GraphicsDevice` object that we passed to the `FromStream` method is a property we get from our Game1 class inheriting from `Game`.  Now since we're not using the ContentManager to load this in, that means we have to manage the resource, which includes disposing of it whenever we need to unload content.  So in our `UnloadContent` method, add the following
+The `GraphicsDevice` object that we passed to the `FromStream` method is a property we get from our Game1 class inheriting from `Game`.  Now since we're not using the ContentManager to load this in, that means we have to manage the resource, which includes disposing of it whenever we need to unload content.  So, in our `UnloadContent` method, add the following
 
 ```csharp
 /// <summary>
@@ -92,20 +92,20 @@ protected override void UnloadContent()
 }
 ```
 
-This is one way of loading an image file into your game as a Texture2D.  It's a bit cumbersome though, having to use file streams, managing the content unloading manually, and the fact that the image file has to exist in the deployed game's files as a plain image file that anyone could open and manipluate.  Now, let's take a look at the process of doing this with the Content Pipeline Tool and the ContentManager.
+This is one way of loading an image file into your game as a Texture2D.  It's a bit cumbersome though, having to use file streams, managing the content unloading manually, and the fact that the image file must exist in the deployed game's files as a plain image file that anyone could open and manipulate.  Now, let's look at the process of doing this with the Content Pipeline Tool and the ContentManager.
 
 
 
 ## The Content Pipeline Tool
 ---
-As I said before, the Contnet Pipeline Tool comes with MonoGame and provides a user interface for managing our game assets.  It takes our game assets, imports them, processes them, then outputs them as a `.xnb` file.  These output files are what the ContentMangaer will use to locate and load our assets.  The Content Pipeline Tool has several out-of-the-box importers to use that work with various file types.  Below is table of some of the basic ones.
+As I said before, the Content Pipeline Tool comes with MonoGame and provides a user interface for managing our game assets.  It takes our game assets, imports them, processes them, then outputs them as a `.xnb` file.  These output files are what the ContentMangaer will use to locate and load our assets.  The Content Pipeline Tool has several out-of-the-box importers to use that work with various file types.  Below is table of some of the basic ones.
 
 | Type  | Description |
 |---|---|
-| Images | Images files such a .png, .jpb, .bmp |
-| Audio | Music and sound effects like .mp3, .wav, and .ogg |
+| Images | Images files such a **.png**, **.jpg**, **.bmp** |
+| Audio | Music and sound effects like **.mp3**, **.wav**, and **.ogg** |
 | Video | H.264 video files |
-| Fonts | This is .spritefont files, which describe different properties of a font, such as family and size |
+| Fonts | This is **.spritefont** files, which describe different properties of a font, such as family and size |
 
 <div class="card text-white bg-dark mb-3">
     <div class="card-header">
@@ -118,7 +118,7 @@ As I said before, the Contnet Pipeline Tool comes with MonoGame and provides a u
     </div>
 </div>
 
-So lets just dive right into this.  First create a new MonoGame Crossplatform Desktop Project. We won't be reusing the previous one from the scenario we covered above.  Once the project is created, expand the *Content* directory in the Solution Explorer window in Visual Studio.  Then double click the **Content.mgbc** file.
+So, let's just dive right into this.  First create a new MonoGame Cross Platform Desktop Project. We won't be reusing the previous one from the scenario we covered above.  Once the project is created, expand the *Content* directory in the Solution Explorer window in Visual Studio.  Then double click the **Content.mgbc** file.
 
 ![Double Click Content.mgbc](double-click-content.png)  
 
@@ -133,7 +133,7 @@ This will open the Content Pipeline Tool window, shown below.
         </span>
     </div>
     <div class="card-body">
-        <p>When double clicking to open, if a text file opens in Visual Studio instead of the window shown above, this is because Visual Studio is not setup to open it with the correct application.  To fix this, right cick the <span class="font-weight-bold">Content.mgbc</span> in the Solution Explorer and select <span class="font-weight-bold">Open With...</span>. The scroll down and click <span class="font-weight-bold">MonoGame Pipeline Tool</span>, then click the <span class="font-weight-bold">Set as default</span> button, then click the <span class="font-weight-bold">Ok</span> button.</p>
+        <p>When double clicking to open, if a text file opens in Visual Studio instead of the window shown above, this is because Visual Studio is not setup to open it with the correct application.  To fix this, right click the <span class="font-weight-bold">Content.mgbc</span> in the Solution Explorer and select <span class="font-weight-bold">Open With...</span>. The scroll down and click <span class="font-weight-bold">MonoGame Pipeline Tool</span>, then click the <span class="font-weight-bold">Set as default</span> button, then click the <span class="font-weight-bold">Ok</span> button.</p>
     </div>
 </div>
 
@@ -146,7 +146,7 @@ Now that we have the window open, lets go over what where looking at. First thin
 | Build Output | This shows the output log when the content is built.  |
 
 
-You'll want to come up with some type of organization for the content you add.  So lets add a new folder call *images*.  To do this, you can right-click inside the Project panel, the select **Add**, and then **New Folder**
+You'll want to come up with some type of organization for the content you add.  Let's add a new folder call *images*.  To do this, you can right-click inside the Project panel, the select **Add**, and then **New Folder**
 
 ![Add New Folder](add-new-folder.png)
 
@@ -154,7 +154,7 @@ Let's name the folder **images**. This will be the folder we place our player_id
 
 ![Add Existing Item](add-existing-item.png)
 
-Use the file selector to add the image. After selecing the image, you will be shown the Add File Dialog.  
+Use the file selector to add the image. After selecting the image, you will be shown the Add File Dialog.  
 
 ![Add File Dialog](add-file-dialog.png)
 
@@ -162,7 +162,7 @@ This will present you with the following three options
 
 | Option | Description |
 |---|---|
-| Copy the file to the directory | Choosing this will make a copy of the original file, and place the copy inside the content directory.  **Keep in mind, choosing this option means that any changes to the original file will not be reflected in the content file, since it's a copy** |
+| Copy the file to the directory | Choosing this will make a copy of the original file and place the copy inside the content directory.  **Keep in mind, choosing this option means that any changes to the original file will not be reflected in the content file, since it's a copy** |
 | Add a link to the file | Choosing this will create a link to the original file for the content pipeline tool.  **Unlike choosing to copy the file, using this option, changes in the original will be reflected. However, if you move, rename, or delete the original file, the link will be broken.** |
 | Skip adding the file | Choosing this option skips adding the file. When adding a single file, this is the same as clicking the cancel button.  |
 
@@ -176,7 +176,7 @@ For this tutorial, we are going to choose the **Copy the file to the directory**
     </div>
     <div class="card-body">
         <p>
-            We're not going to cover it in this tutorial, but feel free to explore the Properties panel for the image after adding it.  Just click the image in the Project panel, then look over all the different things within the Properties panel. <span class="bold">Just be sure that if you change any values, to change them back to what they were. For the purpose of the tutorial, we'll only be using the default values</span>
+            We're not going to cover it in this tutorial, but feel free to explore the Properties panel for the image after adding it.  Just click the image in the Project panel, then look over all the different things within the Properties panel. <span class="bold">Just be sure that if you change any values, to change them back to what they were. For the tutorial, we'll only be using the default values</span>
         </p>
     </div>
 </div>
@@ -189,7 +189,7 @@ For this tutorial, we are going to choose the **Copy the file to the directory**
     </div>
     <div class="card-body">
         <p>
-            Since we choose to copy the file to the directory, take a moment to explore where the file is copied too.  In you game's project folder, locate and open the <span class="bold">Content</span> folder.  In here, you'll see the <span class="italic">images</span> folder we created in the Content Pipeline Tool, and insde there will be the image we just added.  Remember, this is a <span class="italic">copy</span> of the original 
+            Since we choose to copy the file to the directory, take a moment to explore where the file is copied too.  In you game's project folder, locate and open the <span class="bold">Content</span> folder.  In here, you'll see the <span class="italic">images</span> folder we created in the Content Pipeline Tool, and inside there will be the image we just added.  Remember, this is a <span class="italic">copy</span> of the original 
         </p>
     </div>
 </div>
@@ -211,7 +211,7 @@ You should see some text appear in the Build Output panel while it's building.  
     </div>
 </div>
 
-And that's it for adding content with the Content Pipeline Tool.  This is the process you'll use to add any game assets for your game.  Next we'll go over using the `ContentManager` inside the game's code to load our content into the game to be used.
+And that's it for adding content with the Content Pipeline Tool.  This is the process you'll use to add any game assets for your game.  Next, we'll go over using the `ContentManager` inside the game's code to load our content into the game to be used.
 
 ## Content Manager
 ---
@@ -257,10 +257,10 @@ protected override void LoadContent()
 }
 ```
 
-The `Load<T>(string assetName)` method is a C# generic method, sigified by the `<T>`, which means we have to tell it what type of content it is loading, in this case a `Texture2D`.  Then, we have to pass in the asset name that we want to load, in this case the player_idle.png image.  Since we put it inside the **images** directory in the Content Pipeline Tool, we also need to specify this.  Note however that we do not add the extension.  This is because the ContentManger knows that it is loading the .xnb file that was generated by the Content Pipeline Tool.  
+The `Load<T>(string assetName)` method is a C# generic method, signified by the `<T>`, which means we have to tell it what type of content it is loading, in this case a `Texture2D`.  Then, we have to pass in the asset name that we want to load, in this case the player_idle.png image.  Since we put it inside the **images** directory in the Content Pipeline Tool, we also need to specify this.  Note however that we do not add the extension.  This is because the ContentManger knows that it is loading the .xnb file that was generated by the Content Pipeline Tool.  
 
 And that's it.  Now that we have our image loaded as Texture2D, we can use that with the SpriteBatch to draw it to the screen.
 
 # Conclusion
-There is more than one way to import game assets into your game, load them up, and use them.  For most of the out-of-the-box content types such as `Texture2D`, `SoundEffect`, and `Song`, these classes offer a `.FromStream` (or `FromUri` for `Song`) method to load the content without the use of the Content Pipeline Tool and ContentManager.  This means that you'll have to manually manage the resource and unloading it should it need to be disposed of.  MonoGame however offers the Content Pipeline Tool and the ContentManager class to simplify this process and to also help proctect your files by converting them to a .xnb format.  
+There is more than one way to import game assets into your game, load them up, and use them.  For most of the out-of-the-box content types such as `Texture2D`, `SoundEffect`, and `Song`, these classes offer a `.FromStream` (or `FromUri` for `Song`) method to load the content without the use of the Content Pipeline Tool and ContentManager.  This means that you'll have to manually manage the resource and unloading it should it need to be disposed of.  MonoGame however offers the Content Pipeline Tool and the ContentManager class to simplify this process and to also help protect your files by converting them to a .xnb format.  
 </div>
