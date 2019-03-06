@@ -24,7 +24,7 @@ If you would like to follow along with this tutorial using the same files and as
   
 
 
-## Create the Camera Clas
+## Create the Camera Class
 ---
 If you are unfamilar with the concept of a camera in game development, it is gives us someting called a Transformation Matrix, which we can then apply to our rendering.  This transformation matrix contains the information to translate, rotate, and scale what we tell to render so that it looks as if we're viewing the game from the perspective of the camera. 
 
