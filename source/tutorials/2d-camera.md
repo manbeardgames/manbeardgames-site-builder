@@ -13,9 +13,9 @@ ogdescription: How to create and implement a simple 2D camera for use in your pr
 
 # Overview
 ---
-A camera can be an essential part of your game when you need to create game worlds that expand beyond the scope of the game windows width and height.  The concept of a camera can seem overwhelming at first, but here we'll layout the groudwork as simple as possible in a way that you can expand on to suite your game project's needs.
+A camera can be an essential part of your game when you need to create game worlds that expand beyond the scope of the game windows width and height.  The concept of a camera can seem overwhelming at first, but here we'll layout the groundwork as simple as possible in a way that you can expand on to suite your game project's needs.
 
-Creating a camera will require the use of vecttors math and matrices math to create a Transofmration Matrix.  It is beyond the scope of these tutorials to explain the math behind it. If you would like to further research this topic, the article [The Transform Matrix For 2D Games](http://www.alanzucconi.com/2016/02/10/tranfsormation-matrix/#part1) is a good starting place.  
+Creating a camera will require the use of vectors math and matrices math to create a Transformation Matrix.  It is beyond the scope of these tutorials to explain the math behind it. If you would like to further research this topic, the article [The Transform Matrix For 2D Games](http://www.alanzucconi.com/2016/02/10/tranfsormation-matrix/#part1) is a good starting place.  
 
 
 # Project Files
@@ -26,7 +26,7 @@ If you would like to follow along with this tutorial using the same files and as
 
 ## Create the Camera Class
 ---
-If you are unfamilar with the concept of a camera in game development, it is gives us someting called a Transformation Matrix, which we can then apply to our rendering.  This transformation matrix contains the information to translate, rotate, and scale what we tell to render so that it looks as if we're viewing the game from the perspective of the camera. 
+If you are unfamiliar with the concept of a camera in game development, it is gives us something called a Transformation Matrix, which we can then apply to our rendering.  This transformation matrix contains the information to translate, rotate, and scale what we tell to render so that it looks as if we're viewing the game from the perspective of the camera. 
 
 ![camera concept](tutorial-cover.png)
 
@@ -35,16 +35,16 @@ To get started, create a new class for your camera, I'll call mine `Camera2D`.  
 ```csharp
 public class Camera2D
 {
-    //  The tranformation matrix of the camera
+    //  The transformation matrix of the camera
     private Matrix _transformationMatrix = Matrix.Identity;
 
-    //  The inverse of the transofmration matrix
+    //  The inverse of the transformation matrix
     private Matrix _inverseMatrix = Matrix.Identity;
 
     //  The xy-coordinate top-left position of the camera
     private Vector2 _position = Vector2.Zero;
 
-    //  The rotation of the cameara along the Z axis
+    //  The rotation of the camera along the Z axis
     private float _rotation = 0;
 
     //  The x and y zoom level of the camera
@@ -56,13 +56,13 @@ public class Camera2D
     //  Has the position, angle, origin, or zoom of the camera changed
     private bool _hasChanged;
 
-    //  The Viewport reference for the camra
+    //  The Viewport reference for the camera
     public Viewport Viewport;
 
     /// <summary>
     ///     Creates a new 2D camera instance
     /// </summary>
-    /// <param name="viewPort">The Viewport refernece for the camera</param>
+    /// <param name="viewPort">The Viewport reference for the camera</param>
     public Camera2D(Viewport viewPort)
     {
         Viewport = viewPort;
@@ -83,7 +83,7 @@ public class Camera2D
 }
 ```
 
-Below is an explination the fields we've added above to further clarify their purpose for our camera.  
+Below is an explanation the fields we've added above to further clarify their purpose for our camera.  
 
 
 | Field | Type | Description |
@@ -93,15 +93,16 @@ Below is an explination the fields we've added above to further clarify their pu
 | `_position` | Vector2 | This is the xy-coordinate position of our camera relative to the top-left of the camera's view. In terms of our transformation matrix, this is the **translation**/ |
 | `_rotation` | float| This is the angle of rotation for our camera.  In terms of our transformation matrix, this is the **rotation**. |
 | `_zoom` | Vector2 | This is the zoom level of the camera.  In terms of our transformation matrix, this is the **scale**. |
-| `_origin` | Vector2 | This is the origin point of our camera. By default it is Vector2.Zero, which means our camer's origin is the top-left. |
-| `_hasChanged` | bool | This is a boolean value we'll set to true anytime either the position, rotation, or scale of the camera has changed, signifiying that we need to update our transformation matrix. |
+| `_origin` | Vector2 | This is the origin point of our camera. By default, it is Vector2.Zero, which means our camera's origin is the top-left. |
+| `_hasChanged` | bool | This is a boolean value we'll set to true anytime either the position, rotation, or scale of the camera has changed, signifying that we need to update our transformation matrix. |
 | `ViewPort` | ViewPort | This is the Viewport reference for our camera. |
 
 After the fields are declared, two constructors are introduced.  The first constructor allows us to pass in a reference to an existing `ViewPort`.  This is useful because it allows us to use the Viewport from our Game1 class provided by default by MonoGame.  The second constructor allows use to supply a width and height, which will create a viewport reference for use base on these dimensions.
 
 
-## Updating The Matrices
-To keep our transformation matrix and inverse matrix updated, we'll create a method called `UpdateMMatrices`.  Calculating a new transformation matrix is done through the multiplication of a tranlation matrix of our `_position`, a rotation matrix of our `_rotation`, a scale matrix of our `_zoom`, and an additional translation matrix of our `_origin`.  Once we have each of these individual matrices, we can multiply them all together to get our final `_transformationMatrix`.  Then to get the value of our `_inverseMatrix`, we just inverse the transformation matrix.
+## Updating the Matrices
+---
+To keep our transformation matrix and inverse matrix updated, we'll create a method called `UpdateMatrices`.  Calculating a new transformation matrix is done through the multiplication of a translation matrix of our `_position`, a rotation matrix of our `_rotation`, a scale matrix of our `_zoom`, and an additional translation matrix of our `_origin`.  Once we have each of these individual matrices, we can multiply them all together to get our final `_transformationMatrix`.  Then to get the value of our `_inverseMatrix`, we just inverse the transformation matrix.
 
 Add the following method to our Camera2D class
 
@@ -153,9 +154,10 @@ private void UpdateMatrices()
 }
 ```
 
-And that's it for the hard stuff.  This will keep the transformation and inverse matrix values udpated whenever there is a change to the position, rotation, or scale.  Next, we'll create the public properties that can be used to retrive the values needed from the camera to use witin the game.
+And that's it for the hard stuff.  This will keep the transformation and inverse matrix values updated whenever there is a change to the position, rotation, or scale.  Next, we'll create the public properties that can be used to retrieve the values needed from the camera to use within the game.
 
 ## Adding Camera Properties
+---
 The first two properties that we are going to add are for the TransformationMatrix and the InverseMatrix.  Add the following to the Camera2D class.
 
 ```csharp
@@ -166,7 +168,7 @@ public Matrix TransformationMatrix
 {
     get
     {
-        //  If a change is detected, update matraces before
+        //  If a change is detected, update matrices before
         //  returning value
         if(_hasChanged)
         {
@@ -177,13 +179,13 @@ public Matrix TransformationMatrix
 }
 
 /// <summary>
-///     Gets the inverse of the cameras transformation matrix
+///     Gets the inverse of the camera's transformation matrix
 /// </summary>
 public Matrix InverseMatrix
 {
     get
     {
-        //  If a change is detected, update matraces before
+        //  If a change is detected, update matrices before
         //  returning value
         if (_hasChanged)
         {
@@ -296,7 +298,7 @@ public float X
 }
 
 /// <summary>
-///     Gets or Sets teh camera's y-coordinate position relative to the world
+///     Gets or Sets the camera's y-coordinate position relative to the world
 ///     space of the game
 /// </summary>
 public float Y
@@ -316,13 +318,13 @@ public float Y
 }
 ```
 
-The getter for each of these properties return back their respective backing field values.  In each of the setters, first a check to see if the value has actually changed is performed.  If it is actually a new value, the the value is set to the respective backing field, and the `_hasChanged` boolean is set to true, incdicating that a change has been made.  The last two properties `X` and `Y` are mostly there for utility so we can set them individually instead of having to supply a full Vector2 each time to `Position`.  
+The getter for each of these properties return back their respective backing field values.  In each of the setters, first a check to see if the value has actually changed is performed.  If it is actually a new value, the value is set to the respective backing field, and the `_hasChanged` boolean is set to true, indicating that a change has been made.  The last two properties `X` and `Y` are mostly there for utility so we can set them individually instead of having to supply a full Vector2 each time to `Position`.  
 
 That's it for our properties.  
 
 ## Screen Space to Camera Space Methods
 ---
-By introducing a camera into our game, we've also also created two seperate coordinate spaces.  
+By introducing a camera into our game, we've also created two separate coordinate spaces.  
 
 | System | Definition |
 |---|---|
@@ -336,14 +338,14 @@ To further expand on this concept, take a look at the following image:
 ![world space to screen space concept](world-to-screen-space.png)
 
 
-On the left is our game world.  The game world is 2000px wide by 2000px tall.  In this game world, our player is located at world space xy-position {1000, 900}.  On the right is our game screen that is being rendered.  The game screen is only 1280px wisde by 720px tall.  We have the mouse at screen space xy-position {1000, 650}.
+On the left is our game world.  The game world is 2000px wide by 2000px tall.  In this game world, our player is located at world space xy-position {1000, 900}.  On the right is our game screen that is being rendered.  The game screen is only 1280px wide by 720px tall.  We have the mouse at screen space xy-position {1000, 650}.
 
 We need something that is going to translate between these two coordinate systems. Thankfully, it's actually not too difficult.  In our Camera2D class, add the following two methods
 
 ```csharp
 /// <summary>
 ///     Translate the given screen space xy-coordinate position
-///     to the equivilant world space xy-coordinate position
+///     to the equivalent world space xy-coordinate position
 /// </summary>
 /// <param name="position">The xy-coordinate position in screen space to translate</param>
 /// <returns>
@@ -356,7 +358,7 @@ public Vector2 ScreenToWorld(Vector2 position)
 
 /// <summary>
 ///     Translates the given world space xy-coordinate position
-///     to the equivilant screen space xy-coordinate position
+///     to the equivalent screen space xy-coordinate position
 /// </summary>
 /// <param name="position">The xy-coordinate position in world space to translate</param>
 /// <returns>
@@ -370,7 +372,8 @@ public Vector2 WorldToScreen(Vector2 position)
 
 With these two methods, we can translate between the two coordinate systems.  
 
-## Using The Camera
+## Using the Camera
+---
 To use our camera in our game, first we need to create a new instance of the camera.  in our Game1 class and the following field and initialize it within the constructor.
 
 ```csharp
