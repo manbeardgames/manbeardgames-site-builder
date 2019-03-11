@@ -6,16 +6,16 @@ module.exports = {
     },
     opengraph: {
         type: 'website',
-        image: 'https://manbeardgames.com/img/ogmbg.png',
+        image: 'https://manbeardgames.com/content/img/ogmbg.png',
         siteName: 'ManBeardGames',
         description: 'ManBeardGames is an indie game developer, web developer, and twitch streamer.',
     },
     paths: {
         src: {
             root: './source',
-            img: './source/img',
-            sass: './source/scss',
-            js: './source/js',
+            img: './source/content/img',
+            sass: './source/content/scss',
+            js: './source/content/js',
             pages: './source/pages',
             layouts: './source/layouts',
             devblog: './source/partials/_dev-blog.ejs',
@@ -30,9 +30,9 @@ module.exports = {
         },
         build: {
             root: './public',
-            img: './public/img',
-            css: './public/css',
-            js: './public/js',
+            img: './public/content/img',
+            css: './public/content/css',
+            js: './public/content/js',
             posts: './public/dev-blog',
             vendor: {
                 bootstrapcss: './public/vendor/bootstrap/css/bootstrap.css',
@@ -44,10 +44,10 @@ module.exports = {
         },
         tmp: {
             root: './.tmp',
-            img: './.tmp/img',
-            sass: './.tmp/sass',
-            css: './.tmp/css',
-            js: './.tmp/js',
+            img: './.tmp/content/img',
+            sass: './.tmp/content/sass',
+            css: './.tmp/content/css',
+            js: './.tmp/content/js',
             vendor: {
                 bootstrapcss: './.tmp/vendor/bootstrap/css/bootstrap.css',
                 bootstrapjs: './.tmp/vendor/bootstrap/js/bootstrap.js',

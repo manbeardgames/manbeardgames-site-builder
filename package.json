@@ -7,7 +7,10 @@
     "add-game": "node ./scripts/addgame",
     "build": "node ./scripts/build",
     "build:prod": "cross-env NODE_ENV=production node .scripts/build",
-    "serve": "serve ./public"
+    "serve": "serve ./public",
+    "test-arg": "node -e \"const args = process.argv;  console.log(args['name']);\"",
+    "new-controller": "node -e \"if(process.argv.length < 2) { console.error('no name provided'); } else { require('./tasks/controller-tasks').create_controller(process.argv[process.argv.length - 1]); } \"",
+    "process-stylesheets": "node -e \"require('./tasks/stylesheet-tasks').process();\""
   },
   "author": "Christohper Whitley",
   "license": "MIT",
@@ -27,6 +30,7 @@
   },
   "devDependencies": {
     "popper.js": "^1.14.6",
-    "prismjs": "^1.15.0"
+    "prismjs": "^1.15.0",
+    "typescript": "^3.3.3333"
   }
 }

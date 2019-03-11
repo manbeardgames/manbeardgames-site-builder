@@ -4,9 +4,9 @@ const ejs = require('ejs');
 const marked = require('marked');
 const frontMatter = require('front-matter');
 const glob = require('glob');
-const config = require('../site.config');
+const config = require('../config/site.config');
 const sass = require('sass');
-const paths = require('../paths');
+const paths = require('../config/paths');
 const prism = require('prismjs');
 const loadLanguages = require('prismjs/components/');
 loadLanguages(['csharp']);
@@ -31,6 +31,8 @@ fse.emptyDirSync(paths.build.root);
 fse.emptyDirSync(paths.temp.root);
 
 ProcessSass();
+
+
 ProcessImages();
 ProcessJavaScript();
 ProcessVendor();
