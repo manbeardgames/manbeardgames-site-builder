@@ -70,12 +70,10 @@ exports.process = function() {
         
         for(var route in routes) {
             if(routes.hasOwnProperty(route)) {
-                routes[route]();
+                let view = routes[route].buildView();
+
             }
         }
-        // routes.forEach((route, i) => {
-        //     route();
-        // })
     });
 }
 

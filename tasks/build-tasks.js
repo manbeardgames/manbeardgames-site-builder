@@ -6,7 +6,8 @@ const logger = require('../lib/logger');
 const stylesheets = require('./stylesheet-tasks');
 const images = require('./image-tasks');
 const javascripts = require('./javascript-tasks');
-const controlelrs = require('./controller-tasks');
+const controllers = require('./controller-tasks');
+const vendors = require('./vendor-tasks');
 
 
 // var exports = module.exports = {};
@@ -47,6 +48,12 @@ exports.build = function () {
 
     //  Copy over processed javascript files
     javascripts.moveTo(javascript_dir);
+
+    //  Process vendors
+    vendors.process();
+
+    //  Process controllers
+    controllers.process();
 
 
 
