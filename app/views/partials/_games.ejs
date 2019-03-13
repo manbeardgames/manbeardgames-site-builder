@@ -5,7 +5,7 @@
 
         <div class="game-container">
             <div class="game-preview-container">
-                <img class="img-responsive img-thumbnail" src="content/images/games/<%- game.nameSpine %>/game_preview.png" alt="...">
+                <img class="img-responsive img-thumbnail" src="content/images/games/<%- game.spine %>/game_preview.png" alt="...">
             </div>
 
             <div class="game-overview-container">
@@ -13,7 +13,7 @@
                     <%- game.name %>
                 </h3>
                 <p>
-                    <%- game.shortDescription %>
+                    <%- game.short %>
                 </p>
 
                 <div class="block-platforms">
@@ -25,7 +25,7 @@
                         </div>
                     <% }) %>           
                 </div>          
-                <a class="btn btn-primary btn-large" href="/<%= game.nameSpine %>">More Info</a>
+                <a class="btn btn-primary btn-large" href="/<%= game.spine %>">More Info</a>
             </div>
         </div>
 </section>
