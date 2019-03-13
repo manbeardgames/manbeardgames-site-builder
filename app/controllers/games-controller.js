@@ -1,115 +1,51 @@
+//---------------------------------------------------------
+//  Game Controller
+//  The game controller is responsible for creating the individual page
+//  for each game.
+//
+//  The game controller is a little unique in that it does not contain
+//  a seperate route entry for each game. Since every game page is templeted
+//  the same, just with different information on the view, instead one
+//  route view is used that generates the views of every game page, passing
+//  the game data to the render.
+//---------------------------------------------------------
+
 const app = require('./application-controller');
-const glob = require('glob');
-const path = require('path');
-const fse = require('fs-extra');
-const fMatter = require('front-matter');
 
 // var exports = module.exports = {};
 
 exports.routes = {
-    beats: {
-        route: '/beats/',
+    all: {
         buildView: function () {
-            
-            //  Get the view data
-            let view_data = app.readView('games', 'beats');
-            
-            //  Get the data for beats from database
-            let db = app.getData('beats');
+            //  Get the data collection of all games
+            let games = app.getDataFolder('games');
 
-            view_data.page_data = Object.assign({}, view_data.page_data, {
-                game: db,
+            //  Get the default view data from the db.  We do this since we don't
+            //  have a view to render from to obtain the data. Instead, we'll use
+            //  this default view data and update the values per game below
+            let default_view_data = app.getDataSingle('view_data');
+
+            //  Iterate each of the games in the game collection
+            games.forEach((game, i) => {
+                //  Use the default view data as the base for the view data
+                let view_data = Object.create(default_view_data);
+
+                //  Set the layout to game
+                view_data.layout = 'game';
+
+                //  Set the page nav header to the name of the game
+                view_data.page_data.page_nav_header = game.name;
+
+                //  Store the data object about the game in the view's page data
+                view_data.page_data.game = game;
+
+                //  Render the view
+                let view = app.renderView(view_data);
+
+                //  Save the view to the public folder
+                app.saveView(`/${game.spine}/index.html`, view);
+
             });
-
-            //  render the view
-            let view = app.renderView(view_data);
-
-            //  save the view to public folder
-            app.saveView('/beats/index.html', view);
-        }
-    },
-    droplet: {
-        route: '/droplet/',
-        buildView: function () {
-            
-            //  Get the view data
-            let view_data = app.readView('games', 'droplet');
-            
-            //  Get the data for droplet from database
-            let db = app.getData('droplet');
-
-            view_data.page_data = Object.assign({}, view_data.page_data, {
-                game: db,
-            });
-
-            //  render the view
-            let view = app.renderView(view_data);
-
-            //  save the view to public folder
-            app.saveView('/droplet/index.html', view);
-        }
-    },
-    echo: {
-        route: '/echo/',
-        buildView: function () {
-            
-            //  Get the view data
-            let view_data = app.readView('games', 'echo');
-            
-            //  Get the data for echo from database
-            let db = app.getData('echo');
-
-            view_data.page_data = Object.assign({}, view_data.page_data, {
-                game: db,
-            });
-
-            //  render the view
-            let view = app.renderView(view_data);
-
-            //  save the view to public folder
-            app.saveView('/echo/index.html', view);
-        }
-    },
-    ophidian: {
-        route: '/ophidian/',
-        buildView: function () {
-            
-            //  Get the view data
-            let view_data = app.readView('games', 'ophidian');
-            
-            //  Get the data for ophidian from database
-            let db = app.getData('ophidian');
-
-            view_data.page_data = Object.assign({}, view_data.page_data, {
-                game: db,
-            });
-
-            //  render the view
-            let view = app.renderView(view_data);
-
-            //  save the view to public folder
-            app.saveView('/ophidian/index.html', view);
-        }
-    },
-    slime_battle_royal: {
-        route: '/slime-battle-royale/',
-        buildView: function () {
-            
-            //  Get the view data
-            let view_data = app.readView('games', 'slime-battle-royale');
-            
-            //  Get the data for beats from database
-            let db = app.getData('slime-battle-royale');
-
-            view_data.page_data = Object.assign({}, view_data.page_data, {
-                game: db,
-            });
-
-            //  render the view
-            let view = app.renderView(view_data);
-
-            //  save the view to public folder
-            app.saveView('/slime-battle-royale/index.html', view);
         }
     }
 }
