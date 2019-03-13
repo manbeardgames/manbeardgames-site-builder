@@ -13,19 +13,17 @@ exports.routes = {
             //  Get the view data
             let view_data = app.readView('home', 'index');
 
-            //  this view requires extra data about the games
-            let games = app.getData('games_list');
+            //  This view requires extra data about all of our games
+            let games = app.getDataFolder('games');
 
-            view_data.page_data = Object.assign({}, view_data.page_data, {
-                games: games
-            });
+            //  Set the games property for the view data's page data
+            view_data.page_data.games = games;
 
             //  render the view
             let view = app.renderView(view_data);
 
             //  save the view to public folder
             app.saveView('/index.html', view);
-        },
-
+        }
     }
 }
