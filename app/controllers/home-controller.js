@@ -1,8 +1,4 @@
 const app = require('./application-controller');
-const glob = require('glob');
-const path = require('path');
-const fse = require('fs-extra');
-const fMatter = require('front-matter');
 
 // var exports = module.exports = {};
 
@@ -11,10 +7,10 @@ exports.routes = {
         route: '/',
         buildView: function () {
             //  Get the view data
-            let view_data = app.readView('home', 'index');
+            let view_data = Object.create(app.readView('home', 'index'));
 
             //  This view requires extra data about all of our games
-            let games = app.getDataFolder('games');
+            let games = Object.create(app.getDataFolder('games'));
 
             //  Set the games property for the view data's page data
             view_data.page_data.games = games;
