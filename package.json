@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "add-game": "node ./scripts/addgame",
-    "build": "node ./scripts/build",
+    "build": "node -e \"require('./tasks/build-tasks').build();\"",
     "build:prod": "cross-env NODE_ENV=production node .scripts/build",
     "serve": "serve ./public",
     "test-arg": "node -e \"const args = process.argv;  console.log(args['name']);\"",

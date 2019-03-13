@@ -124,7 +124,7 @@ footer .social-icons a:hover, footer .social-icons a:focus {
   margin: auto;
   padding: 0;
   color: #fff;
-  background: url("../img/mbg_cookie.svg") center no-repeat;
+  background: url("../images/mbg_cookie.svg") center no-repeat;
   background-size: contain;
   text-indent: -999rem;
 }
@@ -211,7 +211,7 @@ nav h3 {
 nav .navbar-brand {
   color: #fff;
   font-size: 1.6rem;
-  background: url("../img/mbg_cookie.svg") center no-repeat;
+  background: url("../images/mbg_cookie.svg") center no-repeat;
   background-size: contain;
   width: 75px;
   height: 75px;
@@ -311,7 +311,7 @@ nav .navbar-brand:hover {
   margin-right: 14px;
 }
 #games .game .game-container .game-overview-container .block-platforms .platform a .itch-logo {
-  background-image: url("../img/itchio-logo/itchio-textless-black.svg");
+  background-image: url("../images/itchio-logo/itchio-textless-black.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -320,7 +320,7 @@ nav .navbar-brand:hover {
   transition: all 0.3s;
 }
 #games .game .game-container .game-overview-container .block-platforms .platform a .itch-logo:hover {
-  background-image: url("../img/itchio-logo/itchio-textless-orange.svg");
+  background-image: url("../images/itchio-logo/itchio-textless-orange.svg");
 }
 #games .game .game-container .game-overview-container .game-platform {
   margin-right: auto;
@@ -492,7 +492,7 @@ nav .navbar-brand:hover {
   margin-right: 14px;
 }
 .block-container .block .block-platforms .platform a .itch-logo {
-  background-image: url("../img/itchio-logo/itchio-textless-black.svg");
+  background-image: url("../images/itchio-logo/itchio-textless-black.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -501,7 +501,7 @@ nav .navbar-brand:hover {
   transition: all 0.3s;
 }
 .block-container .block .block-platforms .platform a .itch-logo:hover {
-  background-image: url("../img/itchio-logo/itchio-textless-orange.svg");
+  background-image: url("../images/itchio-logo/itchio-textless-orange.svg");
 }
 .block-container .block .block-trailer {
   margin-left: auto;

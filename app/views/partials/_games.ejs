@@ -5,7 +5,7 @@
 
         <div class="game-container">
             <div class="game-preview-container">
-                <img class="img-responsive img-thumbnail" src="img/games/<%- game.nameSpine %>/game_preview.png" alt="...">
+                <img class="img-responsive img-thumbnail" src="content/images/games/<%- game.nameSpine %>/game_preview.png" alt="...">
             </div>
 
             <div class="game-overview-container">
@@ -20,7 +20,7 @@
                     <% game.platforms.forEach((platform, i) => { %>
                         <div class="platform">
                             <a href="<%- platform.url %>" target="_blank">
-                                <div class="platform-badge" style="background-image: url('img/badges/<%- platform.name %>-badge.png');"></div>
+                                <div class="platform-badge" style="background-image: url('content/images/badges/<%- platform.name %>-badge.png');"></div>
                             </a>
                         </div>
                     <% }) %>           

@@ -74,7 +74,7 @@ exports.directories = {
     partials: partials_dir
 }
 
-exports.controllers = ['home'];
+exports.controllers = ['home', 'games'];
 
 exports.readView = function (controller, view) {
     //  Generate the path to the view dir
@@ -95,18 +95,19 @@ exports.readView = function (controller, view) {
 
         //  Generate the view object
         let view_data = Object.assign({}, {
-            body: front_matter.body ? front_matter.body : '<html><head></head><body>Error Reading View</body></html>',
+            body: front_matter.body,
             type: view_ext ? view_ext : 'text',
-            layout: front_matter.layout || 'default',
+            layout: front_matter.attributes.page_layout || 'default',
             file_path: view_file_path,
             page_data: {
-                title: front_matter.site_title || '',
-                description: front_matter.description || '',
-                og_title: front_matter.og_title || '',
-                og_description: front_matter.og_description || '',
-                og_image: front_matter.og_image || '',
-                nav_header: front_matter.nav_header || '',
-                attributes: front_matter.attributes
+                site_title: front_matter.attributes.site_title || '',
+                site_description: front_matter.attributes.description || '',
+                og_title: front_matter.attributes.og_title || '',
+                og_image: front_matter.attributes.og_image || '',
+                og_description: front_matter.attributes.og_description || '',
+                og_type: front_matter.attributes.og_type || '',
+                page_nav_header: front_matter.attributes.page_nav_header || '',
+                attributes: front_matter.attributes.attributes
             }
         });
 
