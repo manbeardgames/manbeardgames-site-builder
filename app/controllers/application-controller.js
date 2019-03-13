@@ -4,6 +4,7 @@ const fm = require('front-matter');
 const path = require('path');
 const fse = require('fs-extra');
 const glob = require('glob');
+const prism = require('prismjs');
 
 /**
  * The root directory of the application
@@ -14,6 +15,10 @@ const __root__dir = process.cwd();
  * The base directory where all data objects are stored
  */
 const db_dir = path.join(__root__dir, 'db');
+
+const app_dir = path.join(__root__dir, 'app');
+
+const assets_dir = path.join(app_dir, 'assets');
 
 /**
  * The base directory where the application controllers are stored
@@ -40,6 +45,8 @@ const partials_dir = path.join(views_dir, 'partials');
  */
 const public_dir = path.join(__root__dir, 'public');
 
+const content_dir = path.join(public_dir, 'content');
+
 
 // var exports = module.exports = {};
 
@@ -51,29 +58,90 @@ const public_dir = path.join(__root__dir, 'public');
  * @param {Object} data The page data object to pass to the EJS renderer for the view
  */
 function renderEjs(body, data) {
-    //  Ensure that data is at the minimum an empty
-    //  object
-    data = Object.assign({}, data);
+    //  Set the options for the renderer
+    let options = {
+        //  By setting the root directory to our "views" directory, when we want to
+        //  do partials in the .ejs, we can just say <%- include('/partials/_landing') %> and
+        //  it will use the path as relative from the root
+        root: views_dir
+    };
 
     //  Use the ejs module to render
-    let rendered = ejs.render(body, data.page_data, {
-        filename: data.file_path
-    });
+    let rendered = ejs.render(body, data.page_data, options);
 
     //  Return the render
     return rendered;
 }
 
 /**
- * Renderst he given Markdown View
+ * Renders the given Markdown View
  * @param {string} body A string containing the contents of the MarkDown View to render
  */
-function renderMarkdown(body) {
-    //  Use the marked module to render
-    let rendered = marked(body);
+function renderMarkdown(body, opts) {
+    let defopts = {
+        img_path: '/content/images'
+    };
+
+    options = Object.assign({}, defopts, opts);
+
+    //  For marked rendering, we're going to return back not only the
+    //  rendered html, but also a collection of the headers that can be
+    //  used for things like content tables in partials
+    let headers = [];
+
+    //  Create a new marked renderer so we can customize it for what
+    //  we need in our project
+    let markedRenderer = new marked.Renderer();
+
+    //  Specifiy settings for heading tags
+    markedRenderer.heading = function (text, level) {
+        //  Genereate an id value for the header tag that is
+        //  the header text, all lowercase with all spaces as -'s
+        let id = text.toLowerCase().replace(/[^\w]+/g, '-')
+
+        headers.push({
+            id: id,
+            text: text
+        });
+
+        //  Return back the html for the header
+        return `<h${level} id=${id}>${text}</h${level}>`;
+    }
+
+    //  Specify rendering for code
+    markedRenderer.code = function (code, language, isEscaped) {
+        //  Use the prism library to highlight the code for us. Language
+        //  is always C# on this site for now
+        var html = prism.highlight(code, prism.languages.csharp, language);
+
+        //  wrap the html in a pre and code tag before returning
+        return `
+        <pre class="language-${language}"><code class="language-${language}">${html}</code></pre>`;
+    }
+
+    //  Specify rendering for images
+    markedRenderer.image = function (href, title, text) {
+        //  Generate the path to the image
+        var img_path = path.join(options.img_path, href);
+
+        //  Genereate and return the html of the img tag
+        return `<img class="img-fluid" src=${img_path}" alt="${title}" />`;
+    }
+
+    //  Specify rendering for links
+    markedRenderer.links = function (href, title, text) {
+        //  Generate a link
+        var link = marked.Renderer.prototype.link.call(this, href, title, text);
+
+        //  Adjust the link's html so that it opens in a new window and return it
+        return link.replace('<a', '<a target="_blank"');
+    }
+
+    //  Use the marked module to render with the renderer we created
+    let rendered = marked(body, { renderer: markedRenderer });
 
     //  return the render
-    return rendered;
+    return { render: rendered, headers: headers };
 }
 
 /**
@@ -131,7 +199,9 @@ var readView = function (controller, view) {
         //  Get the default view data
         let default_view_data = getDataSingle('view_data');
 
-        //  Generate the view object
+
+        //  Generate the view object based on the values from the front matter.
+        //  if the front matter data does not exist, use the default view data instead
         let view_data = Object.assign({}, {
             body: front_matter.body || default_view_data.body,
             type: view_ext || default_view_data.type,
@@ -149,8 +219,8 @@ var readView = function (controller, view) {
             }
         });
 
-        //  return the view data
-        return view_data
+        //  return a new object based on the view data
+        return view_data;
     }
     else {
         throw `Unable to locate view ${view} in ${view_dir}`
