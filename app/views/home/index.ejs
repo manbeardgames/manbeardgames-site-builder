@@ -11,12 +11,12 @@ page_layout: "default"
 page_nav_header: "ManBeardGames"
 ---
 
-<%- include ../partials/_landing %>
+<%- include('/partials/_landing') %>
 <div class="content">
 <div id="swap"></div>
   <div class="container-fluid m-0 p-0">
     <div id="games">
-      <%- include ../partials/_games %>
+      <%- include('/partials/_games', {games: games}) %>
     </div>
   </div>
 </div>
