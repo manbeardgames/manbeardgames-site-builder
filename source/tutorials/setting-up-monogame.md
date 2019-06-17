@@ -1,15 +1,3 @@
----
-title: Setting Up MonoGame
-short: How to setup your environment to get ready to make games with MonoGame
-# layout: tutorials
-layout: default
-publish: ok
-index: 1
-date: Feburary 14, 2019
-ogtitle: Setting Up Monogame
-ogimage: https://manbeardgames.com/img/ogmbg.png
-ogdescription: How to setup your environment to get ready to make games with MonoGame.
----
 <div class="container post">
 
 # Setting Up MonoGame  
@@ -38,7 +26,7 @@ editions of Visual Studio, you can view a breakdown of the differences between e
 ---
 Once the download finishes, run the installer to begin installing Visual Studio.  It will ask you which components and workloads you want to install as part of the process.  Look over this list to see what's there, and if there is anything you thing you may have interest in, you can choose it now.  If you don't choose something now, you can always add it later by rerunning the installer which will allow you to modify your installation and choose additional workloads and components.  For now, the only thing we need at minimum is the **.NET Desktop Development** workload.  See the image below for reference on where this workload is on the list. 
 
-![visual studio installer](visual-studio-installer.png)
+![visual studio installer](setting-up-monogame/visual-studio-installer.png)
 
 ## MonoGame  
 ---

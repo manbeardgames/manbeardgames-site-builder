@@ -1,14 +1,3 @@
----
-title: Creating Scenes
-short: In this tutorial, we'll discuss creating the concept of Scenes in MonoGame
-layout: default
-publish: ok
-index: 101
-date: March 5, 2019
-ogtitle: Creating Scenes
-ogimage: https://manbeardgames.com/img/tutorials/adding-content/tutorial-cover.png
-ogdescription: In this tutorial, we'll discuss creating the concept of Scenes in MonoGame
----
 <div class="container post">
 
 # Overview

@@ -1,0 +1,5 @@
+---
+  ogtitle: Scene-Entity-Component Series
+  ogimage: https://manbeardgames.com/img/tutorials/scene-entity-component-series/series-cover.png
+  ogdescription: In this series of tutorials, we'll learn to create Scenes in MonOGame, complete with transitions between scenes.  We'll then dive deeper and add entity-component management to the scenes.
+---
