@@ -1,0 +1,26 @@
+<div class="content">
+    <div class="container">
+        <h1 class="mt-4 mb-3"><%= series.name %> </h1>
+        <p> <%= series.short %> </p>
+        <% series.tutorials.forEach((tutorial, i) => { %>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <img class="img-fluid rounded" src="<%= tutorial.opengraph.image %>" alt="" />
+                        </div>
+                        <div class="col-lg-6">
+                            <h2 class="card-title"><%= tutorial.title %></h2>
+                            <p class="card-text"><%= tutorial.short %></p>
+                            <a href="<%= tutorial.outputDir %>" class="btn btn-primary">Read More &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer text-muted">
+                    Last Updated <%= series.date %>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>

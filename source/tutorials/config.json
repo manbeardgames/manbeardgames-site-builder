@@ -1,9 +1,9 @@
 {
     "title": "MonoGame Tutorials",
-    "fileName": "index",
-    "fileExt": ".ejs",
-    "sourceDir": "./source/tutorials",
-    "outputDir": "./public/tutorials",
+    "file_name": "index",
+    "file_ext": ".ejs",
+    "source_dir": "./source/tutorials",
+    "output_dir": "./public/tutorials",
     "short": "",
     "layout": "default",
     "publish": "ok",
@@ -14,11 +14,265 @@
         "image": "https://manbeardgames.com/img/ogmbg.png"
     },
     "tutorials": [{
+            "title": "Getting Started With MonoGame",
+            "file_name": "index",
+            "file_ext": ".ejs",
+            "source_dir": "./source/tutorials/getting-started-with-monogame",
+            "output_dir": "./public/tutorials/getting-started-with-monogame",
+            "url": "/tutorials/getting-started-with-monogame",
+            "short": "Learn how to get started making games with MonOGame, from installation, to adding content, to making a simple demo game",
+            "layout": "default",
+            "publish": "ok",
+            "date": "June 18th, 2019",
+            "opengraph": {
+                "title": "Getting Started With monoGame",
+                "description": "Learn how to get started making games with MonOGame, from installation, to adding content, to making a simple demo game",
+                "image": ""
+            },
+            "isSeries": true,
+            "tutorials": [{
+                    "title": "Setting Up MonoGame",
+                    "file_name": "setting-up-monogame",
+                    "file_ext": ".md",
+                    "source_dir": "./source/tutorials/getting-started-with-monogame",
+                    "output_dir": "./public/tutorials/getting-started-with-monogame/setting-up-monogame",
+                    "short": "How to setup your environment to get ready to make games with MonoGame",
+                    "layout": "default",
+                    "publish": "ok",
+                    "index": "1",
+                    "date": "Feburary 14, 2019",
+                    "opengraph": {
+                        "title": "Setting Up Monogame",
+                        "description": "How to setup your environment to get ready to make games with MonoGame.",
+                        "image": "https://manbeardgames.com/img/ogmbg.png"
+                    }
+                },
+                {
+                    "title": "Adding Content",
+                    "file_name": "adding-content",
+                    "file_ext": ".md",
+                    "source_dir": "./source/tutorials/getting-started-with-monogame/",
+                    "output_dir": "./public/tutorials/getting-started-with-monogame/adding-content",
+                    "short": "This tutorial briefly goes over adding content, such as images, sounds, and fonts, to your game using the Content Pipeline Tool and the ContentMangaer.",
+                    "layout": "default",
+                    "publish": "ok",
+                    "index": "100",
+                    "date": "Feburary 15, 2019",
+                    "opengraph": {
+                        "title": "Adding Content",
+                        "description": "This tutorial briefly goes over adding content, such as images, sounds, and fonts, to your game using the Content Pipeline Tool and the ContentMangaer.",
+                        "image": "https://manbeardgames.com/img/tutorials/adding-content/tutorial-cover.png"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Scene-Entity-Component Series",
+            "file_name": "index",
+            "file_ext": ".ejs",
+            "source_dir": "./source/tutorials/scenes",
+            "output_dir": "./public/tutorials/scenes",
+            "url": "/tutorials/scenes",
+            "short": "In this series of tutorials, we'll learn to create Scenes in MonoGame, complete with transitions between scenes.  We'll then dive deeper and add entity-component management to the scenes.",
+            "layout": "default",
+            "publish": "ok",
+            "date": "June 17, 2019",
+            "opengraph": {
+                "title": "[MonoGame] Scene-Entity-Component Tutorial Series",
+                "description": "In this series of tutorials, we'll learn to create Scenes in MonoGame, complete with transitions between scenes.  We'll then dive deeper and add entity-component management to the scenes.",
+                "image": ""
+            },
+            "isSeries": true,
+            "tutorials": [{
+                    "title": "Introduction",
+                    "file_name": "introduction",
+                    "file_ext": ".md",
+                    "source_dir": "./source/tutorials/scenes",
+                    "output_dir": "./public/tutorials/scenes/introduction",
+                    "url": "/tutorials/scenes/introduction",
+                    "short": "Short introduction before we being the Scenes Tutorial Series",
+                    "layout": "default",
+                    "publish": "ok",
+                    "index": "101",
+                    "date": "March 5, 2019",
+                    "opengraph": {
+                        "title": "Scenes Tutorial Series - Intorudciton",
+                        "description": "Short intrudction before we begin the Scenes Tutorial Series",
+                        "image": ""
+                    }
+                },
+                {
+                    "title": "The Scene Class",
+                    "file_name": "the-scene-class",
+                    "file_ext": ".md",
+                    "source_dir": "./source/tutorials/scenes",
+                    "output_dir": "./public/tutorials/scenes/part-1-the-scene-class",
+                    "url": "/tutorials/scenes/part-1-the-scene-class",
+                    "short": "In part 1, we disucss and create the Scene class. This is the foundation for everything else in this series.",
+                    "layout": "default",
+                    "publish": "ok",
+                    "index": "101",
+                    "date": "March 5, 2019",
+                    "opengraph": {
+                        "title": "Scenes Tutorial Series - The Scene Class",
+                        "description": "In part 1, we disucss and create the Scene class. This is the foundation for everything else in this series.",
+                        "image": ""
+                    }
+                },
+                {
+                    "title": "Scene Manager",
+                    "file_name": "the-scene-manager",
+                    "file_ext": ".md",
+                    "source_dir": "./source/tutorials/scenes",
+                    "output_dir": "./public/tutorials/scenes/part-2-scene-manager",
+                    "url": "/tutorials/scenes/part-2-scene-manager",
+                    "short": "In part 2, we discuss a couple of different ways to manage scenes and then use one of them; the Scene Manager class.",
+                    "layout": "default",
+                    "publish": "ok",
+                    "index": "101",
+                    "date": "March 5, 2019",
+                    "opengraph": {
+                        "title": "Scenes Tutorial Series - Scene Manager",
+                        "description": "In part 2, we discuss a couple of different ways to manage scenes and then use one of them; the Scene Manager class.",
+                        "image": ""
+                    }
+                },
+                {
+                    "title": "Scene Transitions",
+                    "file_name": "scene-transitions",
+                    "file_ext": ".md",
+                    "source_dir": "./source/tutorials/scenes",
+                    "output_dir": "./public/tutorials/scenes/part-3-scene-transitions",
+                    "url": "/tutorials/scenes/part-3-scene-transitions",
+                    "short": "In part 3, we implement transition effects so that we're not just popping scenes in and out.",
+                    "layout": "default",
+                    "publish": "ok",
+                    "index": "101",
+                    "date": "March 5, 2019",
+                    "opengraph": {
+                        "title": "Scenes Tutorial Series - Scene Transitions",
+                        "description": "In part 3, we implement transition effects so that we're not just popping scenes in and out",
+                        "image": ""
+                    }
+                },
+                {
+                    "title": "What Is Entity-Component",
+                    "file_name": "what-is-entity-component",
+                    "file_ext": ".md",
+                    "source_dir": "./source/tutorials/scenes",
+                    "output_dir": "./public/tutorials/scenes/part-4-what-is-entity-component",
+                    "url": "/tutorials/scenes/part-4-what-is-entity-component",
+                    "short": "In part 4, we discuss what is meant when we say entity-component.",
+                    "layout": "default",
+                    "publish": "ok",
+                    "index": "101",
+                    "date": "March 5, 2019",
+                    "opengraph": {
+                        "title": "Scenes Tutorial Series - What Is entity Component",
+                        "description": "In part 4, we discuss what is meant when we say entity-component.",
+                        "image": ""
+                    }
+                },
+                {
+                    "title": "The Entity Class",
+                    "file_name": "the-entity-class",
+                    "file_ext": ".md",
+                    "source_dir": "./source/tutorials/scenes",
+                    "output_dir": "./public/tutorials/scenes/part-5-the-entity-class",
+                    "url": "/tutorials/scenes/part-5-the-entity-class",
+                    "short": "In part 5, we create the Entity class, the basis for all game objects in our scenes.",
+                    "layout": "default",
+                    "publish": "ok",
+                    "index": "101",
+                    "date": "March 5, 2019",
+                    "opengraph": {
+                        "title": "Scenes Tutorial Series - The Entity Class",
+                        "description": "In part 5, we create the Entity class, the basis for all game objects in our scenes.",
+                        "image": ""
+                    }
+                },
+                {
+                    "title": "The Component Class",
+                    "file_name": "the-component-class",
+                    "file_ext": ".md",
+                    "source_dir": "./source/tutorials/scenes",
+                    "output_dir": "./public/tutorials/scenes/part-6-the-component-class",
+                    "url": "/tutorials/scenes/part-6-the-component-class",
+                    "short": "In part 6, we create the Component class.",
+                    "layout": "default",
+                    "publish": "ok",
+                    "index": "101",
+                    "date": "March 5, 2019",
+                    "opengraph": {
+                        "title": "Scenes Tutorial Series - The Component Class",
+                        "description": "In part 6, we create the Component class.",
+                        "image": ""
+                    }
+                },
+                {
+                    "title": "Keeping Track",
+                    "file_name": "keeping-track",
+                    "file_ext": ".md",
+                    "source_dir": "./source/tutorials/scenes",
+                    "output_dir": "./public/tutorials/scenes/part-7-keeping-track",
+                    "url": "/tutorials/scenes/part-7-keeping-track",
+                    "short": "In part 7, we disucss how to keep track of all entities and components that have been created in our scenes.",
+                    "layout": "default",
+                    "publish": "ok",
+                    "index": "101",
+                    "date": "March 5, 2019",
+                    "opengraph": {
+                        "title": "Scenes Tutorial Series - Keeping Track",
+                        "description": "In part 7, we disucss how to keep track of all entities and components that have been created in our scenes.",
+                        "image": ""
+                    }
+                },
+                {
+                    "title": "Wrap Up",
+                    "file_name": "wrap-up",
+                    "file_ext": ".md",
+                    "source_dir": "./source/tutorials/scenes",
+                    "output_dir": "./public/tutorials/scenes/part-8-wrap-up",
+                    "url": "/tutorials/scenes/part-8-wrap-up",
+                    "short": "In part 8, we wrap up the discussion of our Scene, Entity, and Component classes and talk about extending them beyond this tutorial.",
+                    "layout": "default",
+                    "publish": "ok",
+                    "index": "101",
+                    "date": "March 5, 2019",
+                    "opengraph": {
+                        "title": "Scenes Tutorial Series - Wrap Up",
+                        "description": "In part 8, we wrap up the discussion of our Scene, Entity, and Component classes and talk about extending them beyond this tutorial.",
+                        "image": ""
+                    }
+                },
+                {
+                    "title": "Demo Project",
+                    "file_name": "demo-project",
+                    "file_ext": ".md",
+                    "source_dir": "./source/tutorials/scenes",
+                    "output_dir": "./public/tutorials/scenes/part-9-demo-project",
+                    "url": "/tutorials/scenes/part-9-demo-project",
+                    "short": "In this final part, we use what we've created in this series to construct a demo project.",
+                    "layout": "default",
+                    "publish": "ok",
+                    "index": "101",
+                    "date": "March 5, 2019",
+                    "opengraph": {
+                        "title": "Scenes Tutorial Series - Demo Project",
+                        "description": "In this final part, we use what we've created in this series to construct a demo project.",
+                        "image": ""
+
+                    }
+                }
+            ]
+        },
+        {
             "title": "2D Camera",
-            "fileName": "2d-camera",
-            "fileExt": ".md",
-            "sourceDir": "./source/tutorials",
-            "outputDir": "./public/tutorials/2d-camera",
+            "file_name": "2d-camera",
+            "file_ext": ".md",
+            "source_dir": "./source/tutorials",
+            "output_dir": "./public/tutorials/2d-camera",
+            "url": "/tutorials/2d-camera",
             "short": "How to create and implement a simple 2D camera for use in your projects",
             "layout": "default",
             "publish": "ok",
@@ -32,10 +286,11 @@
         },
         {
             "title": "AABB 2D Collision Checks",
-            "fileName": "aabb-2d-collision-checks",
-            "fileExt": ".md",
-            "sourceDir": "./source/tutorials",
-            "outputDir": "./public/tutorials/aabb-2d-collision-checks",
+            "file_name": "aabb-2d-collision-checks",
+            "file_ext": ".md",
+            "source_dir": "./source/tutorials",
+            "output_dir": "./public/tutorials/aabb-2d-collision-checks",
+            "url": "/tutorials/aabb-2d-collision-checks",
             "short": "How to create a simple check for 2D collision using Axis-Aligned Bounding Box (AABB)",
             "layout": "default",
             "publish": "ok",
@@ -48,28 +303,12 @@
             }
         },
         {
-            "title": "Adding Content",
-            "fileName": "adding-content",
-            "fileExt": ".md",
-            "sourceDir": "./source/tutorials",
-            "outputDir": "./public/tutorials/adding-content",
-            "short": "This tutorial briefly goes over adding content, such as images, sounds, and fonts, to your game using the Content Pipeline Tool and the ContentMangaer.",
-            "layout": "default",
-            "publish": "ok",
-            "index": "100",
-            "date": "Feburary 15, 2019",
-            "opengraph": {
-                "title": "Adding Content",
-                "description": "This tutorial briefly goes over adding content, such as images, sounds, and fonts, to your game using the Content Pipeline Tool and the ContentMangaer.",
-                "image": "https://manbeardgames.com/img/tutorials/adding-content/tutorial-cover.png"
-            }
-        },
-        {
             "title": "Creating Scenes",
-            "fileName": "creating-scenes",
-            "fileExt": ".md",
-            "sourceDir": "./source/tutorials",
-            "outputDir": "./public/tutorials/creating-scenes",
+            "file_name": "creating-scenes",
+            "file_ext": ".md",
+            "source_dir": "./source/tutorials",
+            "output_dir": "./public/tutorials/creating-scenes",
+            "url": "/tutorials/creating-scenes",
             "short": "In this tutorial, we'll discuss creating the concept of Scenes in MonoGame",
             "layout": "default",
             "publish": "ok",
@@ -80,203 +319,6 @@
                 "description": "In this tutorial, we'll discuss creating the concept of Scenes in MonoGame",
                 "image": "https://manbeardgames.com/img/tutorials/adding-content/tutorial-cover.png"
             }
-        },
-        {
-            "title": "Setting Up MonoGame",
-            "fileName": "setting-up-monogame",
-            "fileExt": ".md",
-            "sourceDir": "./source/tutorials",
-            "outputDir": "./public/tutorials/setting-up-monogame",
-            "short": "How to setup your environment to get ready to make games with MonoGame",
-            "layout": "default",
-            "publish": "ok",
-            "index": "1",
-            "date": "Feburary 14, 2019",
-            "opengraph": {
-                "title": "Setting Up Monogame",
-                "description": "How to setup your environment to get ready to make games with MonoGame.",
-                "image": "https://manbeardgames.com/img/ogmbg.png"
-            }
         }
-    ],
-    "series": [{
-        "title": "Scene-Entity-Component Series",
-        "directory": "scenes",
-        "short": "In this series of tutorials, we'll learn to create Scenes in MonOGame, complete with transitions between scenes.  We'll then dive deeper and add entity-component management to the scenes.",
-        "layout": "defualt",
-        "publish": "ok",
-        "date": "June 17, 2019",
-        "tutorials": [{
-                "title": "Introduction",
-                "fileName": "introduction",
-                "fileExt": ".md",
-                "sourceDir": "./source/tutorials/scenes",
-                "outputDir": "./public/tutorials/scenes/introduction",
-                "short": "Short introduction before we being the Scenes Tutorial Series",
-                "layout": "default",
-                "publish": "ok",
-                "index": "101",
-                "date": "March 5, 2019",
-                "opengraph": {
-                    "title": "Scenes Tutorial Series - Intorudciton",
-                    "description": "Short intrudction before we begin the Scenes Tutorial Series",
-                    "image": ""
-                }
-            },
-            {
-                "title": "Part 1 - The Scene Class",
-                "fileName": "the-scene-class",
-                "fileExt": ".md",
-                "sourceDir": "./source/tutorials/scenes",
-                "outputDir": "./public/tutorials/scenes/part-1-the-scene-class",
-                "short": "In part 1, we disucss and create the Scene class. This is the foundation for everything else in this series.",
-                "layout": "default",
-                "publish": "ok",
-                "index": "101",
-                "date": "March 5, 2019",
-                "opengraph": {
-                    "title": "Scenes Tutorial Series - The Scene Class",
-                    "description": "In part 1, we disucss and create the Scene class. This is the foundation for everything else in this series.",
-                    "image": ""
-                }
-            },
-            {
-                "title": "Part 2 - Scene Manager",
-                "fileName": "the-scene-manager",
-                "fileExt": ".md",
-                "sourceDir": "./source/tutorials/scenes",
-                "outputDir": "./public/tutorials/scenes/part-2-scene-manager",
-                "short": "In part 2, we discuss a couple of different ways to manage scenes and then use one of them; the Scene Manager class.",
-                "layout": "default",
-                "publish": "ok",
-                "index": "101",
-                "date": "March 5, 2019",
-                "opengraph": {
-                    "title": "Scenes Tutorial Series - Scene Manager",
-                    "description": "In part 2, we discuss a couple of different ways to manage scenes and then use one of them; the Scene Manager class.",
-                    "image": ""
-                }
-            },
-            {
-                "title": "Part 3 - Scene Transitions",
-                "fileName": "scene-transitions",
-                "fileExt": ".md",
-                "sourceDir": "./source/tutorials/scenes",
-                "outputDir": "./public/tutorials/scenes/part-3-scene-transitions",
-                "short": "In part 3, we implement transition effects so that we're not just popping scenes in and out.",
-                "layout": "default",
-                "publish": "ok",
-                "index": "101",
-                "date": "March 5, 2019",
-                "opengraph": {
-                    "title": "Scenes Tutorial Series - Scene Transitions",
-                    "description": "In part 3, we implement transition effects so that we're not just popping scenes in and out",
-                    "image": ""
-                }
-            },
-            {
-                "title": "Part 4 - What Is Entity-Component",
-                "fileName": "what-is-entity-component",
-                "fileExt": ".md",
-                "sourceDir": "./source/tutorials/scenes",
-                "outputDir": "./public/tutorials/scenes/part-4-what-is-entity-component",
-                "short": "In part 4, we discuss what is meant when we say entity-component.",
-                "layout": "default",
-                "publish": "ok",
-                "index": "101",
-                "date": "March 5, 2019",
-                "opengraph": {
-                    "title": "Scenes Tutorial Series - What Is entity Component",
-                    "description": "In part 4, we discuss what is meant when we say entity-component.",
-                    "image": ""
-                }
-            },
-            {
-                "title": "Part 5 - The Entity Class",
-                "fileName": "the-entity-class",
-                "fileExt": ".md",
-                "sourceDir": "./source/tutorials/scenes",
-                "outputDir": "./public/tutorials/scenes/part-5-the-entity-class",
-                "short": "In part 5, we create the Entity class, the basis for all game objects in our scenes.",
-                "layout": "default",
-                "publish": "ok",
-                "index": "101",
-                "date": "March 5, 2019",
-                "opengraph": {
-                    "title": "Scenes Tutorial Series - The Entity Class",
-                    "description": "In part 5, we create the Entity class, the basis for all game objects in our scenes.",
-                    "image": ""
-                }
-            },
-            {
-                "title": "Part 6 - The Component Class",
-                "fileName": "the-component-class",
-                "fileExt": ".md",
-                "sourceDir": "./source/tutorials/scenes",
-                "outputDir": "./public/tutorials/scenes/part-6-the-component-class",
-                "short": "In part 6, we create the Component class.",
-                "layout": "default",
-                "publish": "ok",
-                "index": "101",
-                "date": "March 5, 2019",
-                "opengraph": {
-                    "title": "Scenes Tutorial Series - The Component Class",
-                    "description": "In part 6, we create the Component class.",
-                    "image": ""
-                }
-            },
-            {
-                "title": "Part 7 - Keeping Track",
-                "fileName": "keeping-track",
-                "fileExt": ".md",
-                "sourceDir": "./source/tutorials/scenes",
-                "outputDir": "./public/tutorials/scenes/part-7-keeping-track",
-                "short": "In part 7, we disucss how to keep track of all entities and components that have been created in our scenes.",
-                "layout": "default",
-                "publish": "ok",
-                "index": "101",
-                "date": "March 5, 2019",
-                "opengraph": {
-                    "title": "Scenes Tutorial Series - Keeping Track",
-                    "description": "In part 7, we disucss how to keep track of all entities and components that have been created in our scenes.",
-                    "image": ""
-                }
-            },
-            {
-                "title": "Part 8 - Wrap Up",
-                "fileName": "wrap-up",
-                "fileExt": ".md",
-                "sourceDir": "./source/tutorials/scenes",
-                "outputDir": "./public/tutorials/scenes/part-8-wrap-up",
-                "short": "In part 8, we wrap up the discussion of our Scene, Entity, and Component classes and talk about extending them beyond this tutorial.",
-                "layout": "default",
-                "publish": "ok",
-                "index": "101",
-                "date": "March 5, 2019",
-                "opengraph": {
-                    "title": "Scenes Tutorial Series - Wrap Up",
-                    "description": "In part 8, we wrap up the discussion of our Scene, Entity, and Component classes and talk about extending them beyond this tutorial.",
-                    "image": ""
-                }
-            },
-            {
-                "title": "Part 9 - Demo Project",
-                "fileName": "demo-project",
-                "fileExt": ".md",
-                "sourceDir": "./source/tutorials/scenes",
-                "outputDir": "./public/tutorials/scenes/part-9-demo-project",
-                "short": "In this final part, we use what we've created in this series to construct a demo project.",
-                "layout": "default",
-                "publish": "ok",
-                "index": "101",
-                "date": "March 5, 2019",
-                "opengraph": {
-                    "title": "Scenes Tutorial Series - Demo Project",
-                    "description": "In this final part, we use what we've created in this series to construct a demo project.",
-                    "image": ""
-
-                }
-            }
-        ]
-    }]
+    ]
 }

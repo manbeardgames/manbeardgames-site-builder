@@ -1,0 +1,26 @@
+<%
+//  ---------------------------------------------------------------------------
+//  Description
+//  ---------------------------------------------------------------------------
+//  This is the partial used to render all "series" tutorial pages. The main tutorial
+//  page is also categorized as a series and needs to be configured as such.
+//
+//  ---------------------------------------------------------------------------
+//  Parameters
+//  ---------------------------------------------------------------------------
+//  [String] sereis_name
+//      This is the name of the series that will display at the top of the page
+//  [String] series_description
+//      a short description of the series that is displayed below the name
+//  [Array<Object>] tutorial
+//      The collection of tutorial objects that make up this series
+%>
+<div class="content">
+    <div class="container">
+        <h1 class="mt-4 mb-3"><%= series_name %></h1>
+        <p><%= series_description %></p>
+        <% tutorials.forEach((tutorial, i) => {%>
+            <%- include('_tutorial_card', {tutorial: tutorial}) %>
+        <% }) %>
+    </div>
+</div>

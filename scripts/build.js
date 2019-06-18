@@ -407,630 +407,6 @@ function GenerateTutorials() {
     fse.writeFileSync(completePath, completePage);
 }
 
-//  ===================================================================================
-/**
- * Processes the tutorial pages
- */
-//  ===================================================================================
-function ProcessTutorials_old() {
-    //  Ensure the directory exists
-    fse.ensureDirSync(paths.build.tutorials);
-
-    let navHeaders = GenerateTutorialNavHeaders();
-    let seriesData = GenerateTutorialSeriesData();
-
-    //  Get a list of all the tutorial files
-    let tutorialFiles = glob.sync('**/*.md', {
-        cwd: paths.source.tutorials
-    });
-
-    tutorialFiles.forEach((tutorial, i) => {
-        //  Get hte file info
-        let fileInfo = path.parse(tutorial);
-
-        let dirSpine = fileInfo.dir.replace(/[0-9]+-/g, '');
-        let nameSpine = fileInfo.name.replace(/[0-9]+-/g, '');
-
-        //  Generate the build directory path string
-        let buildDir = path.join(paths.build.tutorials, dirSpine, nameSpine);
-
-        //  Make the directory
-        fse.ensureDirSync(buildDir);
-
-        //  Read the page
-        let pageTemplete = fse.readFileSync(path.join(paths.source.tutorials, tutorial), 'utf-8');
-
-        //  Extract the front matter
-        let fMatter = frontMatter(pageTemplete);
-
-        let pageData = Object.assign({}, config, {
-            page: fMatter.attributes
-        });
-
-        //  Render the marked
-        var markedRenderer = new marked.Renderer();
-        markedRenderer.heading = function (text, level) {
-            var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
-            var style = level === 1 ? "title" : level === 2 ? "heading" : "sub-heading";
-            return `
-            <h${level} class="${style}" id=${escapedText}>${text}</h${level}>`;
-        }
-
-        markedRenderer.code = function (code, language, isEscapsed) {
-            var html = prism.highlight(code, prism.languages.csharp, language);
-            return `
-            <pre class="language-${language}"><code class="language-${language}">${html}</code></pre>`;
-            // return `
-            // <pre><code class="${language}">${code}</code></pre>`
-
-        }
-
-        markedRenderer.image = function (href, title, text) {
-            var imgPath = path.join('/img', 'tutorials', dirSpine, nameSpine, href);
-            return `<img class="img-fluid" src="${imgPath}" alt="${title}" />`;
-        }
-
-        markedRenderer.link = function (href, title, text) {
-            var link = marked.Renderer.prototype.link.call(this, href, title, text);
-            return link.replace('<a', '<a target="_blank"');
-        }
-        let renderedPost = marked(fMatter.body, {
-            renderer: markedRenderer
-        });
-
-        //  Determine which layout to use
-        let layout = fMatter.attributes.layout || 'tutorials';
-
-        //  Generate the file name of the layout
-        let layoutFileName = path.join(paths.source.layouts, layout + '.ejs');
-
-        //  Read teh data from the layout file
-        let layoutTemplete = fse.readFileSync(layoutFileName, 'utf-8');
-
-        //  Render the layout
-        let completePage = ejs.render(
-            layoutTemplete,
-            Object.assign({}, pageData, {
-                body: renderedPost,
-                filename: layoutFileName,
-                tutorials: seriesData,
-                navHeaders: navHeaders
-            })
-        );
-
-        //  Generate the path to write the file
-        let finalFilePath = `${buildDir}/index.html`;
-
-        //  Write to file
-        fse.writeFileSync(finalFilePath, completePage);
-
-    });
-
-    return seriesData;
-
-    // //  Process the tutorial pages
-    // let tutorialData = ProcessTutorials();
-}
-
-function GenerateTutorialSeriesData() {
-    //  Get a list of all the tutorial files
-    let tutorialFiles = glob.sync('**/*.md', {
-        cwd: paths.source.tutorials
-    });
-
-    //  Start a collection of the tutorial series.  A series is the base folder that
-    //  the individual tutorials are located in
-    let series = [];
-
-    //  Iterate all of the tutorial files and process them for the colleciton
-    tutorialFiles.forEach((tutorial, i) => {
-        //  Get hte file info of the tutorial file
-        let fileInfo = path.parse(tutorial);
-
-        //  Add the directory name of the file to the series array
-        series.push({
-            name: fileInfo.dir,
-            tutorials: []
-        });
-    });
-
-    //  FIlter the series collection so that it only contains the unique values
-    series = series.filter((value, index, self) => {
-        return index === self.findIndex((s) => s.name === value.name);
-    });
-
-    //  Get the description of each series
-    for (var i = 0; i < series.length; i++) {
-        let descriptionFilePath = path.join(paths.source.tutorials, series[i].name, 'description.yaml');
-
-        //  Read the description file
-        let descriptionMatter = fse.readFileSync(descriptionFilePath, 'utf-8');
-
-        //  Parse the frontmatter
-        let fMatter = frontMatter(descriptionMatter);
-
-        //  Store the description
-        series[i].description = fMatter.attributes.description;
-    }
-
-    //  Add all files into the tutorials collection of the appropriate series
-    tutorialFiles.forEach((tutorial, i) => {
-        //  Get the file info of the tutorial file
-        let fileInfo = path.parse(tutorial);
-        //  Get the index of the series in the series colleciton that this tutorial
-        //  belongs to
-        let idx = series.findIndex(s => s.name === fileInfo.dir);
-        //  Add the tutorial name to the tutorials colleciton of the series at
-        //  the found index
-        series[idx].tutorials.push({
-            name: fileInfo.name
-        });
-    });
-
-    //  Sort the series by name
-    series.sort((a, b) => {
-        if (a.name < b.name) {
-            return -1;
-        } else if (a.name > b.name) {
-            return 1;
-        } else {
-            return 0;
-        }
-    });
-
-    //  Sort each tutorial by name
-    let idx = 0;
-    for (idx = 0; idx < series.length; idx++) {
-        series[idx].tutorials.sort((a, b) => {
-            if (a.name < b.name) {
-                return -1;
-            } else if (a.name > b.name) {
-                return 1;
-            } else {
-                return 0;
-            }
-        });
-    }
-
-    //  Sanatize the names of all series and tutorials so that the numbers
-    //  are removed and they are in title case
-    series.forEach((series, i) => {
-        series.nameSpine = series.name.replace(/[0-9]+-/g, '');
-        series.name = series.nameSpine;
-        series.name = series.name.split('-').join(' ');
-        series.name = series.name
-            .toLowerCase()
-            .split(' ')
-            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-            .join(' ');
-
-        series.tutorials.forEach((tutorial, i) => {
-            tutorial.nameSpine = tutorial.name.replace(/[0-9]+-/g, '');
-            tutorial.name = tutorial.nameSpine;
-            tutorial.name = tutorial.name.split('-').join(' ');
-            tutorial.name = tutorial.name
-                .toLowerCase()
-                .split(' ')
-                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                .join(' ');
-        });
-
-    });
-
-    return series;
-
-}
-
-
-function GenerateTutorialNavHeaders() {
-    //  Get a list of all the tutorial files
-    let tutorialFiles = glob.sync('**/*.md', {
-        cwd: paths.source.tutorials
-    });
-    //let directories = []
-
-    let headers = [];
-    tutorialFiles.forEach((tutorial, i) => {
-        //  Get the file info of the tutorial file
-        let fileInfo = path.parse(tutorial);
-        //  Add the directory fo the file to the headers array
-        //directories.push(fileInfo.dir);
-        headers.push({
-            name: fileInfo.dir,
-            subHeaders: []
-        });
-    });
-
-    //  Filter the headers so that it only contains the unique values
-    headers = headers.filter((value, index, self) => {
-        return index === self.findIndex((h) => h.name === value.name);
-    });
-
-    //  Add all files into the subheader collection of the appropriate header
-    tutorialFiles.forEach((tutorial, i) => {
-        let fileInfo = path.parse(tutorial);
-        let idx = headers.findIndex(x => x.name === fileInfo.dir);
-        headers[idx].subHeaders.push({
-            name: fileInfo.name
-        });
-    });
-
-    //  Sort the headers by name
-    headers.sort((a, b) => {
-        if (a.name < b.name) {
-            return -1;
-        } else if (a.name > b.name) {
-            return 1;
-        } else {
-            return 0;
-        }
-    });
-
-    //  Sort each subheader by name
-    let idx = 0;
-    for (idx = 0; idx < headers.length; idx++) {
-        headers[idx].subHeaders.sort((a, b) => {
-            if (a.name < b.name) {
-                return -1;
-            } else if (a.name > b.name) {
-                return 1;
-            } else {
-                return 0;
-            }
-        });
-    };
-
-    //  Sanatize the names of all headers and subheaders so that
-    //  the numbers are removed and they are in title case
-    headers.forEach((header, i) => {
-        header.nameSpine = header.name.replace(/[0-9]+-/g, '');
-        header.name = header.nameSpine;
-        header.name = header.name.split('-').join(' ');
-        header.name = header.name
-            .toLowerCase()
-            .split(' ')
-            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-            .join(' ');
-
-        header.subHeaders.forEach((subHeader, i) => {
-            subHeader.nameSpine = subHeader.name.replace(/[0-9]+-/g, '');
-            subHeader.name = subHeader.nameSpine;
-            subHeader.name = subHeader.name.split('-').join(' ');
-            subHeader.name = subHeader.name
-                .toLowerCase()
-                .split(' ')
-                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                .join(' ');
-        });
-    });
-
-    return headers;
-}
-
-
-function GenerateTutorials_New() {
-
-    //  Ensure the tutorials build directory exists
-    fse.ensureDir('./public/tutorials/');
-
-    //  Generate all of the tutorial posts
-    let tutorialData = ProcessTutorials_New();
-
-    //  Get the tutorial partial
-    // let filePath = path.parse(paths.source.partials, '_tutorials.ejs');
-    let filePath = path.join(paths.source.partials, '_tutorials.ejs');
-
-    //  Read the page file
-    let pageTempelte = fse.readFileSync(filePath, 'utf-8');
-
-    //  Get the front matter
-    let fMatter = frontMatter(pageTempelte);
-
-    //  Create the data object for the page
-    let pageData = Object.assign({}, config, {
-        page: fMatter.attributes,
-        tutorials: tutorialData
-    });
-
-    //  Generate the page content
-    let renderedPage = ejs.render(fMatter.body, pageData, {
-        fileName: filePath
-    });
-
-    //  Determine which layout to use
-    let layout = fMatter.attributes.layout || 'default';
-
-    //  Generate the file name of hte layout
-    let layoutFileName = path.join(paths.source.layouts, layout + '.ejs');
-
-    //  Read teh data from the layout file
-    let layoutTemplete = fse.readFileSync(layoutFileName, 'utf-8');
-
-    //  Render the layout using the rendered page from above as the body
-    let completePage = ejs.render(layoutTemplete, Object.assign({}, pageData, {
-        body: renderedPage,
-        filename: layoutFileName
-    }));
-
-    //  Genereate the output path
-    let completePath = path.join(paths.build.pages, 'tutorials', 'index.html');
-
-    //  Save the html file
-    fse.writeFileSync(completePath, completePage);
-
-
-
-
-
-    // //  Ensure that the tutorials build directory exists
-    // fse.ensureDir(paths.build.tutorial);
-
-    // //  Process all of the tutorials and receive back a list
-    // //  of all the tutorials
-    // let tutorials = ProcessTutorials_New();
-
-    // //  Generate the path to the tutorial index partial
-    // let filePath = path.join(paths.source.partials, '_tutorials.ejs');
-
-    // //  Get the file info of the tutorial index partial
-    // let fileInfo = path.parse(filePath);
-
-    // //  Read the page templete
-    // let pageTemplete = fse.readFileSync(filePath, 'utf-8');
-
-    // //  Get the front matter
-    // let fMatter = frontMatter(pageTemplete);
-
-    // //  Create the data object for the page
-    // let pageData = Object.assign({}, config, {
-    //     page: fMatter.attributes
-    // })
-
-
-
-}
-
-function ProcessTutorials_New() {
-
-    //  First load the config.json for the tutotials directory
-    let tutorialConfigJson = fse.readFileSync('./source/tutorials/config.json');
-    let tutorialConfig = JSON.parse(tutorialConfigJson);
-
-    //  First process all of the individual tutorials
-    tutorialConfig.tutorials.forEach((tutorial, i) => {
-        //  Get the file info
-        let fileInfo = path.parse(`./source/tutorials/${tutorial}.md`);
-
-        // Create the build directory
-        let buildDIr = path.join(`./public/tutorials/${tutorial}`)
-
-        //  Ensure the directory exists
-        fse.ensureDirSync(buildDir);
-
-        //  Read the page
-        let pageTemplate = fse.readFileSync(`./source/tutorials/${tutorial}.md`, 'utf-8');
-
-        //  Extract the front matter
-        let fMatter = frontMatter(pageTemplate);
-
-        //  Create the page data
-        let pageData = Object.assign({}, config, {
-            page: fMatter.attributes
-        });
-
-        //  Create the MarkDown renderer
-        var markRenderer = new marked.Renderer();
-
-        //  How headings are processed
-        markedRenderer.heading = function (text, level) {
-            var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
-            return `
-            <h${level} id=${escapedText}>${text}</h${level}>`;
-        }
-
-        //  How code sections are handled
-        markedRenderer.code = function (code, language, isEscapsed) {
-            var html = prism.highlight(code, prism.languages.csharp, language);
-            return `
-            <pre class="language-${language}"><code class = "language-${language}">${html}</code></pre>`;
-        }
-
-        //  how images are handled
-        markedRenderer.image = function (href, title, text) {
-            var imgPath = path.join('img', 'tutorials', tutorial, href);
-            return `
-            <div class="text-center">
-            <img class="img-fluid border border-dark" src="\\${imgPath}" alt="${title}" />
-            </div>`;
-        }
-
-        //  How links are handled
-        markedRenderer.link = function (href, title, text) {
-            var link = marked.Renderer.prototype.link.call(this, href, title, text);
-            return link.replace('<a', '<a target="_blank"');
-        }
-
-        //  How tables are handled
-        markedRenderer.table = function (header, body) {
-            return `
-            <table class="table"><thead class="thead-dark">${header}</thead><tbody>${body}</tbody></table>`
-        }
-
-        //  How block quaotes are handled
-        markedRenderer.blockquote = function (quote) {
-            return `
-            <div class="card text-white bg-dark mb-3">
-            <div class="card-header">
-            <span class="lead">Note:</span>
-            </div>
-            <div class="card-body">
-            ${quote}
-            </div>
-            </div>`
-        }
-
-        //  Render the MarkDown as HTML
-        let renderedPost = marked(fMatter.body, {
-            renderer: markedRenderer
-        });
-
-        //  Determine which layout to use
-        let layout = fMatter.attributes.layout || 'tutorial';
-
-        //  Read the data from the layout file
-        let layoutTemplate = fse.readFileSync(`./source.layouts/${layout}.ejs`, 'utf-8');
-
-        //  Render the layout
-        let completePage = ejs.render(
-            layoutTemplate,
-            Object.assign({}, pageData, {
-                body: renderedPost,
-                filename: `./source/layouts/${layout}.ejs`
-            })
-        );
-
-        //  Generate the path to write the file
-        let finalFilePath = `./public/tutorials/${tutorial}/index.html`
-
-        //  Write to file
-        fse.writeFileSync(finalFilePath, completePage);
-    })
-
-    //  Get a list of all tutorials
-    let tutorialFiles = glob.sync('**/*.md', {
-        cwd: './source/tutorials/'
-    });
-
-    //  Got through each tutorial file and process it
-    let tutorialData = [];
-    tutorialFiles.forEach((tutorial, i) => {
-        //  Get the file info
-        let fileInfo = path.parse(tutorial);
-
-        //  Create the build directory
-        let buildDir = path.join(paths.build.tutorials, fileInfo.name);
-
-        //  Make the directory
-        fse.ensureDirSync(buildDir);
-
-        //  Read the page
-        let pageTemplete = fse.readFileSync(path.join(paths.source.tutorials, tutorial), 'utf-8');
-
-        //  Extract the front matter
-        let fMatter = frontMatter(pageTemplete);
-
-        let pageData = Object.assign({}, config, {
-            page: fMatter.attributes,
-        });
-
-
-        //  Render the markdown
-        var markedRenderer = new marked.Renderer();
-        // markedRenderer.heading = function (text, level) {
-        //     var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
-        //     var style = level === 1 ? "title" : level == 2 ? "heading" : "sub-heading";
-        //     return `
-        //     <h${level} class="${style}" id=${escapedText}>${text}</h${level}`;
-        // }
-
-        markedRenderer.heading = function (text, level) {
-            var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
-            return `
-            <h${level} id=${escapedText}>${text}</h${level}>`;
-        }
-
-        markedRenderer.code = function (code, language, isEscapsed) {
-            var html = prism.highlight(code, prism.languages.csharp, language);
-            return `
-            <pre class="language-${language}"><code class = "language-${language}">${html}</code></pre>`;
-        }
-
-        markedRenderer.image = function (href, title, text) {
-            var imgPath = path.join('img', 'tutorials', fileInfo.name, href);
-            // var imgPath = path.join('/img', 'tutorials', dirSpine, nameSpine, href);
-            return `
-            <div class="text-center">
-            <img class="img-fluid border border-dark" src="\\${imgPath}" alt="${title}" />
-            </div>`;
-        }
-
-        markedRenderer.link = function (href, title, text) {
-            var link = marked.Renderer.prototype.link.call(this, href, title, text);
-            return link.replace('<a', '<a target="_blank"');
-        }
-
-        markedRenderer.table = function (header, body) {
-            return `
-            <table class="table"><thead class="thead-dark">${header}</thead><tbody>${body}</tbody></table>`
-        }
-
-        markedRenderer.blockquote = function (quote) {
-            return `
-            <div class="card text-white bg-dark mb-3">
-            <div class="card-header">
-            <span class="lead">Note:</span>
-            </div>
-            <div class="card-body">
-            ${quote}
-            </div>
-            </div>`
-        }
-
-        let renderedPost = marked(fMatter.body, {
-            renderer: markedRenderer
-        });
-
-        //  Determine which layout to use
-        let layout = fMatter.attributes.layout || 'tutorial';
-
-        //  Generate the file naem of the layout
-        let layoutFileName = path.join(paths.source.layouts, layout + '.ejs');
-
-        //  Read the data from the layout file
-        let layoutTemplate = fse.readFileSync(layoutFileName, 'utf-8');
-
-        //  Render the layout
-        let completePage = ejs.render(
-            layoutTemplate,
-            Object.assign({}, pageData, {
-                body: renderedPost,
-                filename: layoutFileName
-            })
-        );
-
-        //  Generate the path to write the file
-        let finalFilePath = `${buildDir}/index.html`;
-
-        //  Write to file
-        fse.writeFileSync(finalFilePath, completePage);
-
-        if (fMatter.attributes.publish === "ok") {
-            //  Add the neccessary info to the tutorialdata
-            tutorialData.push({
-                title: fMatter.attributes.title,
-                short: fMatter.attributes.short,
-                date: fMatter.attributes.date,
-                index: fMatter.attributes.index,
-                cover: `/img/tutorials/${fileInfo.name}/tutorial-cover.png`,
-                url: `/tutorials/${fileInfo.name}`
-            });
-        }
-    });
-
-    //  Sort the tutorials by their index
-    tutorialData.sort((a, b) => {
-        if (a.index < b.index) {
-            return -1;
-        } else if (a.index > b.index) {
-            return 1;
-        } else {
-            return 0;
-        }
-    });
-
-    //  Return the tutorial data
-    return tutorialData;
-}
 
 //  ===================================================================================
 /**
@@ -1047,49 +423,86 @@ function ProcessTutorials() {
     let tutorialConfig = JSON.parse(tutorialConfigJson);
 
     //  Next we need to ensure that the output directory exists
-    fse.ensureDirSync(tutorialConfig.outputDir);
+    fse.ensureDirSync(tutorialConfig.output_dir);
 
     //  Next we need to process all of the individual (not part of a series) tutorials
     tutorialConfig.tutorials.forEach((tutorial, i) => {
-        log(`    Processing ${tutorial.fileName} (${i + 1} of ${tutorialConfig.tutorials.length})`);
-        //  Render the tutorial
-        var render = RenderTutorial(tutorial);
+        log(`    Processing ${tutorial.title} (${i + 1} of ${tutorialConfig.tutorials.length})`);
 
-        //  Ensure the directory to output to exists
-        fse.ensureDirSync(tutorial.outputDir);
+        //  Check to see first if the tutorial is marked as a series
+        if (tutorial.isSeries) {
+            log(`        ${tutorial.title} is a series, processing as series`);
+            //  If it is a series, then we need to process first the individual tutorails
+            //  in the series, then process an index page for the series itself
+            tutorial.tutorials.forEach((sub_tutorial, i) => {
+                log(`        Processing ${sub_tutorial.title} (${i + 1} of ${tutorial.tutorials.length})`);
+                //  First render the sub tutorial
+                let render = RenderTutorial(sub_tutorial);
 
-        //  Write the final rendered HTML file to disk
-        fse.writeFileSync(path.join(tutorial.outputDir, 'index.html'), render);
-    })
+                //  Ensure the directory to output to exists
+                fse.ensureDirSync(sub_tutorial.output_dir);
 
-    //  Next we process all of the series tutorials
-    log('Processing Tutorial Series');
-    tutorialConfig.series.forEach((series, i) => {
-        log(`   Processing ${series.directory} (${i + 1} of ${tutorialConfig.series.length})`);
-        //  process all of the individual tutorials that are part of this series
-        series.tutorials.forEach((tutorial, i) => {
-            log(`        Processing ${tutorial.fileName} (${i + 1} of ${series.tutorials.length})`);
+                //  Write the final rendered HTML file to disk
+                fse.writeFileSync(path.join(sub_tutorial.output_dir, 'index.html'), render);
+            })
+
+            //  Now use the _series_index partial to render the index page for the series
+            let partialContent = fse.readFileSync('./source/partials/tutorials/_series_index.ejs', 'utf-8');
+            let partialRender = ejs.render(
+                partialContent,
+                Object.assign({}, {
+                    series_name: tutorial.title,
+                    series_description: tutorial.short,
+                    tutorials: tutorial.tutorials,
+                    filename: './source/partials/tutorials/_series_index.ejs'
+                })
+            );
+            let layoutFileName = path.join('./source/layouts', tutorial.layout + '.ejs');
+            let layoutFileContent = fse.readFileSync(layoutFileName, 'utf-8');
+            let seriesRender = ejs.render(
+                layoutFileContent,
+                Object.assign({}, {
+                    page: {
+                        "title": tutorial.title,
+                        "description": tutorial.description,
+                        "ogtitle": tutorial.opengraph.title,
+                        "ogimage": tutorial.opengraph.image,
+                        "ogdescription": tutorial.opengraph.description
+                    },
+                    body: partialRender,
+                    filename: layoutFileName
+                })
+            );
+
+            fse.ensureDirSync(path.join('./public/tutorials', ));
+
+            fse.writeFileSync(path.join(tutorial.output_dir, 'index.html'), seriesRender);
+
+
+        } else {
             //  Render the tutorial
             var render = RenderTutorial(tutorial);
 
             //  Ensure the directory to output to exists
-            fse.ensureDirSync(tutorial.outputDir);
+            fse.ensureDirSync(tutorial.output_dir);
 
             //  Write the final rendered HTML file to disk
-            fse.writeFileSync(path.join(tutorial.outputDir, 'index.html'), render);
-        })
-
+            fse.writeFileSync(path.join(tutorial.output_dir, 'index.html'), render);
+        }
     })
 
-    //  Read the contents of the tutorial index file
-    let indexContent = fse.readFileSync(path.join(tutorialConfig.sourceDir, tutorialConfig.fileName + tutorialConfig.fileExt), 'utf-8');
+
+    //  The main tutorial page uses the same _series_index partial as the other series pages
+    let partialContent = fse.readFileSync('./source/partials/tutorials/_series_index.ejs', 'utf-8');
 
     //  Render the content
-    let render = ejs.render(
-        indexContent,
+    let partialRender = ejs.render(
+        partialContent,
         Object.assign({}, {
+            series_name: tutorialConfig.title,
+            series_description: tutorialConfig.short,
             tutorials: tutorialConfig.tutorials,
-            series: tutorialConfig.series
+            filename: './source/partials/tutorials/_series_index.ejs'
         })
     );
 
@@ -1110,16 +523,16 @@ function ProcessTutorials() {
                 "ogimage": tutorialConfig.opengraph.image,
                 "ogdescription": tutorialConfig.opengraph.description
             },
-            body: render,
+            body: partialRender,
             filename: layoutFileName
         })
     )
 
     //  Ensure the directory to output to exists
-    fse.ensureDirSync(tutorialConfig.outputDir);
+    fse.ensureDirSync(tutorialConfig.output_dir);
 
     //  Write the final rendered HTML file
-    fse.writeFileSync(path.join(tutorialConfig.outputDir, 'index.html'), finalRender);
+    fse.writeFileSync(path.join(tutorialConfig.output_dir, 'index.html'), finalRender);
 
 
 
@@ -1127,7 +540,7 @@ function ProcessTutorials() {
 
 function RenderTutorial(tutorial) {
     //  Read the contents of hte tutorial file associated with this tutorial
-    var fileContent = fse.readFileSync(path.join(tutorial.sourceDir, tutorial.fileName + tutorial.fileExt), 'utf-8');
+    var fileContent = fse.readFileSync(path.join(tutorial.source_dir, tutorial.file_name + tutorial.file_ext), 'utf-8');
 
     //  Render the file contents using a marked renderer
     var render = RenderMark_Tutorials(fileContent);
