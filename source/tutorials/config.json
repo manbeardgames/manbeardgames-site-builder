@@ -1,5 +1,18 @@
 {
-    "outputDirectory": "./public",
+    "title": "MonoGame Tutorials",
+    "fileName": "index",
+    "fileExt": ".ejs",
+    "sourceDir": "./source/tutorials",
+    "outputDir": "./public/tutorials",
+    "short": "",
+    "layout": "default",
+    "publish": "ok",
+    "date": "March 5, 2019",
+    "opengraph": {
+        "title": "MonoGame Tutorials",
+        "description": "ManBeardGames is an indie game developer, web developer, and twitch streamer. These are tutorials written on game development",
+        "image": "https://manbeardgames.com/img/ogmbg.png"
+    },
     "tutorials": [{
             "title": "2D Camera",
             "fileName": "2d-camera",

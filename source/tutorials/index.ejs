@@ -1,26 +1,26 @@
----
-site: {
-    title: "Tutorials",
-    description: "ManBeardGames is an indie game developer, web developer, and twitch streamer. These are tutorials written on game development."
-}
+<div class="content">
+    <div class="container">
+    <h1 class="mt-4 mb-3">MonoGame Tutorials</h1>
+    <% tutorials.forEach((tutorial, i) => { %> 
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                            <img class="img-fluid rounded" src="<%= tutorial.opengraph.image %>" alt="">
+                    </div>
 
-og: {
-    title: "Tutorials",
-    image: "https://manbeardgames.com/img/ogmbg.png",
-    description: "ManBeardGames is an indie game developer, web developer, and twitch streamer. These are tutorials written on game development."
-}
+                    <div class="col-lg-6">
+                        <h2 class="card-title"><%= tutorial.title %></h2>
+                        <p calss="card-text"><%= tutorial.short %></p>
+                        <a href="/tutorials/<%= tutorial.fileName %>" class="btn btn-primary">Read More &rarr;</a>
+                    </div>
+                </div>
+            </div>
 
-page: {
-    layout: "flexed",
-    navheader: "ManBeardGames"
-}
----
-<div class="container post">
-
-# Tutorials
-Tutorials will be up very soon. I have a bunch of stuff planned for this on different things with
-MonoGame. I hope you'll be as excited about it as I am.  When tutorials as posted, I'll be announcing that
-on my [twitter](https://www.twitter.com/manbeardgames), so be sure to follow me there.
-
-
+            <div class="card-footer text-muted">
+                Posted on <%= tutorial.date %>
+            </div>
+        </div>
+    <% }) %>
+    </div>
 </div>

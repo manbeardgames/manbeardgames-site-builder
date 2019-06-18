@@ -51,13 +51,13 @@ function ProcessSass() {
     let fileList = glob.sync('**/!(_)*.scss', {
         cwd: paths.source.sass
     });
-    console.log(`Sass files found: ${fileList.length}`);
+    log(`Sass files found: ${fileList.length}`);
 
     //  Render each sass file
     fileList.forEach((file, i) => {
         //  Get the file data
         let fileInfo = path.parse(file);
-        console.log(`    Processing ${fileInfo.name}`);
+        log(`    Processing ${fileInfo.name}`);
 
         //  Create the destiniation directory
         fse.ensureDir(paths.build.sass);
@@ -81,7 +81,7 @@ function ProcessSass() {
  */
 //  ===================================================================================
 function ProcessImages() {
-    console.log(`Copying images from '${paths.source.images}' to '${paths.build.images}'`);
+    log(`Copying images from '${paths.source.images}' to '${paths.build.images}'`);
     fse.copy(paths.source.images, paths.build.images);
 }
 
@@ -92,7 +92,7 @@ function ProcessImages() {
 //  ===================================================================================
 function ProcessJavaScript() {
     //  Copy over the javascript files
-    console.log(`Copying javascript files from '${paths.source.js}' to '${paths.build.js}'`);
+    log(`Copying javascript files from '${paths.source.js}' to '${paths.build.js}'`);
     fse.copy(paths.source.js, paths.build.js);
 }
 
@@ -102,9 +102,9 @@ function ProcessJavaScript() {
  */
 //  ===================================================================================
 function ProcessVendor() {
-    console.log("Copying vendor files from source to build");
+    log("Copying vendor files from source to build");
     for (var vendor in paths.source.vendor) {
-        console.log(`    Copying files for ${vendor}`)
+        log(`    Copying files for ${vendor}`)
         fse.copy(paths.source.vendor[vendor], paths.build.vendor[vendor]);
     }
 }
@@ -123,13 +123,13 @@ function ProcessPages() {
     let pageList = glob.sync('**/*.@(md|ejs|html)', {
         cwd: paths.source.pages
     });
-    console.log(`Pages found: ${pageList.length}`);
+    log(`Pages found: ${pageList.length}`);
 
     //  Iterage the page list
     pageList.forEach((page, i) => {
         //  Get the file info on the page
         let fileInfo = path.parse(page);
-        console.log(`    Processing ${page}`);
+        log(`    Processing ${page}`);
 
         //  Generate the full path to the page file
         let fullFilePath = path.join(paths.source.pages, page);
@@ -1039,6 +1039,7 @@ function ProcessTutorials_New() {
  */
 //  ===================================================================================
 function ProcessTutorials() {
+    log('Processing Tutorials');
     //  First we need to read the contents of the tutorail config JSOn file
     let tutorialConfigJson = fse.readFileSync('./source/tutorials/config.json');
 
@@ -1046,49 +1047,28 @@ function ProcessTutorials() {
     let tutorialConfig = JSON.parse(tutorialConfigJson);
 
     //  Next we need to ensure that the output directory exists
-    fse.ensureDirSync(tutorialConfig.outputDirectory);
+    fse.ensureDirSync(tutorialConfig.outputDir);
 
     //  Next we need to process all of the individual (not part of a series) tutorials
     tutorialConfig.tutorials.forEach((tutorial, i) => {
-        //  Read the contents of the tutorial file associated with this tutorial
-        var fileContent = fse.readFileSync(path.join(tutorial.sourceDir, tutorial.fileName + tutorial.fileExt), 'utf-8');
-
-        //  Render the file contents using a marked renderer
-        var render = RenderMark_Tutorials(fileContent);
-
-        //  Generate the filename of the layout to use based on the layout config for the tutoria
-        let layoutFileName = path.join('./source/layouts', tutorial.layout + '.ejs');
-
-        //  Read the contents of the layout file
-        let layoutFileContent = fse.readFileSync(layoutFileName, 'utf-8');
-
-        //  Perform the final render using ejs
-        let finalRender = ejs.render(
-            layoutFileContent,
-            Object.assign({}, {
-                page: {
-                    "title": tutorial.title,
-                    "description": tutorial.short,
-                    "ogtitle": tutorial.opengraph.title,
-                    "ogimage": tutorial.opengraph.image,
-                    "ogdescription": tutorial.opengraph.description
-                },
-                body: render,
-                filename: layoutFileName
-            })
-        );
+        log(`    Processing ${tutorial.fileName} (${i + 1} of ${tutorialConfig.tutorials.length})`);
+        //  Render the tutorial
+        var render = RenderTutorial(tutorial);
 
         //  Ensure the directory to output to exists
         fse.ensureDirSync(tutorial.outputDir);
 
-        //  Write the final rendered HTMl file to disk
-        fse.writeFileSync(path.join(tutorial.outputDir, 'index.html'), finalRender);
+        //  Write the final rendered HTML file to disk
+        fse.writeFileSync(path.join(tutorial.outputDir, 'index.html'), render);
     })
 
     //  Next we process all of the series tutorials
+    log('Processing Tutorial Series');
     tutorialConfig.series.forEach((series, i) => {
+        log(`   Processing ${series.directory} (${i + 1} of ${tutorialConfig.series.length})`);
         //  process all of the individual tutorials that are part of this series
         series.tutorials.forEach((tutorial, i) => {
+            log(`        Processing ${tutorial.fileName} (${i + 1} of ${series.tutorials.length})`);
             //  Render the tutorial
             var render = RenderTutorial(tutorial);
 
@@ -1100,6 +1080,48 @@ function ProcessTutorials() {
         })
 
     })
+
+    //  Read the contents of the tutorial index file
+    let indexContent = fse.readFileSync(path.join(tutorialConfig.sourceDir, tutorialConfig.fileName + tutorialConfig.fileExt), 'utf-8');
+
+    //  Render the content
+    let render = ejs.render(
+        indexContent,
+        Object.assign({}, {
+            tutorials: tutorialConfig.tutorials,
+            series: tutorialConfig.series
+        })
+    );
+
+    //  Genereate the filename of hte layout to use based on the layout config
+    let layoutFileName = path.join('./source/layouts', tutorialConfig.layout + '.ejs');
+
+    //  Read the contents of the layout file
+    let layoutFileContent = fse.readFileSync(layoutFileName, 'utf-8');
+
+    //  Perform the finel render using ejs
+    let finalRender = ejs.render(
+        layoutFileContent,
+        Object.assign({}, {
+            page: {
+                "title": tutorialConfig.title,
+                "description": tutorialConfig.description,
+                "ogtitle": tutorialConfig.opengraph.title,
+                "ogimage": tutorialConfig.opengraph.image,
+                "ogdescription": tutorialConfig.opengraph.description
+            },
+            body: render,
+            filename: layoutFileName
+        })
+    )
+
+    //  Ensure the directory to output to exists
+    fse.ensureDirSync(tutorialConfig.outputDir);
+
+    //  Write the final rendered HTML file
+    fse.writeFileSync(path.join(tutorialConfig.outputDir, 'index.html'), finalRender);
+
+
 
 }
 
@@ -1199,4 +1221,8 @@ function RenderMark_Tutorials(fileContent) {
 
     //  Return the render
     return render;
+}
+
+function log(message) {
+    console.log(`[${new Date().toLocaleDateString()}] | [${new Date().toLocaleTimeString()}] | ${message}`)
 }
