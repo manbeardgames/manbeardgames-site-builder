@@ -17,7 +17,7 @@ If you would like to follow along with this tutorial using the same files and as
 ---
 If you are unfamiliar with the concept of a camera in game development, it is gives us something called a Transformation Matrix, which we can then apply to our rendering.  This transformation matrix contains the information to translate, rotate, and scale what we tell to render so that it looks as if we're viewing the game from the perspective of the camera. 
 
-![camera concept](2d-camera/tutorial-cover.png)
+![camera concept](tutorials/2d-camera/tutorial-cover.png)
 
 To get started, create a new class for your camera, I'll call mine `Camera2D`.  Add the following:
 
@@ -324,7 +324,7 @@ To further expand on this concept, take a look at the following image:
 
 
 
-![world space to screen space concept](2d-camera/world-to-screen-space.png)
+![world space to screen space concept](tutorials/2d-camera/world-to-screen-space.png)
 
 
 On the left is our game world.  The game world is 2000px wide by 2000px tall.  In this game world, our player is located at world space xy-position {1000, 900}.  On the right is our game screen that is being rendered.  The game screen is only 1280px wide by 720px tall.  We have the mouse at screen space xy-position {1000, 650}.

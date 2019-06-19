@@ -29,7 +29,7 @@
                 "description": "Learn how to get started making games with MonOGame, from installation, to adding content, to making a simple demo game",
                 "image": ""
             },
-            "isSeries": true,
+            "is_series": true,
             "tutorials": [{
                     "title": "Setting Up MonoGame",
                     "file_name": "setting-up-monogame",
@@ -82,7 +82,7 @@
                 "description": "In this series of tutorials, we'll learn to create Scenes in MonoGame, complete with transitions between scenes.  We'll then dive deeper and add entity-component management to the scenes.",
                 "image": ""
             },
-            "isSeries": true,
+            "is_series": true,
             "tutorials": [{
                     "title": "Introduction",
                     "file_name": "introduction",

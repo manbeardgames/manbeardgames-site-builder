@@ -14,7 +14,7 @@ If you would like to follow along with this tutorial using the same files and as
 ---
 Before we can get started on the fun code stuff, we first need to talk about what collision is.  At its most basic definition, it is when defined areas within your game overlap.  
 
-![not colliding versus colliding](aabb-2d-collision-checks/tutorial-cover.png)
+![not colliding versus colliding](tutorials/aabb-2d-collision-checks/tutorial-cover.png)
 
 In the image above there are two scenarios.  The scenario on the left shows two defined rectangular areas, red and green.  These defined areas do no overlap, so this does not define a collision.  In the scenario on the right, the defined red and green areas do overlap, so this would define a collision.
 
@@ -33,11 +33,11 @@ For AABB collision detection to say that there was a collision between two bound
 
 If you can answer yes to all four of these questions, then a collision is detected.  If any of those answers is no, even if it's just one of them, then no collision is detected.  Look at the following images to further illustrate this.
 
-![collision failure one](aabb-2d-collision-checks/collision-fail-1.png)
+![collision failure one](tutorials/aabb-2d-collision-checks/collision-fail-1.png)
 
-![collision failure two](aabb-2d-collision-checks/collision-fail-2.png)
+![collision failure two](tutorials/aabb-2d-collision-checks/collision-fail-2.png)
 
-![collision success](aabb-2d-collision-checks/collision-success.png)
+![collision success](tutorials/aabb-2d-collision-checks/collision-success.png)
 
 Since all four of the questions we must ask are just yes/no questions, we can easily translate this into an if statement in our code to perform the check. The following is an example of this
 

@@ -109,11 +109,11 @@ As I said before, the Content Pipeline Tool comes with MonoGame and provides a u
 
 So, let's just dive right into this.  First create a new MonoGame Cross Platform Desktop Project. We won't be reusing the previous one from the scenario we covered above.  Once the project is created, expand the *Content* directory in the Solution Explorer window in Visual Studio.  Then double click the **Content.mgbc** file.
 
-![Double Click Content.mgbc](adding-content/double-click-content.png)  
+![Double Click Content.mgbc](tutorials/adding-content/double-click-content.png)  
 
 This will open the Content Pipeline Tool window, shown below.
 
-![MonoGame Content Pipeline Window](adding-content/pipeline-tool-window.png)
+![MonoGame Content Pipeline Window](tutorials/adding-content/pipeline-tool-window.png)
 
 <div class="card text-white bg-dark mb-3">
     <div class="card-header">
@@ -137,15 +137,15 @@ Now that we have the window open, lets go over what where looking at. First thin
 
 You'll want to come up with some type of organization for the content you add.  Let's add a new folder call *images*.  To do this, you can right-click inside the Project panel, the select **Add**, and then **New Folder**
 
-![Add New Folder](adding-content/add-new-folder.png)
+![Add New Folder](tutorials/adding-content/add-new-folder.png)
 
 Let's name the folder **images**. This will be the folder we place our player_idle.png image inside of.  Now that we have the folder, lets add our image too it. Right click the newly created folder, then select **Add**, and then **Existing Item...**
 
-![Add Existing Item](adding-content/add-existing-item.png)
+![Add Existing Item](tutorials/adding-content/add-existing-item.png)
 
 Use the file selector to add the image. After selecting the image, you will be shown the Add File Dialog.  
 
-![Add File Dialog](adding-content/add-file-dialog.png)
+![Add File Dialog](tutorials/adding-content/add-file-dialog.png)
 
 This will present you with the following three options
 
@@ -185,7 +185,7 @@ For this tutorial, we are going to choose the **Copy the file to the directory**
 
 Now that we have added our content, the next step is to tell the Content Pipeline tool to build the content.  To do this, click the **Build** menu item at the top of the window, then select **Build** 
 
-![Build Content](adding-content/build-content.png)
+![Build Content](tutorials/adding-content/build-content.png)
 
 You should see some text appear in the Build Output panel while it's building.  When it finishes, it'll show that the build succeeded.  After this you can close the Content Pipeline Tool window.
 
