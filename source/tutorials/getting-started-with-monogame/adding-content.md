@@ -1,4 +1,4 @@
-<div class="container post">
+
 
 # Overview
 ---
@@ -252,4 +252,3 @@ And that's it.  Now that we have our image loaded as Texture2D, we can use that 
 
 # Conclusion
 There is more than one way to import game assets into your game, load them up, and use them.  For most of the out-of-the-box content types such as `Texture2D`, `SoundEffect`, and `Song`, these classes offer a `.FromStream` (or `FromUri` for `Song`) method to load the content without the use of the Content Pipeline Tool and ContentManager.  This means that you'll have to manually manage the resource and unloading it should it need to be disposed of.  MonoGame however offers the Content Pipeline Tool and the ContentManager class to simplify this process and to also help protect your files by converting them to a .xnb format.  
-</div>

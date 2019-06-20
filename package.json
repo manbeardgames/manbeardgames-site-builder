@@ -23,9 +23,10 @@
     "mdi": "^2.2.43",
     "readline-sync": "^1.4.9",
     "sass": "^1.14.3",
-    "serve": "^10.1.1"
+    "serve": "^11.0.2"
   },
   "devDependencies": {
+    "animate.css": "^3.7.2",
     "popper.js": "^1.14.6",
     "prismjs": "^1.15.0"
   }

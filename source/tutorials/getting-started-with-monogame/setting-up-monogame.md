@@ -1,4 +1,4 @@
-<div class="container post">
+
 
 # Setting Up MonoGame  
 ---
@@ -50,4 +50,3 @@ project templetes for us to choose from in Visual Studio when we go to make a ne
 With Visual Studio and MonoGame installed, we're all ready to get started making games. In the next tutorial, we'll go over creating a new project
 Now that we have Visual Stuido and MonoGame installed, we can begin making games.  We'll cover some of the core concepts for MonoGame in the next tutorial.
 
-</div>

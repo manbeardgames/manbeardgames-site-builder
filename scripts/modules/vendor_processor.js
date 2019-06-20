@@ -36,6 +36,10 @@ function process() {
         {
             in: './node_modules/prismjs/themes/prism-tomorrow.css',
             out: './public/vendor/prismjs/css/prism-tomorrow.css'
+        },
+        {
+            in: './node_modules/animate.css/animate.min.css',
+            out: './public/vendor/animate.css/animate.min.css'
         }
     ];
 

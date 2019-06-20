@@ -1,9 +1,8 @@
 <%# ---------------------------------------------------------------------------------
-  Name:         tutorials.ejs
+  Name:         default.ejs
   Type:         Layout
-  Description:  This is the layout template used by all of the tutorial pages.
-  Notes:        -   Uses the tutorial top nav instead of default
-                -   Includes the tutorial sidebar section
+  Description:  This is the default Layout Templete that is used throughout the site.
+  Notes:        -   Entire body is wrapped by the flex-wrap div.
   Last Refactored: 11/28/2018
 ---------------------------------------------------------------------------------  #%>
 <!doctype html>
@@ -13,41 +12,40 @@
     <% include ../partials/_head %>
 </head>
 
-<body data-spy="scroll" data-target=".sidebar">
-    <header>
-        <% include ../partials/navs/_tutorial-top-nav %>
-    </header>
-    <div class="container-fluid">
-        <div class="row navbar-expand-md">
-            <nav class="col-md-3 col-lg-2 navbar-collapse collapse sidebar" id="sidenav">
-                <div class="sidbar-sticky flex-column w-100 mt-1">
-                    <% navHeaders.forEach((header, i) => { %>
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>
-                            <%- header.name %></span>
-                    </h6>
-                    <ul class="nav flex-column">
-                        <% header.subHeaders.forEach((subHeader, i) => { %>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/tutorials/<%- header.nameSpine %>/<%- subHeader.nameSpine %>">
-                                <%- subHeader.name %>
-                            </a>
-                        </li>
-                        <% }) %>
-                    </ul>
-                    <% }) %>
+<body>
+    <div id="flex-wrap">
+        <header>
+            <% include ../partials/navs/_default-top-nav %>
+        </header>
+        <main id="tutorial">
+            <div class="row-offcanvas row-offcanvas-left">
+                <div id="sidebar" class="sidebar-offcanvas">
+                    <div class="col-md-12">
+                        <%- sidebar %>
+                    </div>
                 </div>
-            </nav>
 
-            <main id="tutorial" role="main" class="col-md-9  col-lg-10 pt-3 px-4">
-                <%- body %>
-            </main>
-        </div>
+                <div id="tutorial-main">
+                    <div class="col-md-12">
+                        <p class="d-sm-none">
+                            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">&lt;</button>
+                        </p>
+                        <%- tutorial %>
+                        <div id="prev-next-buttons">
+                            <button type="button" class="btn btn-primary" id="prev">Previous</button>
+                            <button type="button" class="btn btn-primary" id="next">Next</button>
+                        <div>
+                    </div>
+                </div>
+            </div>            
+        </main>
+
+        <footer>
+            <% include ../partials/footers/_default-footer %>
+        </footer>
+
+        <% include ../partials/scripts/_default-scripts %>
     </div>
-
-
-
-    <% include ../partials/scripts/_default-scripts %>
 </body>
 
 </html>

@@ -2,6 +2,9 @@ const fse = require('fs-extra');
 const path = require('path');
 const ejs = require('ejs');
 const log = require('./logger');
+const {
+    config
+} = require('../../source/data/tutorial_config');
 const mark_renderer = require('./mark_renderer');
 
 
@@ -12,6 +15,96 @@ const mark_renderer = require('./mark_renderer');
  */
 //  ===================================================================================
 function process() {
+    log.log('Processing Tutorials');
+
+    //  First read the tutorial configuration file contents
+    //let tutorail_config_contents = fse.readFileSync('./source/tutorials/config.json', 'utf-8');
+
+    //  Next convert the tutorial config contents into a JSON object
+    // let tutorial_config = JSON.parse(tutorail_config_contents);
+
+    //  Itereate each of the tutorials in the config
+    config.tutorials.forEach((tutorial, i) => {
+        let sections = [];
+
+        //  Itereate the sections of the tutorial
+        tutorial.sections.forEach((section, i) => {
+            //  Read the contents of the tutorial section file
+            let content = fse.readFileSync(path.join('./source/tutorials', tutorial.spine, section.spine + '.md'), 'utf-8');
+
+            //  Render the content using the markdown renderer
+            let render = mark_renderer.render(content);
+
+            //  Put the rendered section in the sections array
+            sections.push(render);
+        });
+
+        //  Now that each section of the tutorial has been rendered, we 
+        //  need to render the tutorial wrapper partial using the sections
+        //  First create a string with the path to the wrapper tempalte
+        let wrapper_file_name = './source/partials/tutorials/_tutorial_wrapper.ejs';
+
+        //  Next read the contents of the file
+        let wrapper_contents = fse.readFileSync(wrapper_file_name, 'utf-8');
+
+        //  Now render the wrapper
+        let wrapper_render = ejs.render(
+            wrapper_contents,
+            Object.assign({}, {
+                sections: sections
+            })
+        );
+
+        //  Now that we've rendered the wrapper with all of it's sections
+        //  we next need to render the sidebar
+        //  First create a string witht he path to the sidebar tempalte
+        let side_bar_file_name = './source/partials/tutorials/_tutorial_sidebar.ejs';
+
+        //  Next read the contents of the file
+        let sidebar_contents = fse.readFileSync(side_bar_file_name, 'utf-8');
+
+        //  Now render the sidebar
+        let sidebar_render = ejs.render(
+            sidebar_contents,
+            Object.assign({})
+        );
+
+        //  The last step is to render the tutorial page layout
+        //  First, create a string with the path to the tutorial page layout
+        let tutorial_layout_filename = './source/layouts/tutorials.ejs';
+
+        //  Next read the contents of the layout file
+        let tutorial_layout_contents = fse.readFileSync(tutorial_layout_filename, 'utf-8');
+
+        //  And finally render it
+        let final_render = ejs.render(
+            tutorial_layout_contents,
+            Object.assign({}, {
+                "sidebar": sidebar_render,
+                "tutorial": wrapper_render,
+                page: {
+                    "title": tutorial.name,
+                    "description": tutorial.description,
+                    "ogtitle": tutorial.opengraph.title,
+                    "ogimage": tutorial.opengraph.image,
+                    "ogdescription": tutorial.opengraph.description
+                },
+                filename: tutorial_layout_filename
+            }),
+
+        );
+
+        //  Let's ensure that we have the output directory created
+        fse.ensureDirSync(path.join('./public/tutorials', tutorial.spine));
+
+        //  And save the final render to disk as the HTML file it is
+        fse.writeFileSync(path.join('./public/tutorials', tutorial.spine, 'index.html'), final_render);
+    });
+}
+
+
+
+function process_old() {
     log.log('Processing Tutorials');
 
     //  First we need to read the contents fo the tutorial config JSON file
