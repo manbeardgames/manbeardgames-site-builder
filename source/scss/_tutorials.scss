@@ -4,18 +4,46 @@ https://www.codeply.com/go/SufxS3ir55
 */
 
 #tutorial {
-    height: 100%;
+    // height: 100%;
+    height: $tutorial-main-height;
+    min-height: $tutorial-main-height;
+    max-height: $tutorial-main-height;
+    font-size: $tutorial-font-size;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-size: $tutorial-header-size;
+    }
 }
 
 .row-offcanvas {
     height: 100%;
+    position: relative;
+    -webkit-transition: all 0.15s ease-out;
+    -moz-transition: all 0.15s ease-out;
+    transition: all 0.15s ease-out;
+    width: calc(100% + 100vw);
+}
+
+.row-offcanvas-left {
+    left: -100vw;
+
+    &.active {
+        left: 0;
+    }
 }
 
 #sidebar {
-    width: inherit;
-    min-width: 250px;
-    max-width: 250px;
-    background: darken($white, 15%);
+    //width: inherit;
+    // min-width: 250px;
+    // max-width: 250px;
+    width: $tutorial-sidebar-width;
+    min-width: $tutorial-sidebar-width;
+    max-width: $tutorial-sidebar-width;
+    background: $gray-200;
     float: left;
     height: 100%;
     position: relative;
@@ -25,18 +53,34 @@ https://www.codeply.com/go/SufxS3ir55
     .nav-pills {
         .nav-link {
             color: $ophidianblue;
+
+            &:hover {
+                //background-color: lighten($ophidianorange, 20%);
+                background-color: $ophidianorange-lighten-20;
+                cursor: pointer;
+            }
+
             &.active {
                 background-color: $ophidianorange;
             }
         }
     }
+}
 
-    
+.sidebar-offcanvas {
+    position: absolute;
+    top: 0;
 }
 
 #tutorial-main {
-    height: 100%;
-    overflow: auto;
+    height: initial;
+    // min-height: calc(100vh - 91px - 84px);
+    // max-height: calc(100vh - 91px - 84px);
+    min-height: $tutorial-main-height;
+    max-height: $tutorial-main-height;
+    overflow-y: auto;
+    overflow-x: hidden;
+
 }
 
 #tutorial-wrapper {
@@ -51,30 +95,93 @@ https://www.codeply.com/go/SufxS3ir55
     height: initial;
     min-height: 50px;
     max-height: 50px;
+    display: flex;
+    border-top: 1px;
+    padding: 5px;
+
+    #prev {
+        margin-right: auto;
+    }
+
+    #next {
+        margin-left: auto;
+    }
+
 }
 
-@media screen and (max-width: 768px) {
+
+
+@media screen and (min-width: $breakpoint-md) {
+    #tutorial {
+        height: $tutorial-main-height-md;
+        min-height: $tutorial-main-height-md;
+        max-height: $tutorial-main-height-md;
+
+        font-size: $tutorial-font-size-md;
+        h1,h2,h3,h4,h5{
+            font-size: $tutorial-header-size
+        }
+    }
+
+    #tutorial-main {
+        height: $tutorial-main-height-md;
+        min-height: $tutorial-main-height-md;
+        max-height: $tutorial-main-height-md;
+    }
+
+    #sidebar {
+        width: $tutorial-sidebar-width-md;
+        min-width: $tutorial-sidebar-width-md;
+        max-width: $tutorial-sidebar-width-md;
+    }
+
     .row-offcanvas {
-        position: relative;
-        -webkit-transition: all 0.25s ease-out;
-        -moz-transition: all 0.25s ease-out;
-        transition: all 0.25s ease-out;
-        width: calc(100% + 220px);
+        position: initial;
+        -webkit-transition: none;
+        -moz-transition: none;
+        transition: none;
+        width: initial;
     }
 
     .row-offcanvas-left {
-        left: -220px;
-    }
-
-    .row-offcanvas-left.active {
         left: 0;
     }
 
     .sidebar-offcanvas {
-        position: absolute;
-        top: 0;
+        position: initial;
+        top: initial;
     }
 }
+
+// @media screen and (max-width: 768px) {
+// #sidebar {
+// width: 100vw;
+// max-width: 100vw;
+// min-width: 100vw;
+// }
+// .row-offcanvas {
+// position: relative;
+// -webkit-transition: all 0.15s ease-out;
+// -moz-transition: all 0.15s ease-out;
+// transition: all 0.15s ease-out;
+//width: calc(100% + 250px);
+// width: calc(100% + 100vw);
+// }
+
+// .row-offcanvas-left {
+// //left: -250px;
+// left: -100vw;
+// }
+
+// .row-offcanvas-left.active {
+//     left: 0;
+// }
+
+// .sidebar-offcanvas {
+//     position: absolute;
+//     top: 0;
+// }
+// }
 
 
 

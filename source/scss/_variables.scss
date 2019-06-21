@@ -1,6 +1,6 @@
 // -------------------------------------------------------------------------
 //  Restate bootstrap colors
-$white:    #fff !default;
+$white: #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
 $gray-300: #dee2e6 !default;
@@ -13,114 +13,287 @@ $gray-900: #212529 !default;
 $black: #000 !default;
 
 $grays: () !default;
-$grays: map-merge(
-  (
-    "100": $gray-100,
-    "200": $gray-200,
-    "300": $gray-300,
-    "400": $gray-400,
-    "500": $gray-500,
-    "600": $gray-600,
-    "700": $gray-700,
-    "800": $gray-800,
-    "900": $gray-900
-  ),
-  $grays
-);
+$grays: map-merge(("100": $gray-100,
+        "200": $gray-200,
+        "300": $gray-300,
+        "400": $gray-400,
+        "500": $gray-500,
+        "600": $gray-600,
+        "700": $gray-700,
+        "800": $gray-800,
+        "900": $gray-900),
+    $grays);
 
-$blue:    #007bff !default;
-$indigo:  #6610f2 !default;
-$purple:  #6f42c1 !default;
-$pink:    #e83e8c !default;
-$red:     #dc3545 !default;
-$orange:  #fd7e14 !default;
-$yellow:  #ffc107 !default;
-$green:   #28a745 !default;
-$teal:    #20c997 !default;
+$blue: #007bff !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #28a745 !default;
+$teal: #20c997 !default;
 $cyan: #17a2b8 !default;
 
 
 $colors: () !default;
-$colors: map-merge(
-  (
-    "blue":       $blue,
-    "indigo":     $indigo,
-    "purple":     $purple,
-    "pink":       $pink,
-    "red":        $red,
-    "orange":     $orange,
-    "yellow":     $yellow,
-    "green":      $green,
-    "teal":       $teal,
-    "cyan":       $cyan,
-    "white":      $white,
-    "gray":       $gray-600,
-    "gray-dark":  $gray-800
-  ),
-  $colors
-);
+$colors: map-merge(("blue": $blue,
+        "indigo": $indigo,
+        "purple": $purple,
+        "pink": $pink,
+        "red": $red,
+        "orange": $orange,
+        "yellow": $yellow,
+        "green": $green,
+        "teal": $teal,
+        "cyan": $cyan,
+        "white": $white,
+        "gray": $gray-600,
+        "gray-dark": $gray-800),
+    $colors);
 
 
-$primary:       $blue !default;
-$secondary:     $gray-600 !default;
-$success:       $green !default;
-$info:          $cyan !default;
-$warning:       $yellow !default;
-$danger:        $red !default;
-$light:         $gray-100 !default;
+$primary: $blue !default;
+$secondary: $gray-600 !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $gray-100 !default;
 $dark: $gray-800 !default;
 
 $theme-colors: () !default;
-$theme-colors: map-merge(
-  (
-    "primary":    $primary,
-    "secondary":  $secondary,
-    "success":    $success,
-    "info":       $info,
-    "warning":    $warning,
-    "danger":     $danger,
-    "light":      $light,
-    "dark":       $dark
-  ),
-  $theme-colors
-);
+$theme-colors: map-merge(("primary": $primary,
+        "secondary": $secondary,
+        "success": $success,
+        "info": $info,
+        "warning": $warning,
+        "danger": $danger,
+        "light": $light,
+        "dark": $dark),
+    $theme-colors);
 //  End restating bootstrap colors
 // -------------------------------------------------------------------------
 
 // -------------------------------------------------------------------------
 //  Site colors
-$ophidianblue:    #081E3C;
-$ophidianorange:  #F88A00;
-$ophidianyellow:  #FFF68F;
-$ophidiangreen:   #4AC389;
-$ophidianred:     #F8092C;
+$ophidianblue: #081E3C;
+$ophidianorange: #F88A00;
+$ophidianyellow: #FFF68F;
+$ophidiangreen: #4AC389;
+$ophidianred: #F8092C;
 
 $ophidian-colors: () !default;
-$ophidian-colors: map-merge(
-  (
-    "ophidianblue":     $ophidianblue,
-    "ophidianorange":   $ophidianorange,
-    "ophidianyellow":   $ophidianyellow,
-    "ophidiangreen":    $ophidiangreen,
-    "ophidianred":      $ophidianred,
-  ),
-  $ophidian-colors
-);
+$ophidian-colors: map-merge(("ophidianblue": $ophidianblue,
+        "ophidianorange": $ophidianorange,
+        "ophidianyellow": $ophidianyellow,
+        "ophidiangreen": $ophidiangreen,
+        "ophidianred": $ophidianred,
+    ),
+    $ophidian-colors);
+
+$ophidianblue-darken-5: darken($ophidianblue, 5%);
+$ophidianblue-darken-10: darken($ophidianblue, 10%);
+$ophidianblue-darken-20: darken($ophidianblue, 20%);
+$ophidianblue-darken-30: darken($ophidianblue, 30%);
+$ophidianblue-darken-40: darken($ophidianblue, 40%);
+$ophidianblue-darken-50: darken($ophidianblue, 50%);
+$ophidianblue-darken-60: darken($ophidianblue, 60%);
+$ophidianblue-darken-70: darken($ophidianblue, 70%);
+$ophidianblue-darken-80: darken($ophidianblue, 80%);
+$ophidianblue-darken-90: darken($ophidianblue, 90%);
+$ophidianblue-darken-100: darken($ophidianblue, 100%);
+
+$ophidianblue-lighten-10: lighten($ophidianblue, 10%);
+$ophidianblue-lighten-20: lighten($ophidianblue, 20%);
+$ophidianblue-lighten-30: lighten($ophidianblue, 30%);
+$ophidianblue-lighten-40: lighten($ophidianblue, 40%);
+$ophidianblue-lighten-50: lighten($ophidianblue, 50%);
+$ophidianblue-lighten-60: lighten($ophidianblue, 60%);
+$ophidianblue-lighten-70: lighten($ophidianblue, 70%);
+$ophidianblue-lighten-80: lighten($ophidianblue, 80%);
+$ophidianblue-lighten-90: lighten($ophidianblue, 90%);
+$ophidianblue-lighten-100: lighten($ophidianblue, 100%);
+
+$ophidianorange-darken-10: darken($ophidianorange, 10%);
+$ophidianorange-darken-20: darken($ophidianorange, 20%);
+$ophidianorange-darken-30: darken($ophidianorange, 30%);
+$ophidianorange-darken-40: darken($ophidianorange, 40%);
+$ophidianorange-darken-50: darken($ophidianorange, 50%);
+$ophidianorange-darken-60: darken($ophidianorange, 60%);
+$ophidianorange-darken-70: darken($ophidianorange, 70%);
+$ophidianorange-darken-80: darken($ophidianorange, 80%);
+$ophidianorange-darken-90: darken($ophidianorange, 90%);
+$ophidianorange-darken-100: darken($ophidianorange, 100%);
+
+$ophidianorange-lighten-10: lighten($ophidianorange, 10%);
+$ophidianorange-lighten-20: lighten($ophidianorange, 20%);
+$ophidianorange-lighten-30: lighten($ophidianorange, 30%);
+$ophidianorange-lighten-40: lighten($ophidianorange, 40%);
+$ophidianorange-lighten-50: lighten($ophidianorange, 50%);
+$ophidianorange-lighten-60: lighten($ophidianorange, 60%);
+$ophidianorange-lighten-70: lighten($ophidianorange, 70%);
+$ophidianorange-lighten-80: lighten($ophidianorange, 80%);
+$ophidianorange-lighten-90: lighten($ophidianorange, 90%);
+$ophidianorange-lighten-100: lighten($ophidianorange, 100%);
+
+$ophidianyellow-darken-10: darken($ophidianyellow, 10%);
+$ophidianyellow-darken-20: darken($ophidianyellow, 20%);
+$ophidianyellow-darken-30: darken($ophidianyellow, 30%);
+$ophidianyellow-darken-40: darken($ophidianyellow, 40%);
+$ophidianyellow-darken-50: darken($ophidianyellow, 50%);
+$ophidianyellow-darken-60: darken($ophidianyellow, 60%);
+$ophidianyellow-darken-70: darken($ophidianyellow, 70%);
+$ophidianyellow-darken-80: darken($ophidianyellow, 80%);
+$ophidianyellow-darken-90: darken($ophidianyellow, 90%);
+$ophidianyellow-darken-100: darken($ophidianyellow, 100%);
+
+$ophidianyellow-lighten-10: lighten($ophidianyellow, 10%);
+$ophidianyellow-lighten-20: lighten($ophidianyellow, 20%);
+$ophidianyellow-lighten-30: lighten($ophidianyellow, 30%);
+$ophidianyellow-lighten-40: lighten($ophidianyellow, 40%);
+$ophidianyellow-lighten-50: lighten($ophidianyellow, 50%);
+$ophidianyellow-lighten-60: lighten($ophidianyellow, 60%);
+$ophidianyellow-lighten-70: lighten($ophidianyellow, 70%);
+$ophidianyellow-lighten-80: lighten($ophidianyellow, 80%);
+$ophidianyellow-lighten-90: lighten($ophidianyellow, 90%);
+$ophidianyellow-lighten-100: lighten($ophidianyellow, 100%);
+
+$ophidiangreen-darken-10: darken($ophidiangreen, 10%);
+$ophidiangreen-darken-20: darken($ophidiangreen, 20%);
+$ophidiangreen-darken-30: darken($ophidiangreen, 30%);
+$ophidiangreen-darken-40: darken($ophidiangreen, 40%);
+$ophidiangreen-darken-50: darken($ophidiangreen, 50%);
+$ophidiangreen-darken-60: darken($ophidiangreen, 60%);
+$ophidiangreen-darken-70: darken($ophidiangreen, 70%);
+$ophidiangreen-darken-80: darken($ophidiangreen, 80%);
+$ophidiangreen-darken-90: darken($ophidiangreen, 90%);
+$ophidiangreen-darken-100: darken($ophidiangreen, 100%);
+
+$ophidiangreen-lighten-10: lighten($ophidiangreen, 10%);
+$ophidiangreen-lighten-20: lighten($ophidiangreen, 20%);
+$ophidiangreen-lighten-30: lighten($ophidiangreen, 30%);
+$ophidiangreen-lighten-40: lighten($ophidiangreen, 40%);
+$ophidiangreen-lighten-50: lighten($ophidiangreen, 50%);
+$ophidiangreen-lighten-60: lighten($ophidiangreen, 60%);
+$ophidiangreen-lighten-70: lighten($ophidiangreen, 70%);
+$ophidiangreen-lighten-80: lighten($ophidiangreen, 80%);
+$ophidiangreen-lighten-90: lighten($ophidiangreen, 90%);
+$ophidiangreen-lighten-100: lighten($ophidiangreen, 100%);
+
+$ophidianred-darken-10: darken($ophidianred, 10%);
+$ophidianred-darken-20: darken($ophidianred, 20%);
+$ophidianred-darken-30: darken($ophidianred, 30%);
+$ophidianred-darken-40: darken($ophidianred, 40%);
+$ophidianred-darken-50: darken($ophidianred, 50%);
+$ophidianred-darken-60: darken($ophidianred, 60%);
+$ophidianred-darken-70: darken($ophidianred, 70%);
+$ophidianred-darken-80: darken($ophidianred, 80%);
+$ophidianred-darken-90: darken($ophidianred, 90%);
+$ophidianred-darken-100: darken($ophidianred, 100%);
+
+$ophidianred-lighten-10: lighten($ophidianred, 10%);
+$ophidianred-lighten-20: lighten($ophidianred, 20%);
+$ophidianred-lighten-30: lighten($ophidianred, 30%);
+$ophidianred-lighten-40: lighten($ophidianred, 40%);
+$ophidianred-lighten-50: lighten($ophidianred, 50%);
+$ophidianred-lighten-60: lighten($ophidianred, 60%);
+$ophidianred-lighten-70: lighten($ophidianred, 70%);
+$ophidianred-lighten-80: lighten($ophidianred, 80%);
+$ophidianred-lighten-90: lighten($ophidianred, 90%);
+$ophidianred-lighten-100: lighten($ophidianred, 100%);
 
 
 //  End site colors
 // -------------------------------------------------------------------------
 
+// -------------------------------------------------------------------------
+// Media Query Break Points
+
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// End media query break points
+// -------------------------------------------------------------------------
+
+// -------------------------------------------------------------------------
+// Font
+
+// Size of font by default. 1rem is assuming the browser default of 16px
+$font-size-base: 1rem !default;
+$font-size-sm: calc(#{$font-size-base} * 0.825);
+$font-size-lg: calc(#{$font-size-base} * 1.825);
+
+// End font
+// -------------------------------------------------------------------------
+
+// -------------------------------------------------------------------------
+// Header
+
+// The height of the header seciton
+$header-height: 65px !default;
+$header-height-md: 91px !default;
+
+$logo-width: 45px !default;
+$logo-height: 45px !default;
+$logo-width-md: 75px !default;
+$logo-height-md: 75px !default;
+
+// End header
+// -------------------------------------------------------------------------
+
+// -------------------------------------------------------------------------
+// Footer
+
+$footer-desired-height: 20px !default;
+$footer-padding-left: 5px !default;
+$footer-padding-right: 0px !default;
+$footer-padding-top: 2px !default;
+$footer-padding-bottom: 2px !default;
+// The height of the footer
+$footer-height: calc(#{$footer-desired-height} + #{$footer-padding-bottom} + #{$footer-padding-top}) !default;
+// The minimum height allowed for the footer section
+$footer-min-height: calc(#{$footer-desired-height} + #{$footer-padding-bottom} + #{$footer-padding-top}) !default;
+// The maximum height allowed for the footer section
+$footer-max-height: calc(#{$footer-desired-height} + #{$footer-padding-bottom} + #{$footer-padding-top}) !default;
+
+// End footer
+// -------------------------------------------------------------------------
+
+// -------------------------------------------------------------------------
+// Tutorial
+
+// The width of the tutorial side bar on any devices less than medium width
+$tutorial-sidebar-width: 100vw !default;
+// The width of the tutorial side bar on medium width devices and up
+$tutorial-sidebar-width-md: 250px !default;
+
+$tutorial-main-height: calc(100vh - #{$header-height} - #{$footer-height});
+$tutorial-main-height-md: calc(100vh - #{$header-height-md} - #{$footer-height});
+$tutorial-font-size: $font-size-sm;
+$tutorial-font-size-md: $font-size-base;
+$tutorial-header-size: $font-size-lg;
+
+
+// End tutorial
+// -------------------------------------------------------------------------
+
+
+
+
+
 $zindex-main-sidebar: 1100 !default;
 $sidebar-width: 250px !default;
 $sidebar-padding-x: 0.5rem !default;
 $sidebar-padding-y: 0 !default;
-$nav-link-padding-y:                .5rem !default;
+$nav-link-padding-y: .5rem !default;
 $nav-link-padding-x: 1rem !default;
 
 $sidebar-mini-width: ($nav-link-padding-x + $sidebar-padding-x + .8rem) * 2 !default;
 $sidebar-nav-icon-width: $sidebar-mini-width - (($sidebar-padding-x + $nav-link-padding-x) * 2);
-$sidebar-user-image-width: $sidebar-nav-icon-width + ($nav-link-padding-x / 2);
+$sidebar-user-image-width: $sidebar-nav-icon-width+($nav-link-padding-x / 2);
 $font-size-base: 1rem !default; // Assumes the browser default, typically `16px
 $font-size-sm: ($font-size-base * .875) !default;
 
@@ -133,7 +306,7 @@ $main-footer-bg: $white;
 
 
 $spacer: 1rem !default;
-$navbar-padding-y:  ($spacer / 2) !default;
+$navbar-padding-y: ($spacer / 2) !default;
 $navbar-padding-x: ($spacer / 2) !default;
 
 // Content padding

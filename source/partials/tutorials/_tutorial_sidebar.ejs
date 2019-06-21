@@ -3,9 +3,9 @@
     <% sections.forEach((section, i) => { %>
         <li class="nav-item">
             <% if(i === 0) { %>
-            <a class="nav-link active"> 
+            <a class="nav-link active section-nav" id="section-<%- i %>" data-position="<%- i %>"> 
             <% } else { %>
-            <a class="nav-link">
+            <a class="nav-link section-nav" id="section-<%- i %>" data-position="<%- i %>">
             <% } %>
                 <%= section.name %>
             </a>
