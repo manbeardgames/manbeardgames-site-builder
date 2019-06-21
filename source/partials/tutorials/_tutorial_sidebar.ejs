@@ -1,1 +1,14 @@
-<span>Sidebar</span>
+<span class="sidebar-heading"> <%= heading %>
+<ul class="nav nav-pills flex-column">
+    <% sections.forEach((section, i) => { %>
+        <li class="nav-item">
+            <% if(i === 0) { %>
+            <a class="nav-link active"> 
+            <% } else { %>
+            <a class="nav-link">
+            <% } %>
+                <%= section.name %>
+            </a>
+        </li>
+    <% }) %>
+</ul>

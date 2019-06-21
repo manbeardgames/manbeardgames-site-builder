@@ -26,6 +26,7 @@ function process() {
     //  Itereate each of the tutorials in the config
     config.tutorials.forEach((tutorial, i) => {
         let sections = [];
+        let sidebar_sections = [];
 
         //  Itereate the sections of the tutorial
         tutorial.sections.forEach((section, i) => {
@@ -37,6 +38,14 @@ function process() {
 
             //  Put the rendered section in the sections array
             sections.push(render);
+
+            //  Create the object to push into sidebar sections array
+            let sidebar_section = {
+                name: section.name,
+                index: i
+            };
+            sidebar_sections.push(sidebar_section);
+
         });
 
         //  Now that each section of the tutorial has been rendered, we 
@@ -66,7 +75,10 @@ function process() {
         //  Now render the sidebar
         let sidebar_render = ejs.render(
             sidebar_contents,
-            Object.assign({})
+            Object.assign({}, {
+                heading: tutorial.name,
+                sections: sidebar_sections
+            })
         );
 
         //  The last step is to render the tutorial page layout

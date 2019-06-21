@@ -13,19 +13,44 @@ https://www.codeply.com/go/SufxS3ir55
 
 #sidebar {
     width: inherit;
-    min-width: 220px;
-    max-width: 220px;
-    background-color: red;
+    min-width: 250px;
+    max-width: 250px;
+    background: darken($white, 15%);
     float: left;
     height: 100%;
     position: relative;
     overflow-y: auto;
     overflow-x: hidden;
+
+    .nav-pills {
+        .nav-link {
+            color: $ophidianblue;
+            &.active {
+                background-color: $ophidianorange;
+            }
+        }
+    }
+
+    
 }
 
 #tutorial-main {
     height: 100%;
     overflow: auto;
+}
+
+#tutorial-wrapper {
+    height: initial;
+    min-height: calc(100% - 50px);
+    max-height: calc(100% - 50px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#prev-next-buttons {
+    height: initial;
+    min-height: 50px;
+    max-height: 50px;
 }
 
 @media screen and (max-width: 768px) {

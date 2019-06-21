@@ -1,14 +1,5 @@
 
 
-# Setting Up MonoGame  
----
-So you're ready to get started with MonoGame, but have no idea what to do to start. Well the first step would be to get the 
-neccessary software installed.    All of the software needed to get started is completely free. We're going to need
-
-* Visual Studio
-* MonoGame  
-
-That's it. So let's get started
 
 ## Visual Studio  
 ---

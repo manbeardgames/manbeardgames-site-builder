@@ -9,12 +9,24 @@ let config = {
             "image": ""
         },
         "sections": [{
-                "name": "Setting Up MonoGame",
-                "spine": "setting-up-monogame"
+                "name": "Introduction",
+                "spine": "introduction"
             },
             {
-                "name": "Adding Content",
-                "spine": "adding-content"
+                "name": "Downloading Visual Studio",
+                "spine": "downloading-visual-studio",
+            },
+            {
+                "name": "Installing Visual Studio",
+                "spine": "installing-visual-studio"
+            },
+            {
+                "name": "Downloading MonoGame",
+                "spine": "downloading-monogame"
+            },
+            {
+                "name": "Installing MonoGame",
+                "spine": "installing-monogame"
             }
         ]
     }]

@@ -26,11 +26,13 @@
                 </div>
 
                 <div id="tutorial-main">
-                    <div class="col-md-12">
                         <p class="d-sm-none">
                             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">&lt;</button>
                         </p>
-                        <%- tutorial %>
+                    <div class="col-md-12 h-100">
+                        <div id="tutorial-wrapper">
+                            <%- tutorial %>
+                        </div>
                         <div id="prev-next-buttons">
                             <button type="button" class="btn btn-primary" id="prev">Previous</button>
                             <button type="button" class="btn btn-primary" id="next">Next</button>

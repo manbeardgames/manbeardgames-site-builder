@@ -27,8 +27,12 @@
 
         //  We now need to fade out the current paragraph. To do this, we'll remove
         //  the fade in animation it has, and replace it with the fade out animation
-        current_paragraph.classList.remove('animated', 'fadeInRight');
-        current_paragraph.classList.add('animated', 'fadeOutLeft');
+        current_paragraph.classList.remove('animated', 'fadeInRight', 'fadeInLeft');
+        if(change > 0) {
+            current_paragraph.classList.add('animated', 'fadeOutLeft');
+        } else {
+            current_paragraph.classList.add('animated', 'fadeOutRight');
+        }
 
 
 
@@ -41,13 +45,17 @@
             current_paragraph.style.display = 'none';
 
             //  Next we'll remove any animations from it
-            current_paragraph.classList.remove('animated', 'fadeOutLeft');
+            current_paragraph.classList.remove('animated', 'fadeOutLeft', 'fadeOutRight');
 
             //  Finally, we need to remove the event listener from it
             current_paragraph.removeEventListener('animationend', whenCurrentParagraphAnimationEnds);
 
             //  Next we need to add the fade in animation to th next paragraph
-            next_paragraph.classList.add('animated', 'fadeInRight');
+            if(change > 0) {
+                next_paragraph.classList.add('animated', 'fadeInRight');
+            } else {
+                next_paragraph.classList.add('animated', 'fadeInLeft');
+            }
 
             //  We also need to set the display to initial so it is visible
             next_paragraph.style.display = null;
