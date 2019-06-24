@@ -42,6 +42,7 @@ function process() {
             //  Create the object to push into sidebar sections array
             let sidebar_section = {
                 name: section.name,
+                spine: section.spine,
                 index: i
             };
             sidebar_sections.push(sidebar_section);
@@ -92,6 +93,7 @@ function process() {
         let final_render = ejs.render(
             tutorial_layout_contents,
             Object.assign({}, {
+                "tutorial_name": tutorial.name,
                 "sidebar": sidebar_render,
                 "tutorial": wrapper_render,
                 page: {

@@ -265,13 +265,24 @@ $footer-max-height: calc(#{$footer-desired-height} + #{$footer-padding-bottom} +
 // -------------------------------------------------------------------------
 // Tutorial
 
+$tutorial-sidebar-padding-top: 15px;
+$tutorial-sidebar-padding-bottom: 0px;
+$tutorial-sidebar-padding-left: 15px;
+$tutorial-sidebar-padding-right: 15px;
+
 // The width of the tutorial side bar on any devices less than medium width
 $tutorial-sidebar-width: 100vw !default;
+
+
 // The width of the tutorial side bar on medium width devices and up
-$tutorial-sidebar-width-md: 250px !default;
+$tutorial-sidebar-width-md: calc(300px + #{$tutorial-sidebar-padding-left} + #{$tutorial-sidebar-padding-right}) !default;
 
 $tutorial-main-height: calc(100vh - #{$header-height} - #{$footer-height});
 $tutorial-main-height-md: calc(100vh - #{$header-height-md} - #{$footer-height});
+$tutorial-main-padding-left: 15px;
+$tutorial-main-padding-right: 15px;
+$tutorial-main-padding-top: 15px;
+$tutorial-main-padding-bottom: 15px;
 $tutorial-font-size: $font-size-sm;
 $tutorial-font-size-md: $font-size-base;
 $tutorial-header-size: $font-size-lg;

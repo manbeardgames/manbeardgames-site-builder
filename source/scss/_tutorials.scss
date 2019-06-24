@@ -49,6 +49,10 @@ https://www.codeply.com/go/SufxS3ir55
     position: relative;
     overflow-y: auto;
     overflow-x: hidden;
+    padding-top: $tutorial-sidebar-padding-top;
+    padding-bottom: $tutorial-sidebar-padding-bottom;
+    padding-left: $tutorial-sidebar-padding-left;
+    padding-right: $tutorial-sidebar-padding-right;
 
     .nav-pills {
         .nav-link {
@@ -78,25 +82,33 @@ https://www.codeply.com/go/SufxS3ir55
     // max-height: calc(100vh - 91px - 84px);
     min-height: $tutorial-main-height;
     max-height: $tutorial-main-height;
+    @include flexbox;
+    @include flex-direction(column);
     overflow-y: auto;
     overflow-x: hidden;
-
+    padding-left: $tutorial-main-padding-left;
+    padding-right: $tutorial-main-padding-right;
+    padding-top: $tutorial-main-padding-top;
+    padding-bottom: $tutorial-main-padding-bottom;
 }
 
 #tutorial-wrapper {
-    height: initial;
-    min-height: calc(100% - 50px);
-    max-height: calc(100% - 50px);
+    // height: initial;
+    // min-height: calc(100% - 50px);
+    // max-height: calc(100% - 50px);
     overflow-y: auto;
     overflow-x: hidden;
+    @include flex-grow(1);
 }
 
 #prev-next-buttons {
     height: initial;
     min-height: 50px;
     max-height: 50px;
-    display: flex;
-    border-top: 1px;
+    @include flex-grow(0);
+    @include flexbox;
+    // display: flex;
+    border-top: 1px solid $ophidianblue;
     padding: 5px;
 
     #prev {

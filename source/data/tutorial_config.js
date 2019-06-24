@@ -9,8 +9,8 @@ let config = {
             "image": ""
         },
         "sections": [{
-                "name": "Introduction",
-                "spine": "introduction"
+                "name": "Getting Started With MonoGame",
+                "spine": "getting-started-with-monogame"
             },
             {
                 "name": "Downloading Visual Studio",

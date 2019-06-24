@@ -44,6 +44,30 @@
         //  Get the reference to the next paragraph to show
         let next_paragraph = sections[section_position];
 
+        //  Do not continue if we are not actually changing paragraphs. This occurs if the
+        //  user clicks the paragraph section that is already hightlighted in the sidebar
+        if (current_paragraph === next_paragraph) {
+            return;
+        }
+
+        //  If the section_position is 0, disable the previous button
+        if(section_position === 0) {
+            prev.disabled = true;
+            prev.classList.remove('btn-primary');
+            prev.classList.add('btn-secondary');
+        } else if(section_position == sections.length - 1) {
+            next.disabled = true;
+            next.classList.remove('btn-primary');
+            next.classList.add('btn-secondary');
+        } else {
+            prev.disabled = false;
+            prev.classList.remove('btn-secondary');
+            prev.classList.add('btn-primary');
+            next.disabled = false;
+            next.classList.remove('btn-secondary');
+            next.classList.add('btn-primary');
+        }
+
         //  Get the reference to the next section nav that needs to be the active one
         let next_section_nav = section_navs[section_position];
 
@@ -97,6 +121,8 @@
         current_paragraph.addEventListener('animationend', whenCurrentParagraphAnimationEnds);
     }
 
+    
+
     //  Bind to the click event for the previous button
     prev.addEventListener('click', function () {
         nextParagraph(-1, false);
@@ -130,6 +156,9 @@
     //  Finally, we need to animate in the very first section
     sections[0].classList.add('animated', 'fadeInRight');
     sections[0].style.display = null;
+    prev.classList.remove('btn-primary');
+    prev.classList.add('btn-secondary');
+
 
 })();
 
