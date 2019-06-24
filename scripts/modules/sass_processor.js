@@ -2,7 +2,8 @@ const fse = require('fs-extra');
 const path = require('path');
 const glob = require('glob');
 const sass = require('sass');
-const log = require('./logger');
+// const log = require('./logger');
+const { log } = require('./logger');
 
 //  ===================================================================================
 /**
@@ -11,7 +12,7 @@ const log = require('./logger');
  */
 //  ===================================================================================
 function process() {
-    log.log("Processing SASS Files", { indent: 0 });
+    log("Processing SASS Files", { indent: 0 });
 
     //  Get any .scss files that do not have a _ in the beginning
     let file_list = glob.sync('**/!(_)*.scss', { cwd: './source/scss'});
@@ -21,7 +22,7 @@ function process() {
         //  Get the file info
         let file_info = path.parse(file);
 
-        log.log(`Processing ${file_info.name} (${i + 1} of ${file_list.length})`, { indent: 1 });
+        log(`Processing ${file_info.name} (${i + 1} of ${file_list.length})`, { indent: 1 });
 
         //  Create the destination directory
         fse.ensureDirSync('./public/css');
@@ -37,4 +38,14 @@ function process() {
     })
 }
 
+function processApp() {
+    let file_path = './app/content/scss/site.scss';
+    log(`Rendering "${file_path}"`);
+    let render = sass.renderSync({file: file_path});
+    fse.ensureDirSync('./public/css');
+    fse.writeFileSync('./public/css/site.css', render.css);
+
+}
+
 module.exports.process = process;
+module.exports.processApp = processApp;

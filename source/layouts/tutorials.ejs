@@ -25,21 +25,22 @@
                     </div>
                 </div>
 
-                <div id="tutorial-main">                    
-                        <div id="tutorial-wrapper" data-spy="scroll" data-target="#tutorial-sidebar" data-offset="91">
-                            <h1><%= tutorial_name %></h1>
-                            <%- tutorial %>
+                <div id="tutorial-main">
+                    <div id="tutorial-wrapper" data-spy="scroll" data-target="#tutorial-sidebar" data-offset="91">
+                        <h1><%= tutorial_name %></h1>
+                        <%- tutorial %>
+                    </div>
+                    <div id="prev-next-buttons">
+                        <button type="button" class="btn btn-primary" id="prev">Previous</button>
+                        <div class="d-sm-block d-md-none">
+                            <button type="button" class="btn btn-primary" id="toc" data-toggle="offcanvas">Table of
+                                Contents</button>
                         </div>
-                        <div id="prev-next-buttons">
-                            <button type="button" class="btn btn-primary" id="prev">Previous</button>
-                            <div class="d-sm-block d-md-none">
-                                <button type="button" class="btn btn-primary" id="toc" data-toggle="offcanvas">Table of Contents</button>
-                            </div>
-                            <button type="button" class="btn btn-primary" id="next">Next</button>
+                        <button type="button" class="btn btn-primary" id="next">Next</button>
                         <div>
-                    
-                </div>
-            </div>            
+
+                        </div>
+                    </div>
         </main>
 
         <footer>

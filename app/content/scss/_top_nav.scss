@@ -1,0 +1,48 @@
+#top-nav {
+    min-height: $header-height !important;
+    background-color: $ophidian-blue-darken-5;
+
+    a {
+        color: $white;
+        &:hover {
+            color: $ophidian-orange;
+        }
+    }
+
+    h1,h2,h3,h4,h5,h6 {
+        font-size: $font-size-base;
+    }
+
+    #navbar-logo {
+        img {
+            width: $navbar-logo-width;
+            height: $navbar-logo-height;
+        }
+    }
+
+    .social-icons {
+        a {
+            color: $white;
+            transition: color 0.3s ease-in-out;
+
+            &:hover,
+            &:focus {
+                text-decoration: none;
+                color: $ophidian-orange;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: $breakpoint-md) {
+    #topNav {
+        min-height: $header-height-md;
+
+        #navbar-logo {
+            img {
+                width: $navbar-logo-width-md;
+                height: $navbar-logo-height-md;
+            }
+        }
+    }
+}

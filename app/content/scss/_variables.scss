@@ -1,0 +1,105 @@
+// -------------------------------------------------------------------------
+//  Colors
+$white: #fff;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$ophidian-blue: #081E3C;
+$ophidian-orange: #F88A00;
+$ophidian-blue-darken-5: darken($ophidian-blue, 5%);
+
+//  End Colors
+// -------------------------------------------------------------------------
+
+// -------------------------------------------------------------------------
+//  Responsive Breakpoints
+
+$breakpoint-sm: 576px !default;
+$breakpoint-md: 768px !default;
+$breakpoint-lg: 992px !default;
+$breakpoint-xl: 1200px !default;
+
+//  End Responsive Breakpoint
+// -------------------------------------------------------------------------
+
+// -------------------------------------------------------------------------
+//  Font Size
+
+//  Size of font by default.  1rem is assuming teh browser default of 16px
+$font-size-base: 1rem !default;
+
+//  Small font size
+$font-size-sm: calc(#{$font-size-base} * 0.825) !default;
+
+//  End Font Sizes
+// -------------------------------------------------------------------------
+
+// -------------------------------------------------------------------------
+//  Top Nav
+
+//  The background color of the nav bar
+$navbar-background-color: $ophidian-blue-darken-5;
+
+// The height of the header seciton
+$header-height: 65px !default;
+
+//  The height of the header section on medium widht devices and up
+$header-height-md: 91px !default;
+
+// The width of the navbar logo
+$navbar-logo-width: 45px !default;
+
+// The height of the navbar logo
+$navbar-logo-height: 45px !default;
+
+//  The width of the navbar logo on medium width devices and up
+$navbar-logo-width-md: 75px !default;
+
+//  The height of the navbar logo on medium width devices nad up
+$navbar-logo-height-md: 75px !default;
+
+
+
+//  End Top Nav
+// -------------------------------------------------------------------------
+
+// -------------------------------------------------------------------------
+//  Landing
+
+
+
+
+//  End Landing
+// -------------------------------------------------------------------------
+
+// -------------------------------------------------------------------------
+//  Footer
+
+//  The backgroudn color of the page footer
+$footer-background-color: $ophidian-blue !default;
+
+//  The amount of top padding applied to the footer section
+$footer-padding-top: 2px;
+
+//  The amount of bottom padding applied to the footer section
+$footer-padding-bottom: 2px;
+
+//  The amount of left padding applied to the footer section
+$footer-padding-left: 5px;
+
+//  The amount of right padding applied to the footer section
+$footer-padding-right: 0px;
+
+//  The desired height of the footer. Does not take into accont padding
+$footer-desired-height: 20px !default;
+
+//  The height of the footer after padding is applied
+$footer-height: calc(#{$footer-desired-height} + #{$footer-padding-bottom} + #{$footer-padding-top}) !default;
+
+//  The minimum height the footer is allowed to be
+$footer-min-height: calc(#{$footer-desired-height} + #{$footer-padding-bottom} + #{$footer-padding-top}) !default;
+
+//  The maximum height the footer is allowed to be
+$footer-max-height: calc(#{$footer-desired-height} + #{$footer-padding-bottom} + #{$footer-padding-top}) !default;
+
+//  End Footer
+// -------------------------------------------------------------------------

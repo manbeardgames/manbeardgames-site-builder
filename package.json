@@ -6,6 +6,7 @@
   "scripts": {
     "add-game": "node ./scripts/addgame",
     "build": "node ./scripts/build",
+    "buildapp": "node ./scripts/buildapp",
     "build:prod": "cross-env NODE_ENV=production node .scripts/build",
     "serve": "serve ./public"
   },

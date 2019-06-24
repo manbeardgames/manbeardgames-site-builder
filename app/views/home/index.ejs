@@ -1,0 +1,75 @@
+---
+head: {
+    title: "ManBeardGames",
+    seo: {
+        title: "ManBeardGames",
+        description: "ManBeardGames is an indie game developer, web developer, and twitch streamer."
+    },
+    opengraph: {
+        title: "ManBeardGames",
+        image: "https://manbeardgames.com/img/ogmbg.png",
+        description: "ManBeardGames is an indie game developer, web developer, and twitch streamer."
+    }
+}
+
+top_nav: {
+    header: "ManBeardGames"
+}
+
+layout: "_default"
+---
+
+<!-- Begin Landing Section -->
+<div id="landing">
+    <div class="content">
+        <h1 class="brand">Man Beard Games</h1>
+        <div id="info" class="hidefirst">
+            <p class="tagline">Indie Game Dev | Web Dev | Twitch Streamer</p>
+            <ul class="primary-nav">
+                <li>
+                    <a id="animatescroll" href="#games">Games</a>
+                </li>
+                <li>
+                    <a href="/tutorials">Tutorials</a>
+                </li>
+                <li>
+                    <a href="/dev-blog">Dev Blog</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Landing Section -->
+
+<div class="content">
+    <div id="swap"></div>
+    <div class="container-fluid m-0 p-0">
+        <div id="games-list">
+            <!-- Begin Games List -->
+            <% games.forEach(function(game) { %>
+                <section class="game" id="game-<%- game.spine %>">
+                    <div class="game-container">
+                        <div class="game-preview-container">
+                            <img class="img-responsive img-thumbnail" src="img/game_previews/<%- game.spine %>.png" alt="..." >
+                        </div>
+                        <div class="game-overview-container">
+                            <h3><%- game.name %></h3>
+                            <p><%- game.short_description %></p>
+                            <div class="block-platforms">
+                                <% game.platforms.forEach((platform, i) => { %>
+                                    <div class="platform">
+                                        <a href="<%- platform.url %>" target="_blank">
+                                            <div class="platform-badge" style="background-image: url('img/platform_badges/<%- platform.name %>.png');"></div>
+                                        </a>
+                                    </div>
+                                <% }) %>
+                            </div>
+                            <a class="btn btn-primary btn-large" href="/<%= game.spine %>">More Info</a>
+                        </div>
+                    </div>
+                </section>
+            <% }) %>
+            <!-- End Games List -->
+        </div>
+    </div>
+</div>
