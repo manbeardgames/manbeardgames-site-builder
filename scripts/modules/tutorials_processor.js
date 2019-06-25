@@ -2,9 +2,7 @@ const fse = require('fs-extra');
 const path = require('path');
 const ejs = require('ejs');
 const log = require('./logger');
-const {
-    config
-} = require('../../source/data/tutorial_config');
+const { config } = require('../../source/data/tutorial_config');
 const mark_renderer = require('./mark_renderer');
 
 

@@ -1,0 +1,4 @@
+# Solution 1: Individual Projects
+One answer to the question of which to choose is "Create a sepeate project for each project type, duplicating the game code across each project".  I should also mention at this point that while this *technically* would work, it is **absolutely the wrong answer**.  Lets say you're supporting Windows, Mac, and Linux using the Cross Platform Desktop Project template, as well as Android and iOS using their respective project tempaltes. That means three seperate projects that you'll have to ensure that all of the code is the same between.  Found a bug? Make sure you copy/paste the fix between all three projects.  
+
+This solution leads to more work and a code base that is fragmeneted and harder to manage.
