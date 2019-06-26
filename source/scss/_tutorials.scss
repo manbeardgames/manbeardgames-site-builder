@@ -57,6 +57,7 @@ https://www.codeply.com/go/SufxS3ir55
     .nav-pills {
         .nav-link {
             color: $ophidianblue;
+            font-size: $tutorial-font-size;
 
             &:hover {
                 //background-color: lighten($ophidianorange, 20%);
@@ -145,6 +146,7 @@ https://www.codeply.com/go/SufxS3ir55
         width: $tutorial-sidebar-width-md;
         min-width: $tutorial-sidebar-width-md;
         max-width: $tutorial-sidebar-width-md;
+        
     }
 
     .row-offcanvas {

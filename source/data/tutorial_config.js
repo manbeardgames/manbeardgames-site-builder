@@ -44,24 +44,44 @@ let config = {
                     "spine": "monogame-shared-project-setup"
                 },
                 {
-                    "name": "Solution 1: Individual Projects",
-                    "spine": "solution-1-individual-projects"
-                },
-                {
-                    "name": "Solution 2: One (Shared) Project To Rule THem All",
-                    "spine": "solution-2-one-shared-project-to-rule-them-all"
+                    "name": "One Incorrect Solution And One Correct Solution",
+                    "spine": "one-incorrect-solution-and-one-correct-solution"
                 },
                 {
                     "name": "Before We Begin",
                     "spine": "before-we-begin"
-                },                                                  
+                },
                 {
                     "name": "Getting Started",
                     "spine": "getting-started"
                 },
                 {
-                    "name": "MonoGame Shared Project",
-                    "spine": "monogame-shared-project"
+                    "name": "Creating A Shared Project",
+                    "spine": "creating-a-shared-project"
+                },
+                {
+                    "name": "Add Cross Platform Project",
+                    "spine": "add-cross-platform-project"
+                },
+                {
+                    "name": "Connecting To The Shared Project",
+                    "spine": "connecting-to-the-shared-project"
+                },
+                {
+                    "name": "Add Android Project",
+                    "spine": "add-android-project"
+                },
+                {
+                    "name": "Connect Android Project To Shared Project",
+                    "spine": "connect-android-project-to-shared-project"
+                },
+                {
+                    "name": "Sharing Content",
+                    "spine": "sharing-content"
+                },
+                {
+                    "name": "Wrap Up",
+                    "spine": "wrap-up"
                 }
             ]
         }

@@ -7,10 +7,10 @@ First, create a new folder somewhere on your computer.  This folder is where we 
 
 Next, open Visual Studio if you do not already have it open, and select **File > New > Project** from the menu at the top.  In the *New Project* window that opens, type **Blank Solution** into the search box at the top right. This should give you only one result called *Blank Solution*.  Click this to choose it.
 
-![blank-solution]
+![blank solution](tutorials/monogame-shared-project/blank-solution.png)
 
 At the bottom of the *New Project* window, enter a name for our solution. I'm going to enter **MyAwesomeGame**.  Next, click the **Browse** button and choose the folder that we just created previously.  Make sure that the **Create directory for solution** is NOT checked. Then click the **Ok** button.
 
-![blank-solution-name]
+![blank solution name](tutorials/monogame-shared-project/blank-solution-name.png)
 
 Once this is finished, in Visual Studio you should see that we have the solution you just created open with no projects listed in the *Solution Explorer* window.  Next we'll start adding and setting up the projects.
