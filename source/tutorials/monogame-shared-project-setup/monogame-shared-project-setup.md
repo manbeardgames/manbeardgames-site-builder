@@ -1,4 +1,0 @@
-# MonoGame Shared Project Setup
-When creating a new MonoGame project in Visual Studio, you have various project templates you can choose from to get started.  For desktop, you have the Windows specific projects or you can choose the Cross Platfrom Desktop Project for Windows, Linux and Mac.  You want to support multiple platforms, so you would naturally choose the Cross Platform Project template.  
-
-But wait, this is for Cross Platform **Desktop**.  What if you want to support desktop and mobile?. Well, there is also the MonoGame Android Project and the MonoGame iOS Project templates. You want your game avaialble on as many devices and platforms as possible, so which do you choose?

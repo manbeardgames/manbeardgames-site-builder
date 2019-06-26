@@ -31,8 +31,8 @@ let config = {
             ]
         },
         {
-            "name": "MonoGame Shared Project Setup",
-            "spine": "monogame-shared-project-setup",
+            "name": "Multiplatform Game Development With MonoGame",
+            "spine": "multiplatform-game-development-with-monogame",
             "description": "We outline the steps to setup a MonoGame Shared Project that can be used to build from one source for multiple platforms",
             "opengraph": {
                 "title": "MonoGame Shared Project Setup",
