@@ -10,12 +10,15 @@ https://www.codeply.com/go/SufxS3ir55
     max-height: $tutorial-main-height;
     font-size: $tutorial-font-size;
 
-    h1,
+    h1 {
+        font-size: $tutorial-header-size;
+    }
+
     h2,
     h3,
     h4,
     h5 {
-        font-size: $tutorial-header-size;
+        font-size: $tutorial-header-size-md;
     }
 }
 
@@ -135,8 +138,16 @@ https://www.codeply.com/go/SufxS3ir55
         max-height: $tutorial-main-height-md;
 
         font-size: $tutorial-font-size-md;
-        h1,h2,h3,h4,h5{
-            font-size: $tutorial-header-size
+
+        h1 {
+            font-size: $tutorial-header-size;
+        }
+    
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-size: $tutorial-header-size-md;
         }
     }
 

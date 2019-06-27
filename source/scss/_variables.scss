@@ -224,6 +224,7 @@ $breakpoint-xl: 1200px;
 // Size of font by default. 1rem is assuming the browser default of 16px
 $font-size-base: 1rem !default;
 $font-size-sm: calc(#{$font-size-base} * 0.825);
+$font-size-md: calc(#{$font-size-base} * 1.412);
 $font-size-lg: calc(#{$font-size-base} * 1.825);
 
 // End font
@@ -286,6 +287,7 @@ $tutorial-main-padding-bottom: 15px;
 $tutorial-font-size: $font-size-sm;
 $tutorial-font-size-md: $font-size-base;
 $tutorial-header-size: $font-size-lg;
+$tutorial-header-size-md: $font-size-md;
 
 
 // End tutorial

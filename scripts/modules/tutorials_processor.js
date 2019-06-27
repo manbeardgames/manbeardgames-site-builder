@@ -2,7 +2,9 @@ const fse = require('fs-extra');
 const path = require('path');
 const ejs = require('ejs');
 const log = require('./logger');
-const { config } = require('../../source/data/tutorial_config');
+const {
+    config
+} = require('../../source/data/tutorial_config');
 const mark_renderer = require('./mark_renderer');
 
 
@@ -37,12 +39,17 @@ function process() {
             //  Put the rendered section in the sections array
             sections.push(render);
 
+
             //  Create the object to push into sidebar sections array
             let sidebar_section = {
                 name: section.name,
                 spine: section.spine,
                 index: i
             };
+
+
+
+
             sidebar_sections.push(sidebar_section);
 
         });
