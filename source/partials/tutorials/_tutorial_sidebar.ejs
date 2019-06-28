@@ -3,6 +3,15 @@
     <% sections.forEach((section, i) => { %>
     <li class="nav-item">
         <a class="nav-link" href="#<%= section.spine %>"><%= section.name %></a>
+        <% if(section.children.length > 0) { %>
+            <ul class="nav nav-pills flex-column">
+                <% section.children.forEach((child, i) => { %>
+                    <li class="nav-item">
+                        <a class="nav-link ml-4" href="#<%= child.spine %>"><%= child.name %></a>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
     </li>
     <% }) %>
 </ul>

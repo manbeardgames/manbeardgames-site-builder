@@ -15,9 +15,48 @@ function render(content) {
     //  Create a new MarkDown renderer
     var renderer = new marked.Renderer();
 
+    let sections = [];
+    let current_section;
+    let id_hash = [];
+
     //  Configure how to render the heading tag
     renderer.heading = function (text, level) {
+        //  escapee the text so we're left with a spine value
         let escapted_text = text.toLowerCase().replace(/[^\w]+/g, '-');
+
+        if(id_hash.indexOf(escapted_text) !== -1) {
+            let i = 1;
+            while(true) {
+                let attempt = escapted_text + `-${i}`
+                if(id_hash.indexOf(attempt) === -1) {
+                    escapted_text = attempt;
+                    break;
+                }
+                i = i + 1;
+            }
+        }
+
+        id_hash.push(escapted_text);
+
+        if (level === 1) {
+            if (current_section != null) {
+                sections.push(current_section);
+            }
+
+            current_section = {
+                "name": text,
+                "spine": escapted_text,
+                "children": []
+            };
+        } else if (level === 2) {
+            current_section.children.push({
+                "name": text,
+                "spine": escapted_text
+            });
+        }
+
+
+
         return `<h${level} id=${escapted_text}>${text}</h${level}>`
     }
 
@@ -70,7 +109,10 @@ function render(content) {
     });
 
     //  Return the reunder
-    return render;
+    return Object.assign({}, {
+        "html": render,
+        "sections": sections
+    });
 }
 
 module.exports.render = render;

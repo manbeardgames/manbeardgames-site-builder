@@ -1,19 +1,29 @@
-<div class="container post">
+---
+name: "Creating Scenes"
+spine: "creating-scenes"
+description: "In this tutorial, we'll discuss creating the concept of Scenes in MonoGame"
+date: "March 5, 2019"
+index: 5
+layout: "tutorials"
+opengraph: {
+    title: "Creating Scenes",
+    description: "In this tutorial, we'll discuss creating the concept of Scenes in MonoGame",
+    image: "https://manbeardgames.com/img/tutorials/adding-content/tutorial-cover.png",
+    url: "https://manbeardgames.com/tutorials/adding-content/"
+}
+---
 
 # Overview
----
 When first starting a new MonoGame project, you're given the Game1.cs templete. When starting out, this is good for experimenting and learning the core concepts in MonoGame.  As your game projects grow, eventually the Game1 templete will need to be broken out into logical groupings of levels or screens in order to better manage your code.  
 
 This tutorial will go over one way of doing this, by creating what we'll call Scenes.
 
 # Project Files
----
 If you would like to follow along with this tutorial using the same files and assets I use, you can find them [here on github](https://github.com/manbeardgames/manbeardgames-site-tutorials/tree/master/tutorials/creating-scenes).
   
   
   
 ## What is a Scene
----
 You can think of a Scene as the individual screens of your game. This could be things such as your title screen or you individual levels within your game.  A Scene's primary purpose is to emulate what we do in the Game1 class such as updating and rendering, but on a per scene bases to help us better organize and manage our code.  
 
 We can further expand this idea of a Scene by implementing the idea of Game Objects or Entities, and Components.  This setup would be similar to something like Scenes in Unity in that each Scene contains game objects, and you attach component scripts to the game objects.  
@@ -32,7 +42,6 @@ We can further expand this idea of a Scene by implementing the idea of Game Obje
   
   
 ## The Scene Class
----
 Let's dive right into this. To get started, open Visual Studio and create a new MonoGame Cross Platform Desktop project.  For this tutorial, we'll call it SceneExample.  Once the project is created, add a new class called `Scene`. This is going to be the base class for all scenes that are created for our game.
 
 Let's add two new methods to our Scene class, the `Update` and `Draw` methods.
@@ -56,7 +65,6 @@ We'll come back to the Scene class, but for now, lets move on to our next concep
   
   
 ## The Entity Class
----
 Our scenes are going to be comprised our our game objects that will get updated and rendered from the scene they belong to.  We're going to call these Entities.  Entities further on are going to be comprised of Component scripts, which we'll talk about in the next section.  The Component scripts are going to provide rendering capabiliies and logic to our Entities.  
 
 For now, lets create the base of our Entity class.  Create a new class called Entity and add the following
@@ -136,7 +144,6 @@ This is the skeleton of our Entity class.  We'll be coming back to this to add m
   
   
 ## The Component class
----
 The Component class is what we'll use to create the logic for our entities and/or the rendering.  Not all components need to render, so because of this we'll actually create two types of Component classes, the `Component` and the `GraphicalComponent`.
 
 To start with, lets first create the Component class. Add a new class called Component, then add the following to it
@@ -267,7 +274,6 @@ Now that we have the base entity and component arcitectures in place, we're almo
   
   
 ## The ComponentList
----
 The ComponentList is exactly what it sounds like. It's a class that will allow us to logically manage and track the components that have been added to an entity.  
 
 Create a new class called ComponentList.  Add the following 
@@ -531,7 +537,6 @@ Now that we can track and manage components form the entities using our Componen
   
   
 ## The EntityList
----
 The EntityList is fundimentally going to work the same way the ComponentList did.  So to save some time typeing and you reading, I'll present the code here for you and provide any explinations in the comments.
 
 Create a new class called EntltyList and add the following
@@ -753,7 +758,6 @@ public void Remove(Entity entity)
   
   
 ## Wrapping It All Up
----
 Now that we have all the pieces in place, we need to modify our Game1 class to use scenes.  This part will be pretty simple.  First open the Game1 class and add the following static properties
 
 ```csharp
@@ -877,5 +881,3 @@ protected override void Initialize()
 ```
 
 If you checked out the solution files listed at the beginning of this tutorial, I've included and example scene that utilizes all we've created here.  The `ExampleScene` contains one `PlayerEntity`. This entity has two components; `PlayerMovementComponent` and `Sprite`.  The PlayerMovementComponent moves the player with input, and the Sprite component will render the player.  Be sure to check it out to see how all of this wraps up 
-
-</div>

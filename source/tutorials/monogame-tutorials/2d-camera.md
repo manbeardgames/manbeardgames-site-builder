@@ -1,4 +1,17 @@
-<div class="container post">
+---
+name: "2D Camera"
+spine: "simple-2d-camera"
+description: "How to create and implement a simple 2D camera for use in your projects"
+date: "March 6, 2019"
+index: 4
+layout: "tutorials"
+opengraph: {
+    title: "2D Camera",
+    description: "How to create and implement a simple 2D camera for use in your projects",
+    image: "https://manbeardgames.com/img/tutorials/2d-camera/tutorial-cover.png",
+    url: "https://manbeardgames.com/tutorials/2d-camera/"
+}
+---
 
 # Overview
 ---
@@ -405,5 +418,3 @@ spriteBatch.End();
 And that's it.  You now have a 2D camera that you can use in you game projects.  Don't stop here though, get creative. Think of some other things to add to your camera, like a way to smoothly move it from one position to another, or a way to "shake" it to give that sweet sweet screen shake effect. If you have some interesting things you added, let me know on [Twitter](http://www.twitter.com/manbeardgames) and I'll add them here (with your permission of course). 
 
 And be sure to check out the project files for this tutorial on [Github](https://github.com/manbeardgames/manbeardgames-site-tutorials/tree/master/tutorials/2d-camera) for to see a completed example of using the camera and moving it around with the keyboard.
-
-</div>

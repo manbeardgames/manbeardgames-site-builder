@@ -1,10 +1,11 @@
 const fse = require('fs-extra');
 const path = require('path');
 const ejs = require('ejs');
-const log = require('./logger');
 const {
-    config
-} = require('../../source/data/tutorial_config');
+    log
+} = require('./logger');
+const glob = require('glob');
+const frontMatter = require('front-matter');
 const mark_renderer = require('./mark_renderer');
 
 
@@ -15,6 +16,248 @@ const mark_renderer = require('./mark_renderer');
  */
 //  ===================================================================================
 function process() {
+    log('Processing Tutorials');
+
+    //  First get a list of all the tutorial files by searching for all .md files located
+    //  in the tutorial source directory
+    let tutorial_files = glob.sync('**/*.md', {
+        cwd: './source/tutorials'
+    });
+
+
+    let tutorial_series = []
+
+    //  Iterate each of the tutorial files and process them
+    tutorial_files.forEach((file, i) => {
+        log(`Processing ${file}`, {
+            indent: 1
+        });
+
+        //  Get the file info object for the file
+        let file_info = path.parse(file);
+
+        //  Generate the full path to the file
+        let tutorial_file_name = './source/tutorials/' + file;
+
+        //  Read the contents of the tutorial file
+        let tutorial_content = fse.readFileSync(tutorial_file_name, 'utf-8');
+
+        //  Get the frontmatter object from the contents
+        let fMatter = frontMatter(tutorial_content);
+
+        //  Render the tutorial from markdown to html
+        let rendered_tutorial = mark_renderer.render(fMatter.body);
+
+        //  Generate the file path to the tutorial wrapper template
+        let wrapper_file_name = './source/partials/tutorials/_tutorial_wrapper.ejs';
+
+        //  Read the contents of the tutorial wrapper file
+        let wrapper_content = fse.readFileSync(wrapper_file_name, 'utf-8');
+
+        //  Render the wrapper, using the html from the rendered tutorial
+        let rendered_wrapper = ejs.render(
+            wrapper_content,
+            Object.assign({}, {
+                sections: [rendered_tutorial.html],
+                filename: wrapper_file_name
+            })
+        );
+
+        //  Generate the file path to the tutorial sidebar template
+        let sidebar_file_name = './source/partials/tutorials/_tutorial_sidebar.ejs';
+
+        //  Read the contents of the tutorial sidebar file
+        let sidebar_content = fse.readFileSync(sidebar_file_name, 'utf-8');
+
+        //  Render the sidebar, using the section from the rendered tutorial
+        let rendered_sidebar = ejs.render(
+            sidebar_content,
+            Object.assign({}, {
+                heading: fMatter.attributes.name,
+                sections: rendered_tutorial.sections,
+                filename: sidebar_file_name
+            })
+        );
+
+        //  Generate the file path to the tutorial layout
+        let layout_file_name = './source/layouts/' + fMatter.attributes.layout + '.ejs';
+
+        //  Read the contents fo the layout file
+        let layout_content = fse.readFileSync(layout_file_name, 'utf-8');
+
+        //  Render the layout
+        let rendered_layout = ejs.render(
+            layout_content,
+            Object.assign({}, {
+                "tutorial_name": fMatter.attributes.name,
+                "sidebar": rendered_sidebar,
+                "tutorial": rendered_wrapper,
+                page: {
+                    "title": fMatter.attributes.name,
+                    "description": fMatter.attributes.description,
+                    "ogtitle": fMatter.attributes.opengraph.title,
+                    "ogimage": fMatter.attributes.opengraph.image,
+                    "ogdescription": fMatter.attributes.opengraph.description,
+                    "ogurl": fMatter.attributes.opengraph.url
+                },
+                filename: layout_file_name
+            })
+        );
+
+        //  Generate the path to the output directory
+        let output_dir = path.join('./public/tutorials', file_info.dir, fMatter.attributes.spine);
+
+        //  Ensure the output directory exists
+        fse.ensureDirSync(output_dir);
+
+        //  Save the final render to disk as html file
+        fse.writeFileSync(path.join(output_dir, 'index.html'), rendered_layout);
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function process_even_younger() {
+    log('Processing Tutorials');
+
+    //  First get a list of all the tutorial files by searching for all .md files located
+    //  in the tutorial source directory
+    let tutorial_files = glob.sync('**/*.md', {
+        cwd: './source/tutorials'
+    });
+
+
+    let tutorial_series = []
+
+    //  Iterate each of the tutorial files and process them
+    tutorial_files.forEach((file, i) => {
+        log(`Processing ${file}`, {
+            indent: 1
+        });
+
+        //  Get the file info object for the file
+        let file_info = path.parse(file);
+
+        //  Generate the full path to the file
+        let tutorial_file_name = './source/tutorials/' + file;
+
+
+    })
+
+    //  Itereate each of the tutorials in teh config
+    config.tutorials.forEach((tutorial, i) => {
+        //  Generate the file path string for this tutorial
+        let tutorial_file_name = './source/tutorials/' + tutorial.spine + '/index.md';
+
+        //  Read the contents of the tutorial index file
+        let tutorial_content = fse.readFileSync(tutorial_file_name, 'utf-8');
+
+        //  Render the content using the markdown renderer
+        let rendered_tutorial = mark_renderer.render(tutorial_content);
+
+        //  Generate the file path to the tutorial wrapper template
+        let wrapper_file_name = './source/partials/tutorials/_tutorial_wrapper.ejs';
+
+        //  Read the contents of the tutorial wrapper file
+        let wrapper_content = fse.readFileSync(wrapper_file_name, 'utf-8');
+
+        //  Render the wrapper, using the html from the rendered tutorial
+        let rendered_wrapper = ejs.render(
+            wrapper_content,
+            Object.assign({}, {
+                sections: [rendered_tutorial.html],
+                filename: wrapper_file_name
+            })
+        );
+
+        //  Generate the file path to the tutorial sidebar template
+        let sidebar_file_name = './source/partials/tutorials/_tutorial_sidebar.ejs';
+
+        //  Read the contents of the tutorial sidebar file
+        let sidebar_content = fse.readFileSync(sidebar_file_name, 'utf-8');
+
+        //  Render the sidebar, using the sections from the rendered tutorial
+        let rendered_sidebar = ejs.render(
+            sidebar_content,
+            Object.assign({}, {
+                heading: tutorial.name,
+                sections: rendered_tutorial.sections,
+                filename: sidebar_file_name
+            })
+        );
+
+        //  Generate the file path to the tutorial layout
+        let layout_file_name = './source/layouts/tutorials.ejs';
+
+        //  Read the contents of the tutorial layout file
+        let layout_content = fse.readFileSync(layout_file_name, 'utf-8');
+
+        //  Render the layout
+        let rendered_layout = ejs.render(
+            layout_content,
+            Object.assign({}, {
+                "tutorial_name": tutorial.name,
+                "sidebar": rendered_sidebar,
+                "tutorial": rendered_wrapper,
+                page: {
+                    "title": tutorial.name,
+                    "description": tutorial.description,
+                    "ogtitle": tutorial.opengraph.title,
+                    "ogimage": tutorial.opengraph.image,
+                    "ogdescription": tutorial.opengraph.description,
+                    "ogurl": tutorial.opengraph.url
+                },
+                filename: layout_file_name
+            })
+        );
+
+        //  Ensure that we have the output directory created
+        fse.ensureDirSync('./public/tutorials/' + tutorial.spine);
+
+        //  Save the final render to disk as HTML file
+        fse.writeFileSync('./public/tutorials/' + tutorial.spine + '/index.html', rendered_layout);
+    })
+}
+
+
+
+
+function process_not_as_old() {
     log.log('Processing Tutorials');
 
     //  First read the tutorial configuration file contents

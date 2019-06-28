@@ -1,4 +1,17 @@
-<div class="container post">
+---
+name: "AABB 2D Collision Checks"
+spine: "aabb-2d-collision-checks"
+description: "How to create a simple check for 2D collision using Axis-Aligned Bounding Box (AABB)"
+date: "March 7, 2019"
+layout: "tutorials"
+index: 3
+opengraph: {
+    title: "AABB 2D Collision Checks",
+    description: "How to create a simple check for 2D collision using Axis-Aligned Bounding Box (AABB)",
+    image: "https://manbeardgames.com/img/tutorials/aabb-2d-collision-checks/tutorial-cover.png",
+    url: "https://manbeardgames.com/tutorials/aabb-2d-collision-checks/"
+}
+---
 
 # Overview
 ---
@@ -372,7 +385,4 @@ Another thing we did not discuss here is how to detect the collision of a circul
 
 Be sure to download the project files mentioned at the beginning to see the completed example of this tutorial.  
 
-As always, I hope this was helpful for you. If you have any questions or feedback on this tutorial, please let me know on [Twitter](http://www.twitter.com/manbeardgames).  
-
-
-</div>
+As always, I hope this was helpful for you. If you have any questions or feedback on this tutorial, please let me know on [Twitter](http://www.twitter.com/manbeardgames).
