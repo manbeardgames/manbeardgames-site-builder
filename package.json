@@ -29,6 +29,6 @@
   "devDependencies": {
     "animate.css": "^3.7.2",
     "popper.js": "^1.15.0",
-    "prismjs": "^1.16.0"
+    "prismjs": "^1.23.0"
   }
 }
